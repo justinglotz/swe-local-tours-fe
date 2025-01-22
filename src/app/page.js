@@ -1,9 +1,7 @@
 'use client';
 
- // any component that uses useAuth needs this because if a component directly imports useAuth, it needs to be a client component since useAuth uses React hooks.
+// any component that uses useAuth needs this because if a component directly imports useAuth, it needs to be a client component since useAuth uses React hooks.
 
-import { Button } from 'react-bootstrap';
-import { signOut } from '@/utils/auth'; // anything in the src dir, you can use the @ instead of relative paths
 import { useAuth } from '@/utils/context/authContext';
 
 function Home() {
@@ -20,10 +18,7 @@ function Home() {
       }}
     >
       <h1>Hello {user.displayName}! </h1>
-      <p>Click the button below to logout!</p>
-      <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
-        Sign Out
-      </Button>
+      <p>here we can use the ProfileForm to have user enter their name and description which will update their profile page. Upon submitting that, we have useRouter redirect to tours page. Add conditional so that if they click home and already have profile data (or whatever that determines they have already filled out ProfileForm), the home page automatically routes to display tours page.If not, it displays Profile form.</p>
     </div>
   );
 }
