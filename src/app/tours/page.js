@@ -1,6 +1,19 @@
-// loop through and display all tours on tour card component here
+'use client';
+
+import TourCard from '@/components/TourCard';
 import React from 'react';
 
 export default function ToursPage() {
-  return <div>tours page</div>;
+  return (
+    <div className="flex flex-row flex-wrap">
+      <TourCard />
+      <TourCard />
+      <TourCard />
+      <TourCard />
+      <TourCard />
+      <TourCard />
+      <TourCard />
+      <TourCard />
+    </div>
+  );
 }
