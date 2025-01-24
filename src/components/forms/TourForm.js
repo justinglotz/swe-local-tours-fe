@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import { React } from 'react';
 import { Form, Button } from 'react-bootstrap';
 
 export default function TourForm() {
@@ -39,7 +39,7 @@ export default function TourForm() {
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicDate">
           <Form.Label>Image URL</Form.Label>
-          <Form.Control type="text" placeholder="Enter a URL for the Tour image" />
+          <Form.Control type="text" placeholder="Enter a URL for the tour image" />
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Select a Location</Form.Label>
