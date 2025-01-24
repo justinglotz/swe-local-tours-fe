@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
@@ -24,8 +24,12 @@ export default function TourCard() {
             <Button className="w-1/2">Add To Itinerary</Button>
           </div>
           <div className="flex flex-row justify-end">
-            <FontAwesomeIcon className="m-2 fa-2x" icon={faPenToSquare} />
-            <FontAwesomeIcon className="m-2 fa-2x" icon={faTrashCan} />
+            <OverlayTrigger overlay={<Tooltip>Edit</Tooltip>}>
+              <FontAwesomeIcon className="m-2 fa-2x" icon={faPenToSquare} />
+            </OverlayTrigger>
+            <OverlayTrigger overlay={<Tooltip>Delete</Tooltip>}>
+              <FontAwesomeIcon className="m-2 fa-2x" icon={faTrashCan} />
+            </OverlayTrigger>
           </div>
         </Card.Footer>
       </Card>
