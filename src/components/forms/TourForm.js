@@ -5,6 +5,7 @@ import { DatePicker, TimePicker, LocalizationProvider } from '@mui/x-date-picker
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function TourForm() {
   const [tourName, setTourName] = useState('');
@@ -15,6 +16,7 @@ export default function TourForm() {
   const [price, setPrice] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [location, setLocation] = useState('');
+  const router = useRouter();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,6 +31,7 @@ export default function TourForm() {
       location,
     };
     console.log(payload);
+    router.push('/tours');
   };
   const darkTheme = createTheme({
     palette: {
