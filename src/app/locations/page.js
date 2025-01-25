@@ -18,7 +18,10 @@ export default function LocationsPage() {
 
   // TODO: Fetch locations from the API and set the state
   const getAllTheLocations = () => {
-    getLocations(user.uid).then(setLocations);
+    getLocations(user.uid).then((data) => {
+      console.log(data);
+      setLocations(data);
+    });
   };
 
   // TODO: useEffect to fetch locations when the page loads
@@ -37,14 +40,11 @@ export default function LocationsPage() {
       </div>
 
       {/* For now just displaying one location card to make sure it works. will delete later */}
-      <div>
-        <LocationCard />
-      </div>
 
       <div className="d-flex flex-wrap">
         {/* map over locations here using LocationCard component */}
         {locations.map((location) => (
-          <LocationCard key={location.firebaseKey} locationObj={location} onUpdate={getAllTheLocations} />
+          <LocationCard key={location.id} locationObj={location} />
         ))}
       </div>
     </div>

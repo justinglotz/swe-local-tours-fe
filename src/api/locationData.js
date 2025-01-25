@@ -1,11 +1,11 @@
-const { clientCredentials } = require('@/utils/client');
+// const { clientCredentials } = require('@/utils/client');
 
-const endpoint = clientCredentials.databaseURL;
+const endpoint = 'http://localhost:8000/locations';
 
 // GET ALL LOCATIONS BY UID
 const getLocations = (uid) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/locations.json?orderBy="uid"&equalTo="${uid}"`, {
+    fetch(`${endpoint}?orderBy="uid"&equalTo="${uid}"`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
