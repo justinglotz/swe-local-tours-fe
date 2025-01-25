@@ -24,10 +24,10 @@ export default function TourCard() {
             <Button className="w-1/2">Add To Itinerary</Button>
           </div>
           <div className="flex flex-row justify-end">
-            <OverlayTrigger overlay={<Tooltip>Edit</Tooltip>}>
+            <OverlayTrigger placement="bottom" overlay={<Tooltip>Edit</Tooltip>}>
               <FontAwesomeIcon className="m-2 fa-2x" icon={faPenToSquare} />
             </OverlayTrigger>
-            <OverlayTrigger overlay={<Tooltip>Delete</Tooltip>}>
+            <OverlayTrigger placement="bottom" overlay={<Tooltip>Delete</Tooltip>}>
               <FontAwesomeIcon className="m-2 fa-2x" icon={faTrashCan} />
             </OverlayTrigger>
           </div>
