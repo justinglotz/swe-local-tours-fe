@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 // import { Link } from 'next/link';
@@ -27,12 +27,20 @@ export default function LocationCard({ locationObj }) {
               </Button>
               {/* </Link> */}
 
-              {/* <Link href={`/location/edit/${locationObj.firebaseKey}`} passHref> */}
-              <FontAwesomeIcon className="m-2 fa-2x" icon={faPenToSquare} />
-              {/* </Link> */}
+              <div>
+                <OverlayTrigger overlay={<Tooltip>Edit</Tooltip>}>
+                  {/* <Link href={`/location/edit/${locationObj.firebaseKey}`} passHref> */}
+                  <FontAwesomeIcon className="m-2 fa-2x" icon={faPenToSquare} />
+                  {/* </Link> */}
+                </OverlayTrigger>
+              </div>
 
-              {/* TODO: add onClick={deleteLocation} to the button below */}
-              <FontAwesomeIcon className="m-2 fa-2x" icon={faTrashCan} />
+              <div>
+                <OverlayTrigger overlay={<Tooltip>Edit</Tooltip>}>
+                  {/* TODO: add onClick={deleteLocation} to the button below */}
+                  <FontAwesomeIcon className="m-2 fa-2x" icon={faTrashCan} />
+                </OverlayTrigger>
+              </div>
             </div>
           </Card.Footer>
         </Card.Body>

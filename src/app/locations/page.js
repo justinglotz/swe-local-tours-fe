@@ -6,6 +6,8 @@ import { useAuth } from '@/utils/context/authContext';
 import Link from 'next/link';
 import { Button } from 'react-bootstrap';
 import { getLocations } from '@/api/locationData';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 export default function LocationsPage() {
   // TODO: Set a state for locations
@@ -26,21 +28,25 @@ export default function LocationsPage() {
 
   return (
     <div className="text-center my-4">
+      <div className="text-center mt-3">
         <Link href="/location/new" passHref>
-          <Button>Add A Location</Button>
+          <Button className="w-25">
+            <FontAwesomeIcon icon={faPlus} /> New Location
+          </Button>
         </Link>
-
-        {/* For now just displaying one location card to make sure it works. will delete later */}
-        <div>
-          <LocationCard />
-        </div>
-
-        <div className="d-flex flex-wrap">
-          {/* map over locations here using LocationCard component */}
-          {locations.map((location) => (
-            <LocationCard key={location.firebaseKey} locationObj={location} onUpdate={getAllTheLocations} />
-          ))}
-        </div>
       </div>
+
+      {/* For now just displaying one location card to make sure it works. will delete later */}
+      <div>
+        <LocationCard />
+      </div>
+
+      <div className="d-flex flex-wrap">
+        {/* map over locations here using LocationCard component */}
+        {locations.map((location) => (
+          <LocationCard key={location.firebaseKey} locationObj={location} onUpdate={getAllTheLocations} />
+        ))}
+      </div>
+    </div>
   );
 }
