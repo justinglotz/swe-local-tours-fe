@@ -9,14 +9,19 @@ import PropTypes from 'prop-types';
 
 export default function LocationCard({ locationObj }) {
   console.log(locationObj); // logging this now to satisfy the linter, will remove later
+  if (locationObj) {
+    console.log(locationObj.name); // Log name only if locationObj is valid
+  } else {
+    console.log('locationObj is undefined or null');
+  }
   return (
     <div>
       <Card style={{ width: '18rem' }}>
         <Card.Header>
-          <Card.Title>locationObj.name</Card.Title>
+          <Card.Title>{locationObj.name}</Card.Title>
         </Card.Header>
         <Card.Body>
-          <Card.Text>locationObj.description</Card.Text>
+          <Card.Text>{locationObj.address}</Card.Text>
           <Card.Footer>
             <div className="d-flex justify-content-between align-items-center">
               {/* TODO: Comment (2) Link elements back in below once we're able to pass an obj in and they won't be undefined and break the app */}
@@ -45,6 +50,6 @@ LocationCard.propTypes = {
   locationObj: PropTypes.shape({
     firebaseKey: PropTypes.string,
     name: PropTypes.string,
-    description: PropTypes.string,
+    address: PropTypes.string,
   }).isRequired,
 };
