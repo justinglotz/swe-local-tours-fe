@@ -10,22 +10,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 export default function LocationsPage() {
-  // TODO: Set a state for locations
+  // Set a state for locations
   const [locations, setLocations] = useState([]);
 
   // get user ID using UseAuth Hook
   const { user } = useAuth();
 
-  // TODO: Fetch locations from the API and set the state
+  // Fetch locations from the API and set the state
   const getAllTheLocations = () => {
     getLocations(user.uid).then((data) => {
-      console.log(data);
       setLocations(data);
     });
   };
 
-  // TODO: useEffect to fetch locations when the page loads
+  // useEffect to fetch locations when the page loads
   useEffect(() => {
+    console.log('Fetching locations for user:', user?.uid); // Check if user ID is available and used
     getAllTheLocations();
   }, []);
 
@@ -39,12 +39,10 @@ export default function LocationsPage() {
         </Link>
       </div>
 
-      {/* For now just displaying one location card to make sure it works. will delete later */}
-
       <div className="d-flex flex-wrap">
         {/* map over locations here using LocationCard component */}
         {locations.map((location) => (
-          <LocationCard key={location.id} locationObj={location} />
+          <LocationCard key={location.id} locationObj={location} onUpdate={getAllTheLocations} />
         ))}
       </div>
     </div>
