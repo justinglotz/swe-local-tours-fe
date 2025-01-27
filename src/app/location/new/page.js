@@ -1,5 +1,8 @@
 import React from 'react';
+import LocationForm from '@/components/forms/LocationForm';
 
 export default function NewLocation() {
-  return <div>use the LocationForm component here</div>;
+  return (
+    <LocationForm />
+  );
 }
