@@ -1,7 +1,8 @@
-import { clientCredentials } from '@/utils/client';
+// import { clientCredentials } from '@/utils/client';
 // API CALLS FOR TOURS
 
-const endpoint = clientCredentials.databaseURL;
+// const endpoint = clientCredentials.databaseURL;
+const endpoint = 'http://localhost:8000';
 
 // GET ALL TOURS FOR A SPECIFIC USER
 const getTours = (uid) =>

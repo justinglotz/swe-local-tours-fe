@@ -4,16 +4,10 @@ import React from 'react';
 import { Card, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
-// import { Link } from 'next/link';
+import Link from 'next/link';
 import PropTypes from 'prop-types';
 
 export default function LocationCard({ locationObj }) {
-  console.log(locationObj); // logging this now to satisfy the linter, will remove later
-  if (locationObj) {
-    console.log(locationObj.name); // Log name only if locationObj is valid
-  } else {
-    console.log('locationObj is undefined or null');
-  }
   return (
     <div>
       <Card style={{ width: '18rem' }}>
@@ -24,19 +18,17 @@ export default function LocationCard({ locationObj }) {
           <Card.Text>{locationObj.address}</Card.Text>
           <Card.Footer>
             <div className="d-flex justify-content-between align-items-center">
-              {/* TODO: Comment (2) Link elements back in below once we're able to pass an obj in and they won't be undefined and break the app */}
-              {/* 
-            <Link href={`/location/${locationObj.firebaseKey}`} passHref> */}
-              <Button className="w-auto" variant="primary" size="sm">
-                View Location Details
-              </Button>
-              {/* </Link> */}
+              <Link href={`/location/${locationObj.id}`} passHref>
+                <Button className="w-auto" variant="primary" size="sm">
+                  View Location Details
+                </Button>
+              </Link>
 
               <div>
                 <OverlayTrigger overlay={<Tooltip>Edit</Tooltip>}>
-                  {/* <Link href={`/location/edit/${locationObj.firebaseKey}`} passHref> */}
-                  <FontAwesomeIcon className="m-2 fa-2x" icon={faPenToSquare} />
-                  {/* </Link> */}
+                  <Link href={`/location/edit/${locationObj.id}`} passHref>
+                    <FontAwesomeIcon className="m-2 fa-2x" icon={faPenToSquare} />
+                  </Link>
                 </OverlayTrigger>
               </div>
 
@@ -56,7 +48,7 @@ export default function LocationCard({ locationObj }) {
 
 LocationCard.propTypes = {
   locationObj: PropTypes.shape({
-    firebaseKey: PropTypes.string,
+    id: PropTypes.string,
     name: PropTypes.string,
     address: PropTypes.string,
   }).isRequired,
