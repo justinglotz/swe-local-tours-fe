@@ -16,10 +16,13 @@ export default function ToursPage() {
   const { user } = useAuth();
 
   const getAllTheTours = () => {
-    getTours(user.uid).then(setTours);
+    getTours(user.uid).then((data) => {
+      setTours(data);
+    });
   };
 
   useEffect(() => {
+    console.log('Fetching locations for user:', user?.uid);
     getAllTheTours();
   }, []);
 

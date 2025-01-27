@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/utils/context/authContext';
 import PropTypes from 'prop-types';
+import { createLocation, updateLocation } from '@/api/locationData';
 
 const initialState = {
   name: '',
@@ -23,18 +24,18 @@ export default function LocationForm({ obj = initialState }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if (obj.firebaseKey) {
-    //   const payload = { ...formInput, uid: user.uid };
-    //   updateLocation(payload).then(() => router.push(`/locations/${obj.firebaseKey}`));
-    // } else {
-    //   const payload = { ...formInput, uid: user.uid };
-    //   createLocation(payload).then(({ name }) => {
-    //     const patchPayload = { firebaseKey: name };
-    //     updateLocation(patchPayload).then(() => {
-    //       router.push('/locations');
-    //     });
-    //   });
-    // }
+    if (obj.LocationId) {
+      const payload = { ...formInput, uid: user.uid };
+      updateLocation(payload).then(() => router.push(`/locations/${obj.LocationId}`));
+    } else {
+      const payload = { ...formInput, uid: user.uid };
+      createLocation(payload).then(({ name }) => {
+        const patchPayload = { firebaseKey: name };
+        updateLocation(patchPayload).then(() => {
+          router.push('/locations');
+        });
+      });
+    }
 
     router.push('/locations');
   };
@@ -59,7 +60,7 @@ export default function LocationForm({ obj = initialState }) {
         {/* LOCATION DESCRIPTION INPUT */}
         <Form.Group className="mb-3" controlId="formBasicText">
           <Form.Label>Location Description</Form.Label>
-          <Form.Control name="description" type="text" placeholder="Enter location description" value={formInput.name} onChange={handleChange} />
+          <Form.Control name="description" type="text" placeholder="Enter location description" value={formInput.description} onChange={handleChange} />
         </Form.Group>
 
         {/* LOCATION ADDRESS INPUT */}
