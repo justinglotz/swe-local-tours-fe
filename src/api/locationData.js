@@ -22,6 +22,50 @@ const getLocations = (uid) =>
       .catch(reject);
   });
 
+// DELETE LOCATION
+const deleteLocation = (LocationId) =>
+  new Promise((resolve, reject) => {
+    fetch(`${endpoint}/locations/${LocationId}.json`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => resolve(data))
+      .catch(reject);
+  });
+
+// CREATE LOCATION
+const createLocation = (payload) =>
+  new Promise((resolve, reject) => {
+    fetch(`${endpoint}/locations.json`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => response.json())
+      .then((data) => resolve(data))
+      .catch(reject);
+  });
+
+// UPDATE LOCATION
+const updateLocation = (payload) =>
+  new Promise((resolve, reject) => {
+    fetch(`${endpoint}/locations/${payload.LocationId}.json`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => response.json())
+      .then((data) => resolve(data))
+      .catch(reject);
+  });
+
 // GET SINGLE LOCATION BY LOCATION ID
 const getSingleLocation = (LocationId) =>
   new Promise((resolve, reject) => {
@@ -74,4 +118,4 @@ const getLocationTours = (LocationId) =>
       .catch(reject);
   });
 
-export { getLocations, getSingleLocation, getLocationTours, getSingleLocationByPK };
+export { getLocations, getSingleLocation, getLocationTours, getSingleLocationByPK, updateLocation, createLocation, deleteLocation };
