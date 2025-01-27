@@ -1,0 +1,32 @@
+{
+    "loc_1": {
+      "firebaseKey": "loc_1",
+      "uid": "KMnkWlm7NOSTfPj8D2GmPr2Kt232xa",
+      "name": "Grand Canyon",
+      "address": "Arizona, USA"
+    },
+    "loc_2": {
+      "firebaseKey": "loc_2",
+      "uid": "KMnkWlm7NOSTfPj8D2GmPr2Kt232xa",
+      "name": "Eiffel Tower",
+      "address": "Paris, France"
+    },
+    "loc_3": {
+      "firebaseKey": "loc_3",
+      "uid": "KMnkWlm7NOSTfPj8D2GmPr2Kt232xa",
+      "name": "Great Wall of China",
+      "address": "Beijing, China"
+    },
+    "loc_4": {
+      "firebaseKey": "loc_4",
+      "uid": "KMnkWlm7NOSTfPj8D2GmPr2Kt232xa",
+      "name": "Machu Picchu",
+      "address": "Cusco Region, Peru"
+    },
+    "loc_5": {
+      "firebaseKey": "loc_5",
+      "uid": "KMnkWlm7NOSTfPj8D2GmPr2Kt232xa",
+      "name": "Sydney Opera House",
+      "address": "Sydney, Australia"
+    }
+  }

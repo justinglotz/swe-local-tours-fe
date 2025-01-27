@@ -6,3 +6,44 @@ body {
   background: black;
   color: white;
 }
+
+.location-details-container {
+  background-color: #f9f9f9;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.location-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.location-header h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.location-header p {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.location-address {
+  font-size: 1rem;
+  color: #888;
+  margin-top: 1rem;
+}
+
+.tours-section {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.tours-section h3 {
+  font-size: 1.5rem;
+  color: #333;
+}
