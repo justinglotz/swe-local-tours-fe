@@ -6,7 +6,9 @@ import PropTypes from 'prop-types';
 // import viewLocationDetails from '@/api/mergedData';
 import { getSingleLocationByPK } from '@/api/locationData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { faLocationDot, faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import Link from 'next/link';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 export default function ViewLocationDetails({ params }) {
   const { id } = params;
@@ -39,6 +41,26 @@ export default function ViewLocationDetails({ params }) {
         </p>
       </div>
 
+      <div className="d-flex justify-content-center align-items-center">
+        <div>
+          <OverlayTrigger overlay={<Tooltip>Edit</Tooltip>}>
+            <span>
+              <Link href={`/location/edit/${id}`} passHref>
+                <FontAwesomeIcon className="m-2 fa-2x" icon={faPenToSquare} style={{ color: 'black', fill: 'black' }} />
+              </Link>
+            </span>
+          </OverlayTrigger>
+        </div>
+
+        <div>
+          <OverlayTrigger overlay={<Tooltip>Delete</Tooltip>}>
+            {/* TODO: add onClick={deleteLocation} to the button below */}
+            <FontAwesomeIcon className="m-2 fa-2x" icon={faTrashCan} style={{ color: 'black', fill: 'black' }} />
+          </OverlayTrigger>
+        </div>
+      </div>
+
+      <hr style={{ color: 'black' }} />
       {/* Tours Section */}
       <div className="tours-section">
         <h3>Available Tours at {singleLocation.name}:</h3>
