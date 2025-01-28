@@ -61,7 +61,7 @@ const createLocation = (payload) =>
 const updateLocation = (payload) =>
   new Promise((resolve, reject) => {
     fetch(`${endpoint}${payload.id}`, {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -75,27 +75,35 @@ const updateLocation = (payload) =>
 // GET SINGLE LOCATION BY LOCATION ID
 const getSingleLocation = (LocationId) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/locations/${LocationId}.json`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
+    fetch(
+      `${endpoint}/${LocationId}.json`,
+      { cache: 'no-store' },
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       },
-    })
+    )
       .then((response) => response.json())
       .then((data) => resolve(data))
       .catch(reject);
   });
 
-// GET SINGLE LOCATION BY PK
+// GET SINGLE LOCATION BY ID
 // above one is not working, so trying this way
-const getSingleLocationByPK = (pk) =>
+const getSingleLocationById = (id) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}?orderBy="pk"&equalTo="${pk}"`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
+    fetch(
+      `${endpoint}?orderBy="id"&equalTo="${id}"`,
+      { cache: 'no-store' },
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       },
-    })
+    )
       .then((response) => response.json())
       .then((data) => {
         if (data) {
@@ -124,4 +132,4 @@ const getLocationTours = (locationId) =>
       .catch(reject);
   });
 
-export { getLocations, getSingleLocation, getLocationTours, getSingleLocationByPK, updateLocation, createLocation, deleteLocation };
+export { getLocations, getSingleLocation, getLocationTours, getSingleLocationById, updateLocation, createLocation, deleteLocation };

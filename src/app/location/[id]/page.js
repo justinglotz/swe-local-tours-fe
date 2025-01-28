@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 // import TourCard from '@/components/TourCard'
 import PropTypes from 'prop-types';
 // import viewLocationDetails from '@/api/mergedData';
-import { getSingleLocationByPK } from '@/api/locationData';
+import { getSingleLocationById } from '@/api/locationData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
@@ -22,7 +22,7 @@ export default function ViewLocationDetails({ params }) {
   const [singleLocation, setSingleLocation] = useState({});
 
   useEffect(() => {
-    getSingleLocationByPK(id).then((data) => {
+    getSingleLocationById(id).then((data) => {
       setSingleLocation(data);
     });
   }, [id]);

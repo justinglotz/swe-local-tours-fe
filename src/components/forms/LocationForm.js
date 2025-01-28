@@ -22,12 +22,14 @@ export default function LocationForm({ obj = initialState }) {
   console.log('uid:', user.uid);
 
   useEffect(() => {
-    if (obj.id) setFormInput(obj);
-  }, [obj, user]);
+    if (obj.id) {
+      setFormInput(obj);
+      console.log('obj:', obj);
+    }
+  }, [obj]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('formInput:', formInput);
     if (obj.id) {
       const payload = { ...formInput };
       updateLocation(payload).then(() => router.push(`/locations`));
