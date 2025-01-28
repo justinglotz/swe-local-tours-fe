@@ -24,7 +24,7 @@ const getTours = (uid) =>
       .catch(reject);
   });
 
-// DELETE TOUR
+// DELETE BOOK
 const deleteTour = (firebaseKey) =>
   new Promise((resolve, reject) => {
     fetch(`${endpoint}/tours/${firebaseKey}.json`, {

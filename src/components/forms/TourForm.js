@@ -34,25 +34,32 @@ export default function TourForm({ obj = initialState }) {
     if (obj.firebaseKey) setFormInput(obj);
   }, [obj, user]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formInput);
-    if (obj.firebaseKey) {
-      const payload = { ...formInput, uid: user.uid };
-      updateTour(payload).then(() => router.push(`/tours/${obj.firebaseKey}`));
-    } else {
-      const payload = { ...formInput, uid: user.uid };
-      createTour(payload).then(({ name }) => {
-        const patchPayload = { firebaseKey: name };
-        updateTour(patchPayload).then(() => {
+    try {
+      if (obj.firebaseKey) {
+        const payload = { ...formInput, uid: user.uid };
+        await updateTour(payload);
+        router.push(`/tours/${obj.firebaseKey}`);
+      } else {
+        const payload = { ...formInput, uid: user.uid };
+
+        const response = await createTour(payload);
+
+        if (response.name) {
+          const updatedPayload = {
+            ...payload,
+            firebaseKey: response.name,
+          };
+
+          await updateTour(updatedPayload);
           router.push('/tours');
-        });
-      });
+        }
+      }
+    } catch (error) {
+      console.error('Error submitting tour:', error);
     }
-
-    router.push('/tours');
   };
-
   const handleDateChange = (value, fieldName) => {
     setFormInput((prevState) => ({
       ...prevState,

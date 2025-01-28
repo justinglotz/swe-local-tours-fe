@@ -22,9 +22,8 @@ export default function ToursPage() {
   };
 
   useEffect(() => {
-    console.log('Fetching locations for user:', user?.uid);
     getAllTheTours();
-  }, []);
+  }, [user?.uid]);
 
   return (
     <>
