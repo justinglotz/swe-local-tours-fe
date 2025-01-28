@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import { Card, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Card, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare, faTrashCan, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 
@@ -18,12 +18,11 @@ export default function LocationCard({ locationObj }) {
           <Card.Text>{locationObj.address}</Card.Text>
           <Card.Footer>
             <div className="d-flex justify-content-between align-items-center">
-              <Link href={`/location/${locationObj.id}`} passHref>
-                <Button className="w-auto" variant="primary" size="sm">
-                  View Location Details
-                </Button>
-              </Link>
-
+              <OverlayTrigger overlay={<Tooltip>Details</Tooltip>}>
+                <Link href={`/location/${locationObj.id}`} passHref>
+                  <FontAwesomeIcon className="m-2 fa-2x" icon={faCircleInfo} />
+                </Link>
+              </OverlayTrigger>
               <div>
                 <OverlayTrigger overlay={<Tooltip>Edit</Tooltip>}>
                   <Link href={`/location/edit/${locationObj.id}`} passHref>
@@ -33,7 +32,7 @@ export default function LocationCard({ locationObj }) {
               </div>
 
               <div>
-                <OverlayTrigger overlay={<Tooltip>Edit</Tooltip>}>
+                <OverlayTrigger overlay={<Tooltip>Delete</Tooltip>}>
                   {/* TODO: add onClick={deleteLocation} to the button below */}
                   <FontAwesomeIcon className="m-2 fa-2x" icon={faTrashCan} />
                 </OverlayTrigger>
