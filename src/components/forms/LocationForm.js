@@ -8,8 +8,9 @@ import PropTypes from 'prop-types';
 import { createLocation, updateLocation } from '@/api/locationData';
 
 const initialState = {
+  id: '',
   name: '',
-  description: '',
+  // description: '',
   address: '',
 };
 
@@ -18,19 +19,23 @@ export default function LocationForm({ obj = initialState }) {
   const { user } = useAuth();
   const router = useRouter();
 
+  console.log('uid:', user.uid);
+
   useEffect(() => {
-    if (obj.firebaseKey) setFormInput(obj);
+    if (obj.id) setFormInput(obj);
   }, [obj, user]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (obj.LocationId) {
-      const payload = { ...formInput, uid: user.uid };
-      updateLocation(payload).then(() => router.push(`/locations/${obj.LocationId}`));
+    console.log('formInput:', formInput);
+    if (obj.id) {
+      const payload = { ...formInput };
+      updateLocation(payload).then(() => router.push(`/locations`));
     } else {
       const payload = { ...formInput, uid: user.uid };
-      createLocation(payload).then(({ name }) => {
-        const patchPayload = { firebaseKey: name };
+      createLocation(payload).then((response) => {
+        const { id } = response;
+        const patchPayload = { id };
         updateLocation(patchPayload).then(() => {
           router.push('/locations');
         });
@@ -58,10 +63,10 @@ export default function LocationForm({ obj = initialState }) {
         </Form.Group>
 
         {/* LOCATION DESCRIPTION INPUT */}
-        <Form.Group className="mb-3" controlId="formBasicText">
+        {/* <Form.Group className="mb-3" controlId="formBasicText">
           <Form.Label>Location Description</Form.Label>
           <Form.Control name="description" type="text" placeholder="Enter location description" value={formInput.description} onChange={handleChange} />
-        </Form.Group>
+        </Form.Group> */}
 
         {/* LOCATION ADDRESS INPUT */}
         <Form.Group className="mb-3" controlId="formBasicText">
@@ -82,8 +87,8 @@ export default function LocationForm({ obj = initialState }) {
 
 LocationForm.propTypes = {
   obj: PropTypes.shape({
+    id: PropTypes.number,
     name: PropTypes.string,
-    description: PropTypes.string,
     address: PropTypes.string,
   }),
 };
