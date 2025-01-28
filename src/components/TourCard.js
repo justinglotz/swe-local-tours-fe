@@ -5,11 +5,18 @@ import PropTypes from 'prop-types';
 import { faLocationDot, faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import dayjs from 'dayjs';
 import Link from 'next/link';
+import { deleteTour } from '@/api/tourData';
 
-export default function TourCard({ tourObj }) {
+export default function TourCard({ tourObj, onUpdate }) {
   console.log(tourObj);
   const formattedDate = tourObj.date ? dayjs(tourObj.date).format('MMMM D, YYYY') : 'No date selected';
   const formattedTime = tourObj.time ? dayjs(tourObj.time).format('h:mm A') : 'No time selected';
+
+  const deleteThisTour = () => {
+    if (window.confirm(`Delete ${tourObj.name}?`)) {
+      deleteTour(tourObj.firebaseKey).then(() => onUpdate());
+    }
+  };
 
   return (
     <div className="w-80 m-3">
@@ -41,14 +48,14 @@ export default function TourCard({ tourObj }) {
           </div>
           <div className="flex flex-row justify-end">
             <OverlayTrigger placement="bottom" overlay={<Tooltip>Edit</Tooltip>}>
-              <Link href={`/tour/${tourObj.firebaseKey}`} passHref>
+              <Link href={`/tour/edit/${tourObj.firebaseKey}`} passHref>
                 <button type="button" aria-label="Edit tour">
                   <FontAwesomeIcon className="m-2 fa-2x" icon={faPenToSquare} />
                 </button>
               </Link>
             </OverlayTrigger>
             <OverlayTrigger placement="bottom" overlay={<Tooltip>Delete</Tooltip>}>
-              <button type="button" aria-label="Delete tour">
+              <button type="button" aria-label="Delete tour" onClick={deleteThisTour}>
                 <FontAwesomeIcon className="m-2 fa-2x" icon={faTrashCan} />
               </button>
             </OverlayTrigger>
@@ -71,4 +78,5 @@ TourCard.propTypes = {
     location: PropTypes.string,
     firebaseKey: PropTypes.string,
   }).isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };

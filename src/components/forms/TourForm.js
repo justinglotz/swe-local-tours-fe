@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import { useAuth } from '@/utils/context/authContext';
 import { getLocations } from '@/api/locationData';
 import { createTour, updateTour } from '@/api/tourData';
+import dayjs from 'dayjs';
 
 const initialState = {
   name: '',
@@ -23,7 +24,15 @@ const initialState = {
 };
 
 export default function TourForm({ obj = initialState }) {
-  const [formInput, setFormInput] = useState(obj);
+  const [formInput, setFormInput] = useState(() => 
+    // Parse the date using dayjs before setting the initial state
+     ({
+      ...obj,
+      date: obj.date ? dayjs(obj.date) : null,
+      time: obj.time ? dayjs(obj.time) : null,
+    }),
+  );
+  console.log(obj);
   const [locations, setLocations] = useState([]);
   const { user } = useAuth();
   const router = useRouter();
@@ -31,7 +40,14 @@ export default function TourForm({ obj = initialState }) {
   useEffect(() => {
     getLocations(user.uid).then(setLocations);
 
-    if (obj.firebaseKey) setFormInput(obj);
+    if (obj.firebaseKey) {
+      // Parse the date using dayjs
+      const parsedObj = {
+        ...obj,
+        date: obj.date ? dayjs(obj.date) : null,
+      };
+      setFormInput(parsedObj);
+    }
   }, [obj, user]);
 
   const handleSubmit = async (e) => {
@@ -40,7 +56,7 @@ export default function TourForm({ obj = initialState }) {
       if (obj.firebaseKey) {
         const payload = { ...formInput, uid: user.uid };
         await updateTour(payload);
-        router.push(`/tours/${obj.firebaseKey}`);
+        router.push(`/tours`);
       } else {
         const payload = { ...formInput, uid: user.uid };
 
@@ -60,6 +76,7 @@ export default function TourForm({ obj = initialState }) {
       console.error('Error submitting tour:', error);
     }
   };
+
   const handleDateChange = (value, fieldName) => {
     setFormInput((prevState) => ({
       ...prevState,
