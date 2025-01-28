@@ -1,11 +1,11 @@
 // const { clientCredentials } = require('@/utils/client');
 
-const endpoint = 'http://localhost:8000';
+const endpoint = 'http://localhost:8000/locations';
 
 // GET ALL LOCATIONS BY UID
 const getLocations = (uid) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/locations?orderBy="uid"&equalTo="${uid}"`, {
+    fetch(`${endpoint}?uid=${uid}"`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -25,7 +25,7 @@ const getLocations = (uid) =>
 // DELETE LOCATION
 const deleteLocation = (LocationId) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/locations/${LocationId}.json`, {
+    fetch(`${endpoint}/${LocationId}.json`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ const deleteLocation = (LocationId) =>
 // CREATE LOCATION
 const createLocation = (payload) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/locations.json`, {
+    fetch(endpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -47,15 +47,21 @@ const createLocation = (payload) =>
       body: JSON.stringify(payload),
     })
       .then((response) => response.json())
-      .then((data) => resolve(data))
-      .catch(reject);
+      .then((data) => {
+        console.log('Server response:', data); // Log response data
+        resolve(data);
+      })
+      .catch((error) => {
+        console.error('Error creating location:', error); // Log any errors
+        reject(error);
+      });
   });
 
 // UPDATE LOCATION
 const updateLocation = (payload) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/locations/${payload.LocationId}.json`, {
-      method: 'PATCH',
+    fetch(`${endpoint}${payload.id}`, {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -84,7 +90,7 @@ const getSingleLocation = (LocationId) =>
 // above one is not working, so trying this way
 const getSingleLocationByPK = (pk) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/locations?orderBy="pk"&equalTo="${pk}"`, {
+    fetch(`${endpoint}?orderBy="pk"&equalTo="${pk}"`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -103,11 +109,11 @@ const getSingleLocationByPK = (pk) =>
       .catch(reject);
   });
 
-// GET A SINGLE LOCATIONS TOURS
+// GET A SINGLE LOCATIONS TOURS TODO: move this to toursData.js
 // we may not need this, but putting it here in case we want to show the tours offered at a location in a location's details page
-const getLocationTours = (LocationId) =>
+const getLocationTours = (locationId) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/tours.json?orderBy="location_id"&equalTo="${LocationId}"`, {
+    fetch(`${endpoint}/${locationId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
