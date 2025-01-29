@@ -1,13 +1,12 @@
-import { clientCredentials } from '@/utils/client';
 // API CALLS FOR TOURS
 
-const endpoint = clientCredentials.databaseURL;
-// const endpoint = 'http://localhost:8000';
+// const endpoint = clientCredentials.databaseURL;
+const endpoint = 'http://localhost:8000/tours';
 
 // GET ALL TOURS FOR A SPECIFIC USER
 const getTours = (uid) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/tours.json?orderBy="uid"&equalTo="${uid}"`, {
+    fetch(`${endpoint}?uid="${uid}"`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -24,10 +23,10 @@ const getTours = (uid) =>
       .catch(reject);
   });
 
-// DELETE BOOK
-const deleteTour = (firebaseKey) =>
+// DELETE TOUR
+const deleteTour = (TourId) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/tours/${firebaseKey}.json`, {
+    fetch(`${endpoint}/${TourId}.json`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -39,9 +38,9 @@ const deleteTour = (firebaseKey) =>
   });
 
 // GET SINGLE TOUR
-const getSingleTour = (firebaseKey) =>
+const getSingleTour = (TourId) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/tours/${firebaseKey}.json`, {
+    fetch(`${endpoint}/tours/${TourId}.json`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -55,7 +54,7 @@ const getSingleTour = (firebaseKey) =>
 // CREATE TOUR
 const createTour = (payload) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/tours.json`, {
+    fetch(endpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -70,7 +69,7 @@ const createTour = (payload) =>
 // UPDATE TOUR
 const updateTour = (payload) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/tours/${payload.firebaseKey}.json`, {
+    fetch(`${endpoint}${payload.id}.json`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
