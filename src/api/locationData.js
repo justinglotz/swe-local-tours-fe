@@ -76,7 +76,7 @@ const updateLocation = (payload) =>
 const getSingleLocation = (LocationId) =>
   new Promise((resolve, reject) => {
     fetch(
-      `${endpoint}/${LocationId}.json`,
+      `${endpoint}/${LocationId}`,
       { cache: 'no-store' },
       {
         method: 'GET',
@@ -91,7 +91,7 @@ const getSingleLocation = (LocationId) =>
   });
 
 // GET SINGLE LOCATION BY ID
-// above one is not working, so trying this way
+// not using this now
 const getSingleLocationById = (id) =>
   new Promise((resolve, reject) => {
     fetch(

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 // import TourCard from '@/components/TourCard'
 import PropTypes from 'prop-types';
 // import viewLocationDetails from '@/api/mergedData';
-import { getSingleLocationById } from '@/api/locationData';
+import { getSingleLocation } from '@/api/locationData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
@@ -22,7 +22,7 @@ export default function ViewLocationDetails({ params }) {
   const [singleLocation, setSingleLocation] = useState({});
 
   useEffect(() => {
-    getSingleLocationById(id).then((data) => {
+    getSingleLocation(id).then((data) => {
       setSingleLocation(data);
     });
   }, [id]);
@@ -34,8 +34,6 @@ export default function ViewLocationDetails({ params }) {
     <div className="location-details-container">
       <div className="location-header">
         <h2>{singleLocation.name}</h2>
-        {/* TODO: get description data in BE so it is accessible here */}
-        <p>Description: {singleLocation.description}</p>
         <p className="location-address">
           <FontAwesomeIcon icon={faLocationDot} /> {singleLocation.address}
         </p>
