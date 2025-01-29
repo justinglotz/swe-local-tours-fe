@@ -25,7 +25,6 @@ export default function LocationForm({ obj = initialState }) {
     if (obj.id) {
       // if obj.id exists, set the form input to the obj
       setFormInput(obj);
-      console.log('obj:', obj);
     }
   }, [obj]);
 

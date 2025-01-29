@@ -40,7 +40,7 @@ export default function ToursPage() {
       </div>
       <div className="flex flex-row justify-center flex-wrap">
         {tours.map((tour) => (
-          <TourCard key={tour.firebaseKey} tourObj={tour} onUpdate={getAllTheTours} />
+          <TourCard key={tour.id} tourObj={tour} onUpdate={getAllTheTours} />
         ))}
       </div>
     </>
