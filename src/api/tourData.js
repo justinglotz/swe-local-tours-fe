@@ -81,4 +81,18 @@ const updateTour = (payload) =>
       .catch(reject);
   });
 
-export { getTours, createTour, deleteTour, getSingleTour, updateTour };
+// GET A SINGLE LOCATIONS TOURS
+const getLocationTours = (locationId) =>
+  new Promise((resolve, reject) => {
+    fetch(`${endpoint}/${locationId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => resolve(Object.values(data)))
+      .catch(reject);
+  });
+
+export { getTours, createTour, deleteTour, getSingleTour, updateTour, getLocationTours };
