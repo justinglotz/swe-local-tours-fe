@@ -32,8 +32,8 @@ export default function LocationForm({ obj = initialState }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (obj.id) {
-      const payload = { ...formInput };
-      updateLocation(payload).then(() => router.push(`/locations`));
+      // const payload = { ...formInput };
+      updateLocation(formInput).then(() => router.push(`/locations`));
     } else {
       const payload = { ...formInput, uid: user.uid };
       createLocation(payload).then((response) => {
