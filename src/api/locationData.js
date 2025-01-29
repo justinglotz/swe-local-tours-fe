@@ -117,19 +117,4 @@ const getSingleLocationById = (id) =>
       .catch(reject);
   });
 
-// GET A SINGLE LOCATIONS TOURS TODO: move this to toursData.js
-// we may not need this, but putting it here in case we want to show the tours offered at a location in a location's details page
-const getLocationTours = (locationId) =>
-  new Promise((resolve, reject) => {
-    fetch(`${endpoint}/${locationId}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => resolve(Object.values(data)))
-      .catch(reject);
-  });
-
-export { getLocations, getSingleLocation, getLocationTours, getSingleLocationById, updateLocation, createLocation, deleteLocation };
+export { getLocations, getSingleLocation, getSingleLocationById, updateLocation, createLocation, deleteLocation };
