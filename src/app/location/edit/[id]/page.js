@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import LocationForm from '@/components/forms/LocationForm';
-import { getSingleLocationById } from '@/api/locationData';
+import { getSingleLocation } from '@/api/locationData';
 import PropTypes from 'prop-types';
 
 export default function EditLocation({ params }) {
@@ -11,7 +11,7 @@ export default function EditLocation({ params }) {
   const [editItem, setEditItem] = useState({});
 
   useEffect(() => {
-    getSingleLocationById(id).then(setEditItem);
+    getSingleLocation(id).then(setEditItem);
     console.log('editItem:', editItem);
   }, [id]);
 

@@ -23,6 +23,7 @@ export default function LocationForm({ obj = initialState }) {
 
   useEffect(() => {
     if (obj.id) {
+      // if obj.id exists, set the form input to the obj
       setFormInput(obj);
       console.log('obj:', obj);
     }
@@ -63,12 +64,6 @@ export default function LocationForm({ obj = initialState }) {
           <Form.Label>Location Name</Form.Label>
           <Form.Control name="name" type="text" placeholder="Enter location name" value={formInput.name} onChange={handleChange} />
         </Form.Group>
-
-        {/* LOCATION DESCRIPTION INPUT */}
-        {/* <Form.Group className="mb-3" controlId="formBasicText">
-          <Form.Label>Location Description</Form.Label>
-          <Form.Control name="description" type="text" placeholder="Enter location description" value={formInput.description} onChange={handleChange} />
-        </Form.Group> */}
 
         {/* LOCATION ADDRESS INPUT */}
         <Form.Group className="mb-3" controlId="formBasicText">
