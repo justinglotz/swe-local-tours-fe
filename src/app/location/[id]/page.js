@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-// import TourCard from '@/components/TourCard'
+import TourCard from '@/components/TourCard';
 import PropTypes from 'prop-types';
-// import viewLocationDetails from '@/api/mergedData';
-import { getSingleLocation } from '@/api/locationData';
+import viewLocationDetails from '@/api/mergedData';
+// import { getSingleLocation } from '@/api/locationData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
@@ -13,29 +13,23 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 export default function ViewLocationDetails({ params }) {
   const { id } = params;
 
-  // const [locationDetails, setLocationDetails] = useState({});
-
-  // useEffect(() => {
-  //   viewLocationDetails(id).then(setLocationDetails);
-  // }, [id]);
-
-  const [singleLocation, setSingleLocation] = useState({});
+  const [locationDetails, setLocationDetails] = useState({});
 
   useEffect(() => {
-    getSingleLocation(id).then((data) => {
-      setSingleLocation(data);
+    viewLocationDetails(id).then((data) => {
+      setLocationDetails(data);
     });
   }, [id]);
 
-  // const tours = locationDetails.tours || []; // if locationDetails.tours is undefined, set it to an empty array
+  const tours = locationDetails.tours || []; // if locationDetails.tours is undefined, set it to an empty array
 
-  console.log('single location:', singleLocation);
+  console.log('location details:', locationDetails);
   return (
     <div className="location-details-container">
       <div className="location-header">
-        <h2>{singleLocation.name}</h2>
+        <h2>{locationDetails.name}</h2>
         <p className="location-address">
-          <FontAwesomeIcon icon={faLocationDot} /> {singleLocation.address}
+          <FontAwesomeIcon icon={faLocationDot} /> {locationDetails.address}
         </p>
       </div>
 
@@ -61,17 +55,16 @@ export default function ViewLocationDetails({ params }) {
       <hr style={{ color: 'black' }} />
       {/* Tours Section */}
       <div className="tours-section">
-        <h3>Available Tours at {singleLocation.name}:</h3>
+        <h3>Available Tours at {locationDetails.name}:</h3>
       </div>
 
-      {/* // TODO: add key and tourObj in tour card component below */}
-      {/* 
-      <h3>Tours at (location):</h3>
-      <div className="d-flex flex-wrap">
+      {/* TODO: add key and tourObj in tour card component below */}
+
+      <div className="d-flex flex-wrap tours-container">
         {tours.map((tour) => (
-          <TourCard key={tour.id} tourObj={tour}/>
+          <TourCard key={tour.id} tourObj={tour} />
         ))}
-      </div> */}
+      </div>
     </div>
   );
 }
