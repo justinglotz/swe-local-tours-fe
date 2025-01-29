@@ -9,13 +9,14 @@ import PropTypes from 'prop-types';
 
 export default function TourDetailsPage({ params }) {
   const [tour, setTour] = useState({});
-  const { firebaseKey } = params;
+  const { id } = params;
 
   useEffect(() => {
-    getSingleTour(firebaseKey).then((data) => {
+    getSingleTour(id).then((data) => {
+      console.log(data);
       setTour(data);
     });
-  }, [firebaseKey]);
+  }, [id]);
 
   const tourDateObj = dayjs(tour.date).format('YYYY-MM-DD');
   const tourTimeObj = dayjs(tour.time).format('h:mm A');
@@ -28,14 +29,14 @@ export default function TourDetailsPage({ params }) {
       <p>Time: {tourTimeObj}</p>
       <p>Duration: {tour.duration}</p>
       <p>Price: {tour.price}</p>
-      <img src={tour.imageUrl} alt={tour.name} />
-      <p>Location: {tour.location}</p>
+      <img src={tour.image} alt={tour.name} />
+      <p>Location: {tour.locationName}</p>
     </div>
   );
 }
 
 TourDetailsPage.propTypes = {
   params: PropTypes.shape({
-    firebaseKey: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
   }),
 };

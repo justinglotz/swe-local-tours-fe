@@ -24,7 +24,6 @@ export default function LocationForm({ obj = initialState }) {
   useEffect(() => {
     if (obj.id) {
       setFormInput(obj);
-      console.log('obj:', obj);
     }
   }, [obj]);
 

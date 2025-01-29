@@ -24,9 +24,9 @@ const initialState = {
 };
 
 export default function TourForm({ obj = initialState }) {
-  const [formInput, setFormInput] = useState(() => 
+  const [formInput, setFormInput] = useState(() =>
     // Parse the date using dayjs before setting the initial state
-     ({
+    ({
       ...obj,
       date: obj.date ? dayjs(obj.date) : null,
       time: obj.time ? dayjs(obj.time) : null,
@@ -40,7 +40,7 @@ export default function TourForm({ obj = initialState }) {
   useEffect(() => {
     getLocations(user.uid).then(setLocations);
 
-    if (obj.firebaseKey) {
+    if (obj.id) {
       // Parse the date using dayjs
       const parsedObj = {
         ...obj,
@@ -50,31 +50,50 @@ export default function TourForm({ obj = initialState }) {
     }
   }, [obj, user]);
 
-  const handleSubmit = async (e) => {
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     if (obj.id) {
+  //       const payload = { ...formInput, uid: user.uid };
+  //       await updateTour(payload);
+  //       router.push(`/tours`);
+  //     } else {
+  //       const payload = { ...formInput, uid: user.uid };
+
+  //       const response = await createTour(payload);
+
+  //       if (response.name) {
+  //         const updatedPayload = {
+  //           ...payload,
+  //           firebaseKey: response.name,
+  //         };
+
+  //         await updateTour(updatedPayload);
+  //         router.push('/tours');
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.error('Error submitting tour:', error);
+  //   }
+  // };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      if (obj.firebaseKey) {
-        const payload = { ...formInput, uid: user.uid };
-        await updateTour(payload);
-        router.push(`/tours`);
-      } else {
-        const payload = { ...formInput, uid: user.uid };
-
-        const response = await createTour(payload);
-
-        if (response.name) {
-          const updatedPayload = {
-            ...payload,
-            firebaseKey: response.name,
-          };
-
-          await updateTour(updatedPayload);
+    if (obj.id) {
+      const payload = { ...formInput };
+      updateTour(payload).then(() => router.push(`/tours`));
+    } else {
+      const payload = { ...formInput, uid: user.uid };
+      createTour(payload).then((response) => {
+        const { id } = response;
+        const patchPayload = { id };
+        updateTour(patchPayload).then(() => {
           router.push('/tours');
-        }
-      }
-    } catch (error) {
-      console.error('Error submitting tour:', error);
+        });
+      });
     }
+
+    router.push('/tours');
   };
 
   const handleDateChange = (value, fieldName) => {
@@ -169,7 +188,7 @@ export default function TourForm({ obj = initialState }) {
             <Form.Select name="location" value={formInput.location} onChange={handleChange}>
               <option value="">Select...</option>
               {locations.map((location) => (
-                <option key={location.firebaseKey} value={location.firebaseKey}>
+                <option key={location.id} value={location.id}>
                   {location.name}
                 </option>
               ))}
@@ -198,6 +217,6 @@ TourForm.propTypes = {
     price: PropTypes.number,
     imageUrl: PropTypes.string,
     location: PropTypes.string,
-    firebaseKey: PropTypes.string,
+    id: PropTypes.string,
   }),
 };

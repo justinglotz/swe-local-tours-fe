@@ -14,7 +14,7 @@ export default function TourCard({ tourObj, onUpdate }) {
 
   const deleteThisTour = () => {
     if (window.confirm(`Delete ${tourObj.name}?`)) {
-      deleteTour(tourObj.firebaseKey).then(() => onUpdate());
+      deleteTour(tourObj.id).then(() => onUpdate());
     }
   };
 
@@ -37,20 +37,20 @@ export default function TourCard({ tourObj, onUpdate }) {
         <Card.Footer className="text-muted">
           <div className="flex flex-row gap-4">
             <Button className="w-1/2">
-              <Link href={`/tour/${tourObj.firebaseKey}`} passHref>
+              <Link href={`/tour/${tourObj.id}`} passHref>
                 View Tour Details
               </Link>
             </Button>
 
             <Button className="w-1/2">
-              <Link href={`/tour/edit/${tourObj.firebaseKey}`} passHref>
+              <Link href={`/tour/edit/${tourObj.id}`} passHref>
                 Add To Itinerary
               </Link>
             </Button>
           </div>
           <div className="flex flex-row justify-end">
             <OverlayTrigger placement="bottom" overlay={<Tooltip>Edit</Tooltip>}>
-              <Link href={`/tour/edit/${tourObj.firebaseKey}`} passHref>
+              <Link href={`/tour/edit/${tourObj.id}`} passHref>
                 <button type="button" aria-label="Edit tour">
                   <FontAwesomeIcon className="m-2 fa-2x" icon={faPenToSquare} />
                 </button>
@@ -78,7 +78,7 @@ TourCard.propTypes = {
     price: PropTypes.number,
     imageUrl: PropTypes.string,
     location: PropTypes.string,
-    firebaseKey: PropTypes.string,
+    id: PropTypes.string,
     locationName: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,

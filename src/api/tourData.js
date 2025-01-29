@@ -26,7 +26,7 @@ const getTours = (uid) =>
 // DELETE TOUR
 const deleteTour = (TourId) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/${TourId}.json`, {
+    fetch(`${endpoint}/${TourId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ const deleteTour = (TourId) =>
 // GET SINGLE TOUR
 const getSingleTour = (TourId) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/tours/${TourId}.json`, {
+    fetch(`${endpoint}/${TourId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -69,8 +69,8 @@ const createTour = (payload) =>
 // UPDATE TOUR
 const updateTour = (payload) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}${payload.id}.json`, {
-      method: 'PATCH',
+    fetch(`${endpoint}/${payload.id}`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
