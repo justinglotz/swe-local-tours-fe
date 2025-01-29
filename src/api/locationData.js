@@ -60,7 +60,7 @@ const createLocation = (payload) =>
 // UPDATE LOCATION
 const updateLocation = (payload) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}${payload.id}`, {
+    fetch(`${endpoint}/${payload.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
