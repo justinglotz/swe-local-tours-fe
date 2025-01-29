@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { getTours } from '@/api/tourData';
 import { useAuth } from '@/utils/context/authContext';
+import { getSingleLocation } from '@/api/locationData';
 
 export default function ToursPage() {
   const [tours, setTours] = useState([]);
@@ -17,13 +18,16 @@ export default function ToursPage() {
 
   const getAllTheTours = () => {
     getTours(user.uid).then((data) => {
-      setTours(data);
+      const toursWithLocationNames = data.map((tour) => getSingleLocation(tour.location).then((locationData) => ({ ...tour, locationName: locationData.name })));
+      Promise.all(toursWithLocationNames).then((updatedTours) => {
+        setTours(updatedTours);
+      });
     });
   };
 
   useEffect(() => {
     getAllTheTours();
-  }, [user?.uid]);
+  }, []);
 
   return (
     <>
