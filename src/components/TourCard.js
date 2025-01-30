@@ -10,7 +10,7 @@ import { deleteTour } from '@/api/tourData';
 export default function TourCard({ tourObj, onUpdate }) {
   console.log(tourObj);
   const formattedDate = tourObj.date ? dayjs(tourObj.date).format('MMMM D, YYYY') : 'No date selected';
-  const formattedTime = tourObj.time ? dayjs(tourObj.time).format('h:mm A') : 'No time selected';
+  const formattedTime = tourObj.time ? dayjs(`2000-01-01 ${tourObj.time}`).format('h:mm A') : 'No time selected';
 
   const deleteThisTour = () => {
     if (window.confirm(`Delete ${tourObj.name}?`)) {
@@ -72,8 +72,8 @@ TourCard.propTypes = {
   tourObj: PropTypes.shape({
     name: PropTypes.string,
     description: PropTypes.string,
-    date: PropTypes.instanceOf(Date),
-    time: PropTypes.instanceOf(Date),
+    date: PropTypes.string,
+    time: PropTypes.string,
     duration: PropTypes.string,
     price: PropTypes.number,
     imageUrl: PropTypes.string,
