@@ -10,25 +10,25 @@ import dayjs from 'dayjs';
 
 export default function EditTour({ params }) {
   const [editItem, setEditItem] = useState({});
-  const { firebaseKey } = params;
+  const { id } = params;
 
   useEffect(() => {
-    getSingleTour(firebaseKey).then((data) => {
+    getSingleTour(id).then((data) => {
       // Parse the date and time using dayjs
       const parsedData = {
         ...data,
         date: data.date ? dayjs(data.date) : null,
-        time: data.time ? dayjs(data.time) : null,
+        time: data.time ? dayjs(`1970-01-01T${data.time}`).toDate() : null,
       };
       setEditItem(parsedData);
     });
-  }, [firebaseKey]);
+  }, [id]);
 
   return <TourForm obj={editItem} />;
 }
 
 EditTour.propTypes = {
   params: PropTypes.shape({
-    firebaseKey: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
   }).isRequired,
 };
