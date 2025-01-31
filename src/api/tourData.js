@@ -83,7 +83,7 @@ const updateTour = (payload) =>
 // GET A SINGLE LOCATIONS TOURS
 const getLocationTours = (locationId) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/${locationId}`, {
+    fetch(`${endpoint}?location=${locationId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
