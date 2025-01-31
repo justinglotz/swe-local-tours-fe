@@ -24,15 +24,12 @@ const initialState = {
 };
 
 export default function TourForm({ obj = initialState }) {
-  const [formInput, setFormInput] = useState(() =>
-    // Parse the date using dayjs before setting the initial state
-    ({
-      ...obj,
-      date: obj.date ? dayjs(obj.date) : null,
-      time: obj.time ? dayjs(obj.time) : null,
-    }),
-  );
-  console.log(obj);
+  const [formInput, setFormInput] = useState(() => ({
+    ...obj,
+    date: obj.date ? dayjs(obj.date) : null,
+    time: obj.time ? dayjs(obj.time) : null,
+  }));
+
   const [locations, setLocations] = useState([]);
   const { user } = useAuth();
   const router = useRouter();
@@ -41,49 +38,27 @@ export default function TourForm({ obj = initialState }) {
     getLocations(user.uid).then(setLocations);
 
     if (obj.id) {
-      // Parse the date using dayjs
-      const parsedObj = {
+      setFormInput((prev) => ({
         ...obj,
-        date: obj.date ? dayjs(obj.date) : null,
-      };
-      setFormInput(parsedObj);
+        date: obj.date ? dayjs(obj.date) : prev.date,
+        time: obj.time ? dayjs(obj.time) : prev.time,
+      }));
     }
   }, [obj, user]);
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     if (obj.id) {
-  //       const payload = { ...formInput, uid: user.uid };
-  //       await updateTour(payload);
-  //       router.push(`/tours`);
-  //     } else {
-  //       const payload = { ...formInput, uid: user.uid };
-
-  //       const response = await createTour(payload);
-
-  //       if (response.name) {
-  //         const updatedPayload = {
-  //           ...payload,
-  //           firebaseKey: response.name,
-  //         };
-
-  //         await updateTour(updatedPayload);
-  //         router.push('/tours');
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.error('Error submitting tour:', error);
-  //   }
-  // };
-
   const handleSubmit = (e) => {
     e.preventDefault();
+    const payload = {
+      ...formInput,
+      date: formInput.date ? formInput.date.format('YYYY-MM-DD') : null,
+      time: formInput.time ? formInput.time.format('HH:mm:ss') : null,
+      uid: user.uid,
+    };
+    console.log(payload);
+
     if (obj.id) {
-      const payload = { ...formInput };
-      updateTour(payload).then(() => router.push(`/tours`));
+      updateTour(payload).then(() => router.push('/tours'));
     } else {
-      const payload = { ...formInput, uid: user.uid };
       createTour(payload).then((response) => {
         const { id } = response;
         const patchPayload = { id };
@@ -92,26 +67,17 @@ export default function TourForm({ obj = initialState }) {
         });
       });
     }
-
-    router.push('/tours');
-  };
-
-  const handleDateChange = (value, fieldName) => {
-    setFormInput((prevState) => ({
-      ...prevState,
-      [fieldName]: value || null,
-    }));
   };
 
   const darkTheme = createTheme({
     palette: {
       mode: 'dark',
       background: {
-        default: '#000000', // black background
-        paper: '#1a1a1a', // slightly lighter for elements like dropdowns
+        default: '#000000',
+        paper: '#1a1a1a',
       },
       text: {
-        primary: '#ffffff', // white text
+        primary: '#ffffff',
       },
     },
   });
@@ -145,16 +111,16 @@ export default function TourForm({ obj = initialState }) {
             <Form.Label>Tour Date</Form.Label>
             <br />
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker name="date" value={formInput.date} onChange={(value) => handleDateChange(value, 'date')} renderInput={(params) => <input {...params.inputProps} className="form-control" />} />
+              <DatePicker value={formInput.date} onChange={(value) => setFormInput((prev) => ({ ...prev, date: value }))} slotProps={{ textField: { size: 'small' } }} />
             </LocalizationProvider>
           </Form.Group>
 
           {/* TOUR TIME SELECTOR */}
-          <Form.Group className="mb-3" controlId="formBasicDate">
+          <Form.Group className="mb-3" controlId="formBasicTime">
             <Form.Label>Tour Time</Form.Label>
             <br />
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <TimePicker name="time" label="Select a time" value={formInput.time} onChange={(value) => handleDateChange(value, 'time')} renderInput={(params) => <input {...params.inputProps} className="form-control" />} />
+              <TimePicker value={formInput.time} onChange={(value) => setFormInput((prev) => ({ ...prev, time: value }))} slotProps={{ textField: { size: 'small' } }} />
             </LocalizationProvider>
           </Form.Group>
 
@@ -163,21 +129,21 @@ export default function TourForm({ obj = initialState }) {
             <Form.Label>Select a Duration</Form.Label>
             <Form.Select name="duration" value={formInput.duration} onChange={handleChange}>
               <option>Select...</option>
-              <option>15 minutes</option>
-              <option>30 minutes</option>
-              <option>45 minutes</option>
-              <option>1 hour</option>
+              <option value="15">15 minutes</option>
+              <option value="30">30 minutes</option>
+              <option value="45">45 minutes</option>
+              <option value="60">1 hour</option>
             </Form.Select>
           </Form.Group>
 
           {/* TOUR PRICE INPUT */}
-          <Form.Group className="mb-3" controlId="formBasicDate">
+          <Form.Group className="mb-3" controlId="formBasicPrice">
             <Form.Label>Price</Form.Label>
             <Form.Control name="price" type="text" placeholder="Enter a Price" value={formInput.price} onChange={handleChange} />
           </Form.Group>
 
           {/* TOUR IMAGE URL INPUT */}
-          <Form.Group className="mb-3" controlId="formBasicDate">
+          <Form.Group className="mb-3" controlId="formBasicImage">
             <Form.Label>Image URL</Form.Label>
             <Form.Control name="imageUrl" type="text" placeholder="Enter a URL for the tour image" value={formInput.imageUrl} onChange={handleChange} />
           </Form.Group>
@@ -211,10 +177,10 @@ TourForm.propTypes = {
   obj: PropTypes.shape({
     name: PropTypes.string,
     description: PropTypes.string,
-    date: PropTypes.instanceOf(Date),
-    time: PropTypes.instanceOf(Date),
+    date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
+    time: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
     duration: PropTypes.string,
-    price: PropTypes.number,
+    price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     imageUrl: PropTypes.string,
     location: PropTypes.string,
     id: PropTypes.string,

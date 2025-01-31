@@ -32,7 +32,6 @@ const deleteTour = (TourId) =>
         'Content-Type': 'application/json',
       },
     })
-      .then((response) => response.json())
       .then((data) => resolve(data))
       .catch(reject);
   });
@@ -84,7 +83,7 @@ const updateTour = (payload) =>
 // GET A SINGLE LOCATIONS TOURS
 const getLocationTours = (locationId) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}?orderBy="location"&equalTo="${locationId}"`, {
+    fetch(`${endpoint}?location=${locationId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
