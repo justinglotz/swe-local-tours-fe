@@ -23,7 +23,7 @@ export default function ItineraryPage() {
   return (
     <div>
       <h1 className="text-center m-4">
-        {userData.first_name} {userData.last_name}`&apos;`s Itinerary
+        {userData.first_name} {userData.last_name}&apos;s Itinerary
       </h1>
       {itinerary.map((item) => (
         <ItineraryTourCard key={item.id} itineraryObj={item} onUpdate={getTheItinerary} />
