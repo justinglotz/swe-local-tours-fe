@@ -47,25 +47,27 @@ export default function TourForm({ obj = initialState }) {
   }, [obj, user]);
 
   const handleSubmit = (e) => {
+    console.log('Form Submitted.');
     e.preventDefault();
     const payload = {
       ...formInput,
       date: formInput.date ? formInput.date.format('YYYY-MM-DD') : null,
       time: formInput.time ? formInput.time.format('HH:mm:ss') : null,
-      uid: user.uid,
+      user_id: 1,
     };
+
     console.log(payload);
 
     if (obj.id) {
       updateTour(payload).then(() => router.push('/tours'));
     } else {
-      createTour(payload).then((response) => {
-        const { id } = response;
-        const patchPayload = { id };
-        updateTour(patchPayload).then(() => {
-          router.push('/tours');
-        });
-      });
+      createTour(payload).then(() => router.push('/tours'));
+      // const { id } = response;
+      // const patchPayload = { id };
+      // console.log(patchPayload);
+      // updateTour(patchPayload).then(() => {
+      //   router.push('/tours');
+      // });
     }
   };
 
@@ -182,7 +184,8 @@ TourForm.propTypes = {
     duration: PropTypes.string,
     price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     image: PropTypes.string,
-    location: PropTypes.string,
+    location: PropTypes.number,
+    user_id: PropTypes.number,
     id: PropTypes.string,
   }),
 };
