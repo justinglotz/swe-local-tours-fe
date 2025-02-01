@@ -1,7 +1,6 @@
-import { getSingleLocation } from './locationData';
-import { getLocationTours } from './tourData';
+import { getSingleLocation, deleteLocation } from './locationData';
+import { deleteTour, getLocationTours } from './tourData';
 
-// below is a little different from our wireframe because it gives us access to the tours at the location. keeping for now in case we might want to show the tours offered at a location in a location's details page
 const viewLocationDetails = (LocationId) =>
   new Promise((resolve, reject) => {
     Promise.all([getSingleLocation(LocationId), getLocationTours(LocationId)])
@@ -13,13 +12,18 @@ const viewLocationDetails = (LocationId) =>
       .catch((error) => reject(error));
   });
 
-// const viewLocationDetails = (LocationId) =>
-//   new Promise((resolve, reject) => {
-//     Promise.all([getSingleLocation(LocationId), getLocationTours(LocationId)])
-//       .then(([locationObject, locationToursArray]) => {
-//         resolve({ ...locationObject.fields, tours: locationToursArray });
-//       })
-//       .catch((error) => reject(error));
-//   });
+const deleteLocationTours = (LocationId) =>
+  new Promise((resolve, reject) => {
+    getLocationTours(LocationId)
+      .then((toursArray) => {
+        console.warn(toursArray, 'Location Tours');
+        const deleteTourPromises = toursArray.map((tour) => deleteTour(tour.id));
 
-export default viewLocationDetails;
+        Promise.all(deleteTourPromises).then(() => {
+          deleteLocation(LocationId).then(resolve);
+        });
+      })
+      .catch((error) => reject(error));
+  });
+
+export default { viewLocationDetails, deleteLocationTours };
