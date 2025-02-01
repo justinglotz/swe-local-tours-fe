@@ -19,7 +19,7 @@ const initialState = {
   time: null,
   duration: '',
   price: '',
-  imageUrl: '',
+  image: '',
   location: '',
 };
 
@@ -27,7 +27,7 @@ export default function TourForm({ obj = initialState }) {
   const [formInput, setFormInput] = useState(() => ({
     ...obj,
     date: obj.date ? dayjs(obj.date) : null,
-    time: obj.time ? dayjs(obj.time) : null,
+    time: obj.time ? dayjs(`1970-01-01T${obj.time}`).toDate() : null,
   }));
 
   const [locations, setLocations] = useState([]);
@@ -145,7 +145,7 @@ export default function TourForm({ obj = initialState }) {
           {/* TOUR IMAGE URL INPUT */}
           <Form.Group className="mb-3" controlId="formBasicImage">
             <Form.Label>Image URL</Form.Label>
-            <Form.Control name="imageUrl" type="text" placeholder="Enter a URL for the tour image" value={formInput.imageUrl} onChange={handleChange} />
+            <Form.Control name="image" type="text" placeholder="Enter a URL for the tour image" value={formInput.image} onChange={handleChange} />
           </Form.Group>
 
           {/* LOCATION SELECTOR */}
@@ -181,7 +181,7 @@ TourForm.propTypes = {
     time: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
     duration: PropTypes.string,
     price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    imageUrl: PropTypes.string,
+    image: PropTypes.string,
     location: PropTypes.string,
     id: PropTypes.string,
   }),
