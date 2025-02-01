@@ -6,8 +6,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrashCan, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
+import deleteLocationTours from '@/api/mergedData';
 
-export default function LocationCard({ locationObj }) {
+export default function LocationCard({ locationObj, onUpdate }) {
+  const deleteThisLocation = () => {
+    console.log('locationId:', locationObj.id);
+    if (window.confirm(`Delete ${locationObj.name}?`)) {
+      deleteLocationTours(locationObj.id).then(() => onUpdate());
+    }
+  };
   return (
     <div>
       <Card style={{ width: '18rem' }}>
@@ -33,8 +40,9 @@ export default function LocationCard({ locationObj }) {
 
               <div>
                 <OverlayTrigger overlay={<Tooltip>Delete</Tooltip>}>
-                  {/* TODO: add onClick={deleteLocation} to the button below */}
-                  <FontAwesomeIcon className="m-2 fa-2x" icon={faTrashCan} />
+                  <button type="button" aria-label="Delete Location" onClick={deleteThisLocation}>
+                    <FontAwesomeIcon className="m-2 fa-2x" icon={faTrashCan} />
+                  </button>
                 </OverlayTrigger>
               </div>
             </div>
@@ -51,4 +59,5 @@ LocationCard.propTypes = {
     name: PropTypes.string,
     address: PropTypes.string,
   }).isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };
