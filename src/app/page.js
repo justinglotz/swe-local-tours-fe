@@ -18,7 +18,7 @@ function Home() {
       }}
     >
       <h1>Hello {user.displayName}! </h1>
-      <p>here we can use the ProfileForm to have user enter their name and description which will update their profile page. Upon submitting that, we have useRouter redirect to tours page. Add conditional so that if they click home and already have profile data (or whatever that determines they have already filled out ProfileForm), the home page automatically routes to display tours page.If not, it displays Profile form.</p>
+      <p />
     </div>
   );
 }
