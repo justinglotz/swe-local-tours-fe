@@ -28,6 +28,16 @@ export default function ItineraryPage() {
       {itinerary.map((item) => (
         <ItineraryTourCard key={item.id} itineraryObj={item} onUpdate={getTheItinerary} />
       ))}
+      {/* <div className="h-3/4">
+        {tour.coordinates && ( // Only render map when coordinates exist
+          <Map
+            defaultZoom={15} // Increased zoom level for better visibility
+            defaultCenter={tour.coordinates}
+          >
+            <Marker position={tour.coordinates} title={tour.locationName} />
+          </Map>
+        )}
+      </div> */}
     </div>
   );
 }
