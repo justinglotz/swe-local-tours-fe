@@ -1,0 +1,28 @@
+[
+  
+    {
+      "id": 1,
+      "tour_name": "Sample Tour 1",
+      "tour_date": "2025-03-15",
+      "tour_time": "12:00:00",
+      "tour_price": "150.00",
+      "completed": "false"
+    },
+    {
+      "id": 2,
+      "tour_name": "Sample Tour 2",
+      "tour_date": "2025-03-16",
+      "tour_time": "12:01:00",
+      "tour_price": "144.00",
+      "completed": "false"
+    },
+    {
+      "id": 3,
+      "tour_name": "Sample Tour 3",
+      "tour_date": "2025-03-17",
+      "tour_time": "12:02:00",
+      "tour_price": "125.00",
+      "completed": "true"
+    }
+  ]
+  

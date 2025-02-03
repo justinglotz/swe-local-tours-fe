@@ -21,7 +21,7 @@ const createUser = (payload) =>
       });
   });
 
-// GET USER by id
+// GET USER by id. NOT CURRENTLY WORKING CORRECTLY-- just gets all users. need to fix on BE
 const getSingleUser = (UserId) =>
   new Promise((resolve, reject) => {
     fetch(
