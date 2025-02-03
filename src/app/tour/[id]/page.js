@@ -9,15 +9,43 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Card } from 'react-bootstrap';
 import Link from 'next/link';
+import { Map, Marker } from '@vis.gl/react-google-maps';
 
 export default function TourDetailsPage({ params }) {
+  const geocodeAddress = async (address) => {
+    try {
+      const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`);
+
+      const data = await response.json();
+
+      if (data.status === 'OK') {
+        const { lat, lng } = data.results[0].geometry.location;
+        return { lat, lng };
+      } 
+        console.error('Geocoding error:', data.status);
+        return null;
+      
+    } catch (err) {
+      console.error('Failed to geocode address:', err);
+      return null;
+    }
+  };
   const [tour, setTour] = useState({});
   const { id } = params;
 
   useEffect(() => {
     getSingleTour(id).then((data) => {
-      getSingleLocation(data.location).then((locationData) => {
-        setTour({ ...data, locationName: locationData.name, locationAddress: locationData.address });
+      getSingleLocation(data.location).then(async (locationData) => {
+        // Get coordinates from address
+        const coordinates = await geocodeAddress(locationData.address);
+
+        // Set all data together including coordinates
+        setTour({
+          ...data,
+          locationName: locationData.name,
+          locationAddress: locationData.address,
+          coordinates: coordinates || { lat: -33.860664, lng: 151.208138 }, // fallback coordinates if geocoding fails
+        });
       });
     });
   }, []);
@@ -70,9 +98,19 @@ export default function TourDetailsPage({ params }) {
                 <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
                 <Card.Text className="flex-grow">
                   <p>Location: {tour.locationName}</p>
-                  <p>Address: {tour.locationAddress}</p>
                   <p>Duration: {tour.duration} minutes</p>
                   <p>Price: ${tour.price}</p>
+                  <p>Address: {tour.locationAddress}</p>
+                  <div className="h-3/4">
+                    {tour.coordinates && ( // Only render map when coordinates exist
+                      <Map
+                        defaultZoom={15} // Increased zoom level for better visibility
+                        defaultCenter={tour.coordinates}
+                      >
+                        <Marker position={tour.coordinates} title={tour.locationName} />
+                      </Map>
+                    )}
+                  </div>
                 </Card.Text>
               </Card.Body>
             </Card>
