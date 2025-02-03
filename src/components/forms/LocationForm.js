@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/utils/context/authContext';
 import PropTypes from 'prop-types';
 import { createLocation, updateLocation } from '@/api/locationData';
+import Autocomplete from 'react-google-autocomplete';
 
 const initialState = {
   id: '',
@@ -35,13 +36,14 @@ export default function LocationForm({ obj = initialState }) {
       updateLocation(formInput).then(() => router.push(`/locations`));
     } else {
       const payload = { ...formInput, uid: user.uid };
-      createLocation(payload).then((response) => {
-        const { id } = response;
-        const patchPayload = { id };
-        updateLocation(patchPayload).then(() => {
-          router.push('/locations');
-        });
-      });
+      createLocation(payload);
+      // .then((response) => {
+      //   const { id } = response;
+      //   const patchPayload = { id };
+      //   updateLocation(patchPayload).then(() => {
+      //     router.push('/locations');
+      //   });
+      // });
     }
 
     router.push('/locations');
@@ -65,10 +67,19 @@ export default function LocationForm({ obj = initialState }) {
         </Form.Group>
 
         {/* LOCATION ADDRESS INPUT */}
-        <Form.Group className="mb-3" controlId="formBasicText">
-          <Form.Label>Location Address</Form.Label>
-          <Form.Control name="address" type="text" placeholder="Enter location address" value={formInput.address} onChange={handleChange} />
-        </Form.Group>
+        <Form.Label>Location Address</Form.Label>
+        <Autocomplete
+          apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
+          onPlaceSelected={(place) =>
+            setFormInput((prevState) => ({
+              ...prevState,
+              address: place.formatted_address,
+            }))
+          }
+          options={{ types: ['address'] }}
+          className="form-control"
+          placeholder="Enter address"
+        />
 
         {/* SUBMIT BUTTON */}
         <div className="text-center">
