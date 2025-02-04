@@ -15,6 +15,13 @@ export default function ItineraryTourCard({ itineraryObj }) {
   const formattedDate = itineraryObj.tour_date ? dayjs(itineraryObj.tour_date).format('ddd, MMMM D, YYYY') : 'No date selected';
   const formattedTime = itineraryObj.tour_time ? dayjs(`2000-01-01 ${itineraryObj.tour_time}`).format('h:mm A') : 'No time selected';
   const isCompleted = itineraryObj.completed === 'true';
+  const [completed, setCompleted] = React.useState(isCompleted);
+
+  const handleCheckboxChange = () => {
+    setCompleted(!completed);
+    // Patch the itinerary object with completed
+  };
+
   return (
     <div>
       {console.log(itineraryObj)}
@@ -28,7 +35,7 @@ export default function ItineraryTourCard({ itineraryObj }) {
             </Button>
             <div className="mx-4">
               <h2>Completed:</h2>
-              <Checkbox className="w-100" checked={isCompleted} disabled />
+              <Checkbox className="w-100" checked={completed} onChange={handleCheckboxChange} />
             </div>
             <div className="mx-4">
               <h2>Date:</h2>

@@ -6,6 +6,8 @@ import ItineraryTourCard from '@/components/ItineraryTourCard';
 import React, { useEffect, useState } from 'react';
 import userData from '@/utils/sample-data/users.json';
 import itineraryData from '@/utils/sample-data/itinerary.json';
+import geocodeAddress from '@/utils/geocodeAddress';
+import { Map, Marker } from '@vis.gl/react-google-maps';
 
 export default function ItineraryPage() {
   const [itinerary, setItinerary] = useState([]);
@@ -20,6 +22,20 @@ export default function ItineraryPage() {
 
   console.log(itinerary);
 
+  useEffect(() => {
+    const fetchCoordinates = async () => {
+      const coords = await Promise.all(
+        itinerary.map(async (item) => {
+          const coord = await geocodeAddress(item.location_address);
+          return { ...item, coord };
+        }),
+      );
+      setItinerary(coords);
+    };
+
+    fetchCoordinates();
+  }, [itinerary]);
+
   return (
     <div>
       <h1 className="text-center m-4">
@@ -28,16 +44,16 @@ export default function ItineraryPage() {
       {itinerary.map((item) => (
         <ItineraryTourCard key={item.id} itineraryObj={item} onUpdate={getTheItinerary} />
       ))}
-      {/* <div className="h-3/4">
-        {tour.coordinates && ( // Only render map when coordinates exist
-          <Map
-            defaultZoom={15} // Increased zoom level for better visibility
-            defaultCenter={tour.coordinates}
-          >
-            <Marker position={tour.coordinates} title={tour.locationName} />
-          </Map>
-        )}
-      </div> */}
+      <div className="h-[500px] w-3/4 mx-auto m-4 border border-white rounded-lg overflow-hidden">
+        <Map defaultZoom={12} defaultCenter={{ lat: 36.16, lng: -86.77 }}>
+          {itinerary.map((item) => {
+            if (item.coord) {
+              return <Marker key={item.id} position={item.coord} title={item.location_name} />;
+            }
+            return null;
+          })}
+        </Map>
+      </div>
     </div>
   );
 }

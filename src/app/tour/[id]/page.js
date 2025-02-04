@@ -10,26 +10,10 @@ import Col from 'react-bootstrap/Col';
 import { Card } from 'react-bootstrap';
 import Link from 'next/link';
 import { Map, Marker } from '@vis.gl/react-google-maps';
+import geocodeAddress from '@/utils/geocodeAddress';
+import createItinerary from '@/api/itineraryData';
 
 export default function TourDetailsPage({ params }) {
-  const geocodeAddress = async (address) => {
-    try {
-      const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`);
-
-      const data = await response.json();
-
-      if (data.status === 'OK') {
-        const { lat, lng } = data.results[0].geometry.location;
-        return { lat, lng };
-      } 
-        console.error('Geocoding error:', data.status);
-        return null;
-      
-    } catch (err) {
-      console.error('Failed to geocode address:', err);
-      return null;
-    }
-  };
   const [tour, setTour] = useState({});
   const { id } = params;
 
@@ -48,7 +32,11 @@ export default function TourDetailsPage({ params }) {
         });
       });
     });
-  }, []);
+  }, [id]);
+
+  const addToItinerary = () => {
+    createItinerary(tour);
+  };
 
   const tourDateObj = dayjs(tour.date).format('ddd, MMM D YYYY');
   const tourTimeObj = dayjs(`2000-01-01 ${tour.time}`).format('h:mm A');
@@ -60,12 +48,12 @@ export default function TourDetailsPage({ params }) {
         <Row className="h-full">
           <Col className="col-4 h-full">
             <div className="h-full">
-              <img src={tour.image} alt={tour.name} className="w-full h-full object-cover" />
+              <img src={tour.image} alt={tour.name} className="w-full h-full object-cover rounded-xl" />
             </div>
           </Col>
           <Col className="col-4" />
           <Col className="col-4 d-flex flex-col justify-end pb-4">
-            <button type="button" className="btn btn-primary">
+            <button type="button" className="btn btn-primary" onClick={addToItinerary}>
               Add to Itinerary
             </button>
           </Col>
@@ -85,14 +73,14 @@ export default function TourDetailsPage({ params }) {
             </div>
             <div className="mt-auto pb-4">
               <Link href="/tours" passHref>
-                <button className="btn btn-info" type="button">
+                <button className="btn btn-info hover:w-full" type="button">
                   Back to Tours
                 </button>
               </Link>
             </div>
           </Col>
           <Col className="col-8 h-full">
-            <Card className="h-full" bg="dark" text="white">
+            <Card className="h-full rounded-xl" bg="dark" text="white">
               <Card.Body className="d-flex flex-col">
                 <Card.Title className="text-6xl">TOUR DETAILS</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
@@ -101,7 +89,7 @@ export default function TourDetailsPage({ params }) {
                   <p>Duration: {tour.duration} minutes</p>
                   <p>Price: ${tour.price}</p>
                   <p>Address: {tour.locationAddress}</p>
-                  <div className="h-3/4">
+                  <div className="h-3/4 rounded-lg overflow-hidden">
                     {tour.coordinates && ( // Only render map when coordinates exist
                       <Map
                         defaultZoom={15} // Increased zoom level for better visibility

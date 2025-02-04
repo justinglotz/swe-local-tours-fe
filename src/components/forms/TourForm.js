@@ -53,7 +53,7 @@ export default function TourForm({ obj = initialState }) {
       ...formInput,
       date: formInput.date ? formInput.date.format('YYYY-MM-DD') : null,
       time: formInput.time ? formInput.time.format('HH:mm:ss') : null,
-      user_id: 1,
+      uid: user.uid,
     };
 
     console.log(payload);
