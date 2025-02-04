@@ -6,6 +6,8 @@ import { faLocationDot, faPenToSquare, faTrashCan } from '@fortawesome/free-soli
 import dayjs from 'dayjs';
 import Link from 'next/link';
 import { deleteTour } from '@/api/tourData';
+import { getSingleLocation } from '@/api/locationData';
+import createItinerary from '@/api/itineraryData';
 
 export default function TourCard({ tourObj, onUpdate }) {
   console.log(tourObj);
@@ -16,6 +18,22 @@ export default function TourCard({ tourObj, onUpdate }) {
     if (window.confirm(`Delete ${tourObj.name}?`)) {
       deleteTour(tourObj.id).then(() => onUpdate());
     }
+  };
+
+  const addToItinerary = () => {
+    getSingleLocation(tourObj.location).then((location) => {
+      const { address, name } = location;
+      const payload = {
+        tourName: tourObj.name,
+        completed: false,
+        tourDate: formattedDate,
+        tourTime: formattedTime,
+        tourPrice: tourObj.price,
+        locationAddress: address,
+        locationName: name,
+      };
+      createItinerary(payload); // You can remove this line after verifying the payload
+    });
   };
 
   return (
@@ -42,10 +60,8 @@ export default function TourCard({ tourObj, onUpdate }) {
               </Link>
             </Button>
 
-            <Button className="w-1/2">
-              <Link href={`/tour/edit/${tourObj.id}`} passHref>
-                Add To Itinerary
-              </Link>
+            <Button className="w-1/2" onClick={addToItinerary}>
+              Add To Itinerary
             </Button>
           </div>
           <div className="flex flex-row justify-end">

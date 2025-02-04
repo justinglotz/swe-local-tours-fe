@@ -5,7 +5,7 @@ const endpoint = 'http://localhost:8000/locations';
 // GET ALL LOCATIONS BY UID
 const getLocations = (uid) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}?uid=${uid}"`, {
+    fetch(`${endpoint}?uid=${uid}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

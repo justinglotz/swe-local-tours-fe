@@ -44,8 +44,8 @@ export default function ItineraryPage() {
       {itinerary.map((item) => (
         <ItineraryTourCard key={item.id} itineraryObj={item} onUpdate={getTheItinerary} />
       ))}
-      <div className="h-[500px] w-3/4 mx-auto m-4 border border-white">
-        <Map defaultZoom={12} defaultCenter={{ lat: 36.174465, lng: -86.76796 }}>
+      <div className="h-[500px] w-3/4 mx-auto m-4 border border-white rounded-lg overflow-hidden">
+        <Map defaultZoom={12} defaultCenter={{ lat: 36.16, lng: -86.77 }}>
           {itinerary.map((item) => {
             if (item.coord) {
               return <Marker key={item.id} position={item.coord} title={item.location_name} />;

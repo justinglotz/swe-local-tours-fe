@@ -11,6 +11,7 @@ import { Card } from 'react-bootstrap';
 import Link from 'next/link';
 import { Map, Marker } from '@vis.gl/react-google-maps';
 import geocodeAddress from '@/utils/geocodeAddress';
+import createItinerary from '@/api/itineraryData';
 
 export default function TourDetailsPage({ params }) {
   const [tour, setTour] = useState({});
@@ -31,7 +32,11 @@ export default function TourDetailsPage({ params }) {
         });
       });
     });
-  }, []);
+  }, [id]);
+
+  const addToItinerary = () => {
+    createItinerary(tour);
+  };
 
   const tourDateObj = dayjs(tour.date).format('ddd, MMM D YYYY');
   const tourTimeObj = dayjs(`2000-01-01 ${tour.time}`).format('h:mm A');
@@ -48,7 +53,7 @@ export default function TourDetailsPage({ params }) {
           </Col>
           <Col className="col-4" />
           <Col className="col-4 d-flex flex-col justify-end pb-4">
-            <button type="button" className="btn btn-primary">
+            <button type="button" className="btn btn-primary" onClick={addToItinerary}>
               Add to Itinerary
             </button>
           </Col>
@@ -68,7 +73,7 @@ export default function TourDetailsPage({ params }) {
             </div>
             <div className="mt-auto pb-4">
               <Link href="/tours" passHref>
-                <button className="btn btn-info" type="button">
+                <button className="btn btn-info hover:w-full" type="button">
                   Back to Tours
                 </button>
               </Link>
@@ -84,7 +89,7 @@ export default function TourDetailsPage({ params }) {
                   <p>Duration: {tour.duration} minutes</p>
                   <p>Price: ${tour.price}</p>
                   <p>Address: {tour.locationAddress}</p>
-                  <div className="h-3/4">
+                  <div className="h-3/4 rounded-lg overflow-hidden">
                     {tour.coordinates && ( // Only render map when coordinates exist
                       <Map
                         defaultZoom={15} // Increased zoom level for better visibility
