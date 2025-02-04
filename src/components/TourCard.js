@@ -20,7 +20,7 @@ export default function TourCard({ tourObj, onUpdate }) {
 
   return (
     <div className="w-80 m-3">
-      <Card className="text-center border-none">
+      <Card className="text-center border-none rounded-xl">
         <Card.Header className="font-semibold">{tourObj.name}</Card.Header>
         <Card.Body>
           <Card.Text className="text-left hover:text-blue-500 transition-colors duration-300">

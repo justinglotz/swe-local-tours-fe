@@ -10,26 +10,9 @@ import Col from 'react-bootstrap/Col';
 import { Card } from 'react-bootstrap';
 import Link from 'next/link';
 import { Map, Marker } from '@vis.gl/react-google-maps';
+import geocodeAddress from '@/utils/geocodeAddress';
 
 export default function TourDetailsPage({ params }) {
-  const geocodeAddress = async (address) => {
-    try {
-      const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`);
-
-      const data = await response.json();
-
-      if (data.status === 'OK') {
-        const { lat, lng } = data.results[0].geometry.location;
-        return { lat, lng };
-      } 
-        console.error('Geocoding error:', data.status);
-        return null;
-      
-    } catch (err) {
-      console.error('Failed to geocode address:', err);
-      return null;
-    }
-  };
   const [tour, setTour] = useState({});
   const { id } = params;
 
@@ -60,7 +43,7 @@ export default function TourDetailsPage({ params }) {
         <Row className="h-full">
           <Col className="col-4 h-full">
             <div className="h-full">
-              <img src={tour.image} alt={tour.name} className="w-full h-full object-cover" />
+              <img src={tour.image} alt={tour.name} className="w-full h-full object-cover rounded-xl" />
             </div>
           </Col>
           <Col className="col-4" />
@@ -92,7 +75,7 @@ export default function TourDetailsPage({ params }) {
             </div>
           </Col>
           <Col className="col-8 h-full">
-            <Card className="h-full" bg="dark" text="white">
+            <Card className="h-full rounded-xl" bg="dark" text="white">
               <Card.Body className="d-flex flex-col">
                 <Card.Title className="text-6xl">TOUR DETAILS</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>

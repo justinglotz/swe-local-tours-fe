@@ -6,7 +6,10 @@
       "tour_date": "2025-03-15",
       "tour_time": "12:00:00",
       "tour_price": "150.00",
-      "completed": "false"
+      "completed": "false",
+      "location_id": 4,
+      "location_address": "2182 Carson St, Nashville, TN 37211, USA",
+      "location_name": "Location 1"
     },
     {
       "id": 2,
@@ -14,7 +17,10 @@
       "tour_date": "2025-03-16",
       "tour_time": "12:01:00",
       "tour_price": "144.00",
-      "completed": "false"
+      "completed": "false",
+      "location_id": 5,
+      "location_address": "3423 Percy Priest Dr, Nashville, TN 37214, USA",
+      "location_name": "Location 2"
     },
     {
       "id": 3,
@@ -22,7 +28,10 @@
       "tour_date": "2025-03-17",
       "tour_time": "12:02:00",
       "tour_price": "125.00",
-      "completed": "true"
+      "completed": "true",
+      "location_id": 6,
+      "location_address": "2021 Broadway, Nashville, TN 37203, USA",
+      "location_name": "Location 3"
     }
   ]
   
