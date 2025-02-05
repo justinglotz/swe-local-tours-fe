@@ -25,7 +25,7 @@ const createUser = (payload) =>
 const getSingleUser = (UserId) =>
   new Promise((resolve, reject) => {
     fetch(
-      `${endpoint}/${UserId}`,
+      `${endpoint}?uid=${UserId}`,
       { cache: 'no-store' },
       {
         method: 'GET',
@@ -39,4 +39,18 @@ const getSingleUser = (UserId) =>
       .catch(reject);
   });
 
-export { createUser, getSingleUser };
+// GET ALL USERS TODO: delete this function once getSingleUser is fixed
+const getUsers = () =>
+  new Promise((resolve, reject) => {
+    fetch(endpoint, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => resolve(data))
+      .catch(reject);
+  });
+
+export { getUsers, createUser, getSingleUser };
