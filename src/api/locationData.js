@@ -25,7 +25,7 @@ const getLocations = (uid) =>
 // DELETE LOCATION
 const deleteLocation = (LocationId) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/${LocationId}.json`, {
+    fetch(`${endpoint}/${LocationId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
