@@ -13,6 +13,8 @@ import { Map, Marker } from '@vis.gl/react-google-maps';
 import geocodeAddress from '@/utils/geocodeAddress';
 import createItinerary from '@/api/itineraryData';
 
+const gmaps = false;
+
 export default function TourDetailsPage({ params }) {
   const [tour, setTour] = useState({});
   const { id } = params;
@@ -21,15 +23,26 @@ export default function TourDetailsPage({ params }) {
     getSingleTour(id).then((data) => {
       getSingleLocation(data.location).then(async (locationData) => {
         // Get coordinates from address
-        const coordinates = await geocodeAddress(locationData.address);
+        let coordinates;
+        if (gmaps) {
+          coordinates = await geocodeAddress(locationData.address);
+        }
 
         // Set all data together including coordinates
-        setTour({
-          ...data,
-          locationName: locationData.name,
-          locationAddress: locationData.address,
-          coordinates: coordinates || { lat: -33.860664, lng: 151.208138 }, // fallback coordinates if geocoding fails
-        });
+        if (gmaps) {
+          setTour({
+            ...data,
+            locationName: locationData.name,
+            locationAddress: locationData.address,
+            coordinates: coordinates || { lat: -33.860664, lng: 151.208138 }, // fallback coordinates if geocoding fails
+          });
+        } else {
+          setTour({
+            ...data,
+            locationName: locationData.name,
+            locationAddress: locationData.address,
+          });
+        }
       });
     });
   }, [id]);
