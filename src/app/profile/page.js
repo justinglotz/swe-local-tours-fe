@@ -1,6 +1,46 @@
-// I think we can just put the JSX to display the profile here? Since it is not going to be resused anywhere else. Otherwise we can create a separate component and use it here
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
 
-export default function ProfilePage() {
-  return <div>Profile Page</div>;
+'use client';
+
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable react/function-component-definition */
+
+import { useEffect, useState, React } from 'react';
+import { useAuth } from '@/utils/context/authContext';
+import { getSingleUser } from '@/api/profileData';
+
+export default function Profilepage() {
+  const { user } = useAuth();
+  const [userData, setUserData] = useState({});
+
+  const getTheSingleUser = () => {
+    getSingleUser(user.uid).then((data) => {
+      console.log('Fetched User Data:', data);
+      setUserData(data[0]);
+    });
+  };
+
+  useEffect(() => {
+    getTheSingleUser();
+  }, []);
+
+  return (
+    <>
+      <div style={{ maxWidth: '600px', margin: 'auto', padding: '30px', borderRadius: '15px', boxShadow: '0 6px 12px rgba(0, 0, 0, 0.1)', backgroundColor: '#f9fafb', textAlign: 'center' }}>
+        <div>
+          <img src={user.photoURL} alt="Profile" style={{ width: '120px', height: '120px', borderRadius: '50%', border: '4px solid #007bff', padding: '5px', backgroundColor: '#fff', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }} />
+          <h2 style={{ marginTop: '15px', color: '#333', fontSize: '24px', fontWeight: '600' }}>
+            {userData.first_name} {userData.last_name}
+          </h2>
+          <p style={{ fontSize: '16px', color: '#777', fontStyle: 'italic', marginTop: '8px' }}>{userData.bio}</p>
+          <p style={{ fontWeight: '600', color: '#007bff', fontSize: '16px', marginTop: '10px' }}>Email: {user.email}</p>
+        </div>
+      </div>
+
+      <div style={{ padding: '20px', marginTop: '30px', maxWidth: '600px', margin: 'auto', textAlign: 'center' }}>
+        <h3 style={{ color: '#fff', borderBottom: '2px solid #007bff', display: 'inline-block', paddingBottom: '8px', fontSize: '20px', fontWeight: '600' }}>Completed Tours</h3>
+        <p style={{ color: '#ddd', fontSize: '16px', fontStyle: 'italic', marginTop: '5px' }}>(Coming soon)</p>
+      </div>
+    </>
+  );
 }
