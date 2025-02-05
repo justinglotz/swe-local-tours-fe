@@ -28,7 +28,6 @@ function Home() {
       // if user is defined
       getSingleUser(user.uid)
         .then((data) => {
-          // TODO: getSingleUser not currently working correctly. need to fix on BE
           setUserObj(data);
           console.log('userObj:', userObj);
           // if user object bio is not an empty string, route to tours page
