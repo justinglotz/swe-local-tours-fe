@@ -46,7 +46,7 @@ export default function ItineraryPage() {
       {itinerary.map((item) => (
         <ItineraryTourCard key={item.id} itineraryObj={item} onUpdate={getTheItinerary} />
       ))}
-      {gmaps && (
+      {gmaps ? (
         <div className="h-[500px] w-3/4 mx-auto m-4 border border-white rounded-lg overflow-hidden">
           <Map defaultZoom={12} defaultCenter={{ lat: 36.16, lng: -86.77 }}>
             {itinerary.map((item) => {
@@ -57,7 +57,7 @@ export default function ItineraryPage() {
             })}
           </Map>
         </div>
-      )}
+      ) : null}
     </div>
   );
 }

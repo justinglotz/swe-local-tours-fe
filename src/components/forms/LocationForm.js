@@ -8,6 +8,8 @@ import PropTypes from 'prop-types';
 import { createLocation, updateLocation } from '@/api/locationData';
 import Autocomplete from 'react-google-autocomplete';
 
+const gmaps = false;
+
 const initialState = {
   id: '',
   name: '',
@@ -66,22 +68,27 @@ export default function LocationForm({ obj = initialState }) {
           <Form.Control name="name" type="text" placeholder="Enter location name" value={formInput.name} onChange={handleChange} />
         </Form.Group>
 
-        {/* LOCATION ADDRESS INPUT */}
         <Form.Label>Location Address</Form.Label>
-        <Autocomplete
-          apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
-          onPlaceSelected={(place) =>
-            setFormInput((prevState) => ({
-              ...prevState,
-              address: place.formatted_address,
-            }))
-          }
-          options={{ types: ['address'] }}
-          className="form-control"
-          placeholder="Enter address"
-        />
+        {gmaps ? (
+          <>
+            {/* LOCATION ADDRESS INPUT */}
 
-        {/* SUBMIT BUTTON */}
+            <Autocomplete
+              apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
+              onPlaceSelected={(place) =>
+                setFormInput((prevState) => ({
+                  ...prevState,
+                  address: place.formatted_address,
+                }))
+              }
+              options={{ types: ['address'] }}
+              className="form-control"
+              placeholder="Enter address"
+            />
+          </>
+        ) : (
+          <Form.Control name="address" type="text" placeholder="Enter address" value={formInput.address} onChange={handleChange} />
+        )}
         <div className="text-center">
           <Button variant="primary" type="submit" className="w-25 mt-2 mb-4">
             Submit
