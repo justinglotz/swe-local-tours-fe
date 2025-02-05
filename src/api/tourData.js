@@ -6,7 +6,7 @@ const endpoint = 'http://localhost:8000/tours';
 // GET ALL TOURS FOR A SPECIFIC USER
 const getTours = (uid) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}?uid="${uid}"`, {
+    fetch(`${endpoint}?uid=${uid}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

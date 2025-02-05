@@ -9,6 +9,9 @@ import itineraryData from '@/utils/sample-data/itinerary.json';
 import geocodeAddress from '@/utils/geocodeAddress';
 import { Map, Marker } from '@vis.gl/react-google-maps';
 
+// gmaps variable to turn on and off Google Maps features
+const gmaps = false;
+
 export default function ItineraryPage() {
   const [itinerary, setItinerary] = useState([]);
 
@@ -18,23 +21,22 @@ export default function ItineraryPage() {
 
   useEffect(() => {
     getTheItinerary();
-  }, []);
+    if (gmaps) {
+      const fetchCoordinates = async () => {
+        const coords = await Promise.all(
+          itinerary.map(async (item) => {
+            const coord = await geocodeAddress(item.location_address);
+            return { ...item, coord };
+          }),
+        );
+        setItinerary(coords);
+      };
+
+      fetchCoordinates();
+    }
+  }, [itinerary]);
 
   console.log(itinerary);
-
-  useEffect(() => {
-    const fetchCoordinates = async () => {
-      const coords = await Promise.all(
-        itinerary.map(async (item) => {
-          const coord = await geocodeAddress(item.location_address);
-          return { ...item, coord };
-        }),
-      );
-      setItinerary(coords);
-    };
-
-    fetchCoordinates();
-  }, [itinerary]);
 
   return (
     <div>
@@ -44,16 +46,18 @@ export default function ItineraryPage() {
       {itinerary.map((item) => (
         <ItineraryTourCard key={item.id} itineraryObj={item} onUpdate={getTheItinerary} />
       ))}
-      <div className="h-[500px] w-3/4 mx-auto m-4 border border-white rounded-lg overflow-hidden">
-        <Map defaultZoom={12} defaultCenter={{ lat: 36.16, lng: -86.77 }}>
-          {itinerary.map((item) => {
-            if (item.coord) {
-              return <Marker key={item.id} position={item.coord} title={item.location_name} />;
-            }
-            return null;
-          })}
-        </Map>
-      </div>
+      {gmaps && (
+        <div className="h-[500px] w-3/4 mx-auto m-4 border border-white rounded-lg overflow-hidden">
+          <Map defaultZoom={12} defaultCenter={{ lat: 36.16, lng: -86.77 }}>
+            {itinerary.map((item) => {
+              if (item.coord) {
+                return <Marker key={item.id} position={item.coord} title={item.location_name} />;
+              }
+              return null;
+            })}
+          </Map>
+        </div>
+      )}
     </div>
   );
 }
