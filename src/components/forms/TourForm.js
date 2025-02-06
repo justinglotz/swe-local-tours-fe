@@ -54,12 +54,21 @@ export default function TourForm({ obj = initialState }) {
       date: formInput.date ? formInput.date.format('YYYY-MM-DD') : null,
       time: formInput.time ? formInput.time.format('HH:mm:ss') : null,
       uid: user.uid,
+      user_id: 4,
     };
 
     console.log(payload);
 
     if (obj.id) {
-      updateTour(payload).then(() => router.push('/tours'));
+      // console.log(payload)
+      updateTour({
+        ...formInput,
+        date: formInput.date ? formInput.date.format('YYYY-MM-DD') : null,
+        time: formInput.time ? formInput.time.format('HH:mm:ss') : null,
+        //   uid: user.uid,
+        //   user_id: 4,
+        //   id: obj.id
+      }).then(() => router.push('/tours'));
     } else {
       createTour(payload).then(() => router.push('/tours'));
       // const { id } = response;
