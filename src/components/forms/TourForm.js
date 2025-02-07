@@ -1,3 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
+
 'use client';
 
 import { Form, Button } from 'react-bootstrap';
@@ -11,6 +14,7 @@ import { useAuth } from '@/utils/context/authContext';
 import { getLocations } from '@/api/locationData';
 import { createTour, updateTour } from '@/api/tourData';
 import dayjs from 'dayjs';
+import { getSingleUser } from '@/api/profileData';
 
 const initialState = {
   name: '',
@@ -33,6 +37,18 @@ export default function TourForm({ obj = initialState }) {
   const [locations, setLocations] = useState([]);
   const { user } = useAuth();
   const router = useRouter();
+  const [userData, setUserData] = useState({});
+
+  const getTheSingleUser = () => {
+    getSingleUser(user.uid).then((data) => {
+      console.log('Fetched User Data:', data);
+      setUserData(data[0]);
+    });
+  };
+
+  useEffect(() => {
+    getTheSingleUser();
+  }, []);
 
   useEffect(() => {
     getLocations(user.uid).then(setLocations);
@@ -54,7 +70,7 @@ export default function TourForm({ obj = initialState }) {
       date: formInput.date ? formInput.date.format('YYYY-MM-DD') : null,
       time: formInput.time ? formInput.time.format('HH:mm:ss') : null,
       uid: user.uid,
-      user_id: 4,
+      user_id: userData.id,
     };
 
     console.log(payload);
