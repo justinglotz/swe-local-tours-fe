@@ -1,5 +1,5 @@
 // API CALLS FOR ITINERARY ITEMS
-const endpoint = 'http://localhost:8000/itinerary';
+const endpoint = 'http://localhost:8000/itineraries';
 
 const createItinerary = (payload) =>
   new Promise((resolve, reject) => {

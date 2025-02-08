@@ -7,8 +7,9 @@ import { useAuth } from '@/utils/context/authContext';
 import PropTypes from 'prop-types';
 import { createLocation, updateLocation } from '@/api/locationData';
 import Autocomplete from 'react-google-autocomplete';
+import geocodeAddress from '@/utils/geocodeAddress';
 
-const gmaps = false;
+const gmaps = true;
 
 const initialState = {
   id: '',
@@ -22,8 +23,6 @@ export default function LocationForm({ obj = initialState }) {
   const { user } = useAuth();
   const router = useRouter();
 
-  console.log('uid:', user.uid);
-
   useEffect(() => {
     if (obj.id) {
       // if obj.id exists, set the form input to the obj
@@ -31,15 +30,21 @@ export default function LocationForm({ obj = initialState }) {
     }
   }, [obj]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (obj.id) {
       // const payload = { ...formInput };
       updateLocation(formInput).then(() => router.push(`/locations`));
       console.log(formInput);
     } else {
-      const payload = { ...formInput, uid: user.uid };
-      createLocation(payload);
+      const coords = await geocodeAddress(formInput.address);
+      console.log(coords);
+      const payload = { ...formInput, uid: user.uid, coordinates: coords };
+      console.log(payload);
+      await createLocation(payload);
+      router.push('/locations');
+      // const payload = { ...formInput, uid: user.uid, coordinates: coords };
+      // createLocation(payload);
       // .then((response) => {
       //   const { id } = response;
       //   const patchPayload = { id };
