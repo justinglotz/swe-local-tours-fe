@@ -21,11 +21,6 @@ export default function TourDetailsPage({ params }) {
   useEffect(() => {
     getSingleTour(id).then((data) => {
       getSingleLocation(data.location).then(async (locationData) => {
-        // Get coordinates from address
-        // if (gmaps) {
-        //   coordinates = await geocodeAddress(locationData.address);
-        // }
-
         // Set all data together including coordinates
         if (gmaps) {
           setTour({
