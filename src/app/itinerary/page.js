@@ -20,18 +20,6 @@ export default function ItineraryPage() {
 
   useEffect(() => {
     getTheItinerary();
-    // if (gmaps) {
-    //   const fetchCoordinates = async () => {
-    //     const coords = await Promise.all(
-    //       itinerary.map(async (item) => {
-    //         const coord = await geocodeAddress(item.location_address);
-    //         return { ...item, coord };
-    //       }),
-    //     );
-    //     setItinerary(coords);
-    //   };
-
-    // }
   }, [itinerary]);
 
   console.log(itinerary);
