@@ -1,13 +1,13 @@
 'use client';
 
 import { Form, Button } from 'react-bootstrap';
-import { useState, useEffect } from 'react';
+import { useState, useEffect , useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/utils/context/authContext';
 import PropTypes from 'prop-types';
 import { createLocation, updateLocation } from '@/api/locationData';
-import Autocomplete from 'react-google-autocomplete';
 import geocodeAddress from '@/utils/geocodeAddress';
+import { useJsApiLoader, StandaloneSearchBox } from '@react-google-maps/api';
 
 const gmaps = true;
 
@@ -18,7 +18,16 @@ const initialState = {
   address: '',
 };
 
+const libraries = ['places'];
+
 export default function LocationForm({ obj = initialState }) {
+  const inputRef = useRef(null);
+
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+    libraries,
+  });
   const [formInput, setFormInput] = useState(obj);
   const { user } = useAuth();
   const router = useRouter();
@@ -65,6 +74,14 @@ export default function LocationForm({ obj = initialState }) {
     }));
   };
 
+  const handleOnPlacesChanged = () => {
+    const address = inputRef.current.getPlaces()[0].formatted_address;
+    setFormInput((prevState) => ({
+      ...prevState,
+      address,
+    }));
+  };
+
   return (
     <div className="flex flex-row justify-center">
       <Form className="w-75 mt-3" onSubmit={handleSubmit}>
@@ -74,27 +91,21 @@ export default function LocationForm({ obj = initialState }) {
           <Form.Control name="name" type="text" placeholder="Enter location name" value={formInput.name} onChange={handleChange} />
         </Form.Group>
 
-        <Form.Label>Location Address</Form.Label>
-        {gmaps ? (
-          <>
-            {/* LOCATION ADDRESS INPUT */}
+        <Form.Group className="mb-3" controlId="formBasicAddress">
+          <Form.Label>Location Address</Form.Label>
+          {gmaps && isLoaded ? (
+            <StandaloneSearchBox
+              // eslint-disable-next-line
+              onLoad={(ref) => (inputRef.current = ref)}
+              onPlacesChanged={handleOnPlacesChanged}
+            >
+              <input type="text" placeholder="Enter address" className="form-control" />
+            </StandaloneSearchBox>
+          ) : (
+            <Form.Control name="address" type="text" placeholder="Enter address" value={formInput.address} onChange={handleChange} />
+          )}
+        </Form.Group>
 
-            <Autocomplete
-              apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
-              onPlaceSelected={(place) =>
-                setFormInput((prevState) => ({
-                  ...prevState,
-                  address: place.formatted_address,
-                }))
-              }
-              options={{ types: ['address'] }}
-              className="form-control"
-              placeholder="Enter address"
-            />
-          </>
-        ) : (
-          <Form.Control name="address" type="text" placeholder="Enter address" value={formInput.address} onChange={handleChange} />
-        )}
         <div className="text-center">
           <Button variant="primary" type="submit" className="w-25 mt-2 mb-4">
             Submit
