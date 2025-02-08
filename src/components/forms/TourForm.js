@@ -1,3 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
+
 'use client';
 
 import { Form, Button } from 'react-bootstrap';
@@ -34,6 +37,18 @@ export default function TourForm({ obj = initialState }) {
   const [locations, setLocations] = useState([]);
   const { user } = useAuth();
   const router = useRouter();
+  const [userData, setUserData] = useState({});
+
+  const getTheSingleUser = () => {
+    getSingleUser(user.uid).then((data) => {
+      console.log('Fetched User Data:', data);
+      setUserData(data[0]);
+    });
+  };
+
+  useEffect(() => {
+    getTheSingleUser();
+  }, []);
 
   useEffect(() => {
     getLocations(user.uid).then(setLocations);
