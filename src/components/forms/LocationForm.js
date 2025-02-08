@@ -1,7 +1,7 @@
 'use client';
 
 import { Form, Button } from 'react-bootstrap';
-import { useState, useEffect , useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/utils/context/authContext';
 import PropTypes from 'prop-types';
@@ -42,25 +42,12 @@ export default function LocationForm({ obj = initialState }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (obj.id) {
-      // const payload = { ...formInput };
       updateLocation(formInput).then(() => router.push(`/locations`));
-      console.log(formInput);
     } else {
       const coords = await geocodeAddress(formInput.address);
-      console.log(coords);
       const payload = { ...formInput, uid: user.uid, coordinates: coords };
-      console.log(payload);
       await createLocation(payload);
       router.push('/locations');
-      // const payload = { ...formInput, uid: user.uid, coordinates: coords };
-      // createLocation(payload);
-      // .then((response) => {
-      //   const { id } = response;
-      //   const patchPayload = { id };
-      //   updateLocation(patchPayload).then(() => {
-      //     router.push('/locations');
-      //   });
-      // });
     }
 
     router.push('/locations');
