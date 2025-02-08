@@ -6,11 +6,10 @@ import ItineraryTourCard from '@/components/ItineraryTourCard';
 import React, { useEffect, useState } from 'react';
 import userData from '@/utils/sample-data/users.json';
 import itineraryData from '@/utils/sample-data/itinerary.json';
-import geocodeAddress from '@/utils/geocodeAddress';
 import { Map, Marker } from '@vis.gl/react-google-maps';
 
 // gmaps variable to turn on and off Google Maps features
-const gmaps = false;
+const gmaps = true;
 
 export default function ItineraryPage() {
   const [itinerary, setItinerary] = useState([]);
@@ -21,19 +20,6 @@ export default function ItineraryPage() {
 
   useEffect(() => {
     getTheItinerary();
-    if (gmaps) {
-      const fetchCoordinates = async () => {
-        const coords = await Promise.all(
-          itinerary.map(async (item) => {
-            const coord = await geocodeAddress(item.location_address);
-            return { ...item, coord };
-          }),
-        );
-        setItinerary(coords);
-      };
-
-      fetchCoordinates();
-    }
   }, [itinerary]);
 
   console.log(itinerary);

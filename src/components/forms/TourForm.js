@@ -62,37 +62,40 @@ export default function TourForm({ obj = initialState }) {
     }
   }, [obj, user]);
 
-  const handleSubmit = (e) => {
-    console.log('Form Submitted.');
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const payload = {
-      ...formInput,
-      date: formInput.date ? formInput.date.format('YYYY-MM-DD') : null,
-      time: formInput.time ? formInput.time.format('HH:mm:ss') : null,
-      uid: user.uid,
-      user_id: userData.id,
-    };
 
-    console.log(payload);
+    try {
+      // Get the user details
+      const userResponse = await getSingleUser(user.uid);
 
-    if (obj.id) {
-      // console.log(payload)
-      updateTour({
+      // Assuming the first item in the array contains the user details
+      const userId = userResponse[0].id;
+
+      const payload = {
         ...formInput,
         date: formInput.date ? formInput.date.format('YYYY-MM-DD') : null,
         time: formInput.time ? formInput.time.format('HH:mm:ss') : null,
-        //   uid: user.uid,
-        //   user_id: 4,
-        //   id: obj.id
-      }).then(() => router.push('/tours'));
-    } else {
-      createTour(payload).then(() => router.push('/tours'));
-      // const { id } = response;
-      // const patchPayload = { id };
-      // console.log(patchPayload);
-      // updateTour(patchPayload).then(() => {
-      //   router.push('/tours');
-      // });
+        uid: user.uid, // Firebase user identifier for each gmail account
+        user_id: userId, // User identifier for each user in the database
+      };
+
+      if (obj.id) {
+        // Update existing tour
+        await updateTour({
+          ...payload,
+          id: obj.id,
+        });
+      } else {
+        // Create new tour
+        await createTour(payload);
+      }
+
+      // Navigate to tours page after successful submission
+      router.push('/tours');
+    } catch (error) {
+      console.error('Error submitting tour:', error);
+      // Optionally, add error handling (e.g., show error message to user)
     }
   };
 

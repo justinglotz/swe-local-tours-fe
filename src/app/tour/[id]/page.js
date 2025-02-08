@@ -10,10 +10,9 @@ import Col from 'react-bootstrap/Col';
 import { Card } from 'react-bootstrap';
 import Link from 'next/link';
 import { Map, Marker } from '@vis.gl/react-google-maps';
-import geocodeAddress from '@/utils/geocodeAddress';
 import createItinerary from '@/api/itineraryData';
 
-const gmaps = false;
+const gmaps = true;
 
 export default function TourDetailsPage({ params }) {
   const [tour, setTour] = useState({});
@@ -22,19 +21,13 @@ export default function TourDetailsPage({ params }) {
   useEffect(() => {
     getSingleTour(id).then((data) => {
       getSingleLocation(data.location).then(async (locationData) => {
-        // Get coordinates from address
-        let coordinates;
-        if (gmaps) {
-          coordinates = await geocodeAddress(locationData.address);
-        }
-
         // Set all data together including coordinates
         if (gmaps) {
           setTour({
             ...data,
             locationName: locationData.name,
             locationAddress: locationData.address,
-            coordinates: coordinates || { lat: -33.860664, lng: 151.208138 }, // fallback coordinates if geocoding fails
+            coordinates: locationData.coordinates ? { lat: locationData.coordinates[0], lng: locationData.coordinates[1] } : { lat: -33.860664, lng: 151.208138 }, // fallback coordinates if geocoding fails
           });
         } else {
           setTour({

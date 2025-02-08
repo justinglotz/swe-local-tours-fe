@@ -24,16 +24,12 @@ const createUser = (payload) =>
 // GET USER by id. NOT CURRENTLY WORKING CORRECTLY-- just gets all users. need to fix on BE
 const getSingleUser = (UserId) =>
   new Promise((resolve, reject) => {
-    fetch(
-      `${endpoint}?uid=${UserId}`,
-      { cache: 'no-store' },
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+    fetch(`${endpoint}?uid=${UserId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
       },
-    )
+    })
       .then((response) => response.json())
       .then((data) => resolve(data))
       .catch(reject);
