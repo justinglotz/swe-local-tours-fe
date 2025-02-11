@@ -1,10 +1,8 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-// import TourCard from '@/components/TourCard';
+import TourCard from '@/components/TourCard';
 import PropTypes from 'prop-types';
-// import viewLocationDetails from '@/api/mergedData';
-// import { getSingleLocation } from '@/api/locationData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
@@ -22,7 +20,7 @@ export default function ViewLocationDetails({ params }) {
     });
   }, [id]);
 
-  // const tours = locationDetails.tours || []; // if locationDetails.tours is undefined, set it to an empty array
+  const tours = locationDetails.tours || []; // if locationDetails.tours is undefined, set it to an empty array
 
   console.log('location details:', locationDetails);
   return (
@@ -61,11 +59,11 @@ export default function ViewLocationDetails({ params }) {
 
       {/* TODO: add key and tourObj in tour card component below */}
 
-      {/* <div className="d-flex flex-wrap tours-container">
+      <div className="d-flex flex-wrap tours-container">
         {tours.map((tour) => (
           <TourCard key={tour.id} tourObj={tour} />
         ))}
-      </div> */}
+      </div>
     </div>
   );
 }
