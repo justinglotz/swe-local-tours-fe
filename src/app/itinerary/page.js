@@ -36,8 +36,8 @@ export default function ItineraryPage() {
         <div className="h-[500px] w-3/4 mx-auto m-4 border border-white rounded-lg overflow-hidden">
           <Map defaultZoom={12} defaultCenter={{ lat: 36.16, lng: -86.77 }}>
             {itinerary.map((item) => {
-              if (item.coord) {
-                return <Marker key={item.id} position={item.coord} title={item.location_name} />;
+              if (item.location_coordinates) {
+                return <Marker key={item.id} position={item.location_coordinates} title={item.location_name} />;
               }
               return null;
             })}

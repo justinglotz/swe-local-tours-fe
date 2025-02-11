@@ -9,6 +9,10 @@
       "completed": "false",
       "location_id": 4,
       "location_address": "2182 Carson St, Nashville, TN 37211, USA",
+      "location_coordinates": {
+        "lat": 36.128180,
+        "lng": -86.752446
+      },
       "location_name": "Location 1"
     },
     {
@@ -20,6 +24,10 @@
       "completed": "false",
       "location_id": 5,
       "location_address": "3423 Percy Priest Dr, Nashville, TN 37214, USA",
+      "location_coordinates": {
+        "lat": 36.152418,
+        "lng": -86.628504
+      },
       "location_name": "Location 2"
     },
     {
@@ -31,6 +39,10 @@
       "completed": "true",
       "location_id": 6,
       "location_address": "2021 Broadway, Nashville, TN 37203, USA",
+      "location_coordinates": {
+        "lat": 36.148876,
+        "lng": -86.798352
+      },
       "location_name": "Location 3"
     }
   ]

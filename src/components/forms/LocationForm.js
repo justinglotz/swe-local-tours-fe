@@ -9,6 +9,8 @@ import { createLocation, updateLocation } from '@/api/locationData';
 import geocodeAddress from '@/utils/geocodeAddress';
 import { useJsApiLoader, StandaloneSearchBox } from '@react-google-maps/api';
 
+// https://www.youtube.com/watch?v=HlsubLyXMMw&ab_channel=Mitter-YourTechMate
+
 const gmaps = true;
 
 const initialState = {
