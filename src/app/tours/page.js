@@ -9,6 +9,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { getTours } from '@/api/tourData';
 import { useAuth } from '@/utils/context/authContext';
 import { getSingleLocation } from '@/api/locationData';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 export default function ToursPage() {
   const [tours, setTours] = useState([]);
@@ -33,7 +34,7 @@ export default function ToursPage() {
   }, []);
 
   return (
-    <>
+    <ProtectedRoute>
       <div className="text-center mt-3">
         <Link href="/tour/new" passHref>
           <Button className="w-25" variant="contained">
@@ -47,6 +48,6 @@ export default function ToursPage() {
           <TourCard tourObj={tour} onUpdate={getAllTheTours} />
         ))}
       </div>
-    </>
+    </ProtectedRoute>
   );
 }
