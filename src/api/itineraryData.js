@@ -18,7 +18,7 @@ const getItineraries = () =>
 // GET ITINERARIES BY UID
 const getItinerariesByUid = (uid) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}?uid=${uid}`, {
+    fetch(`${endpoint}?user_id=${uid}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

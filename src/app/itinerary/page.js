@@ -6,10 +6,9 @@
 import ItineraryTourCard from '@/components/ItineraryTourCard';
 import React, { useEffect, useState } from 'react';
 import { Map, Marker } from '@vis.gl/react-google-maps';
-// import { getItinerariesByUid } from '@/api/itineraryData';
 import { useAuth } from '@/utils/context/authContext';
 import { getSingleUser } from '@/api/profileData';
-import itineraryData from '@/utils/sample-data/itinerary.json';
+import { getItineraries } from '@/api/itineraryData';
 
 // gmaps variable to turn on and off Google Maps features
 const gmaps = true;
@@ -21,6 +20,8 @@ export default function ItineraryPage() {
   const [itinerary, setItinerary] = useState([]);
   const [userData, setUserData] = useState({});
 
+  // Get user objects that match my uid
+  // Extract the user id from that object
   const getTheSingleUser = () => {
     getSingleUser(user.uid).then((data) => {
       console.log('Fetched User Data:', data);
@@ -32,15 +33,15 @@ export default function ItineraryPage() {
     getTheSingleUser();
   }, []);
 
-  // const getTheItineraries = () => {
-  //   getItinerariesByUid().then((data) => {
-  //     setItinerary(data);
-  //   });
-  // };
-
   const getTheItineraries = () => {
-    setItinerary(itineraryData);
+    getItineraries().then((data) => {
+      setItinerary(data);
+    });
   };
+
+  // const getTheItineraries = () => {
+  //   setItinerary(itineraryData);
+  // };
 
   useEffect(() => {
     getTheItineraries();
