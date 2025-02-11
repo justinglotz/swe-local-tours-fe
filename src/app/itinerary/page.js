@@ -1,28 +1,52 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // loop thru to display each on ItineraryTourCard component
 
 'use client';
 
 import ItineraryTourCard from '@/components/ItineraryTourCard';
 import React, { useEffect, useState } from 'react';
-import userData from '@/utils/sample-data/users.json';
-import itineraryData from '@/utils/sample-data/itinerary.json';
 import { Map, Marker } from '@vis.gl/react-google-maps';
+// import { getItinerariesByUid } from '@/api/itineraryData';
+import { useAuth } from '@/utils/context/authContext';
+import { getSingleUser } from '@/api/profileData';
+import itineraryData from '@/utils/sample-data/itinerary.json';
 
 // gmaps variable to turn on and off Google Maps features
 const gmaps = true;
 
 export default function ItineraryPage() {
-  const [itinerary, setItinerary] = useState([]);
+  // get user ID using UseAuth Hook
+  const { user } = useAuth();
 
-  const getTheItinerary = () => {
+  const [itinerary, setItinerary] = useState([]);
+  const [userData, setUserData] = useState({});
+
+  const getTheSingleUser = () => {
+    getSingleUser(user.uid).then((data) => {
+      console.log('Fetched User Data:', data);
+      setUserData(data[0]);
+    });
+  };
+
+  useEffect(() => {
+    getTheSingleUser();
+  }, []);
+
+  // const getTheItineraries = () => {
+  //   getItinerariesByUid().then((data) => {
+  //     setItinerary(data);
+  //   });
+  // };
+
+  const getTheItineraries = () => {
     setItinerary(itineraryData);
   };
 
   useEffect(() => {
-    getTheItinerary();
-  }, [itinerary]);
+    getTheItineraries();
+  }, []);
 
-  console.log(itinerary);
+  console.log('itinerary: ', itinerary);
 
   return (
     <div>
@@ -30,7 +54,7 @@ export default function ItineraryPage() {
         {userData.first_name} {userData.last_name}&apos;s Itinerary
       </h1>
       {itinerary.map((item) => (
-        <ItineraryTourCard key={item.id} itineraryObj={item} onUpdate={getTheItinerary} />
+        <ItineraryTourCard key={item.id} itineraryObj={item} onUpdate={getTheItineraries} />
       ))}
       {gmaps ? (
         <div className="h-[500px] w-3/4 mx-auto m-4 border border-white rounded-lg overflow-hidden">

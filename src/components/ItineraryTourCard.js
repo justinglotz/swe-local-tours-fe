@@ -19,7 +19,7 @@ export default function ItineraryTourCard({ itineraryObj }) {
 
   const handleCheckboxChange = () => {
     setCompleted(!completed);
-    // Patch the itinerary object with completed
+    // TODO:  Patch the itinerary object with completed
   };
 
   return (
