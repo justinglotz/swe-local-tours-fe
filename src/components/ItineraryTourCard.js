@@ -10,32 +10,63 @@ import dayjs from 'dayjs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
+import { deleteItinerary, updateItinerary } from '@/api/itineraryData';
+import { Badge } from 'react-bootstrap';
+import { gsap } from 'gsap';
 
 export default function ItineraryTourCard({ itineraryObj }) {
-  const formattedDate = itineraryObj.tour_date ? dayjs(itineraryObj.tour_date).format('ddd, MMMM D, YYYY') : 'No date selected';
-  const formattedTime = itineraryObj.tour_time ? dayjs(`2000-01-01 ${itineraryObj.tour_time}`).format('h:mm A') : 'No time selected';
-  const isCompleted = itineraryObj.completed === 'true';
+  // removed onUpdate to prevent infinite loop issue
+  const formattedDate = itineraryObj.tour.date ? dayjs(itineraryObj.tour.date).format('ddd, MMMM D, YYYY') : 'No date selected';
+  const formattedTime = itineraryObj.tour.time ? dayjs(`2000-01-01 ${itineraryObj.tour.time}`).format('h:mm A') : 'No time selected';
+  const isCompleted = itineraryObj.completed === true || itineraryObj.completed === 'true';
   const [completed, setCompleted] = React.useState(isCompleted);
 
   const handleCheckboxChange = () => {
     setCompleted(!completed);
-    // Patch the itinerary object with completed
+    // TODO:  Patch the itinerary object with completed
+  };
+
+  const deleteThisItinerary = () => {
+    if (window.confirm(`Delete ${itineraryObj.name}?`)) {
+      // deleteItinerary(itineraryObj.id).then(() => onUpdate());
+      deleteItinerary(itineraryObj.id);
+    }
+  };
+
+  const handleSaveCheckbox = () => {
+    gsap.fromTo(`.save-badge-${itineraryObj.id}`, { scale: 1 }, { scale: 1.2, duration: 0.2, yoyo: true, repeat: 1 });
+    setTimeout(() => {
+      console.log(itineraryObj);
+      updateItinerary({
+        id: itineraryObj.id,
+        user_id: itineraryObj.user_id,
+        tour: itineraryObj.tour.id,
+        completed,
+      }).then(() => {
+        // onUpdate();
+      });
+    }, 500);
   };
 
   return (
-    <div>
+    <div className="d-flex justify-content-center">
       {console.log(itineraryObj)}
       <Card className="w-75 mx-auto m-4">
         <Card.Body>
           <div className="flex flex-row">
-            <Card.Title className="flex-grow-1">{itineraryObj.tour_name}</Card.Title>
-            <Button variant="danger" className="h-1/2 my-auto d-flex align-items-center">
+            <Card.Title className="flex-grow-1">{itineraryObj.tour.name}</Card.Title>
+            <Button variant="danger" className="h-1/2 my-auto d-flex align-items-center" onClick={deleteThisItinerary}>
               <FontAwesomeIcon className="m-2" icon={faTrashCan} />
               <span>Delete From Itinerary</span>
             </Button>
             <div className="mx-4">
               <h2>Completed:</h2>
               <Checkbox className="w-100" checked={completed} onChange={handleCheckboxChange} />
+              {completed !== isCompleted && (
+                <Badge bg="success" className={`mx-auto d-block save-badge-${itineraryObj.id}`} onClick={handleSaveCheckbox} style={{ cursor: 'pointer' }}>
+                  Save
+                </Badge>
+              )}
             </div>
             <div className="mx-4">
               <h2>Date:</h2>
@@ -47,7 +78,7 @@ export default function ItineraryTourCard({ itineraryObj }) {
             </div>
             <div className="mx-4">
               <h2>Price:</h2>
-              <h2>${itineraryObj.tour_price}</h2>
+              <h2>${itineraryObj.tour.price}</h2>
             </div>
           </div>
         </Card.Body>
@@ -58,10 +89,17 @@ export default function ItineraryTourCard({ itineraryObj }) {
 
 ItineraryTourCard.propTypes = {
   itineraryObj: PropTypes.shape({
-    tour_name: PropTypes.string,
-    tour_date: PropTypes.string,
-    tour_time: PropTypes.string,
-    completed: PropTypes.string,
-    tour_price: PropTypes.number,
+    name: PropTypes.string.isRequired, // Added this line
+    completed: PropTypes.bool,
+    id: PropTypes.number.isRequired,
+    user_id: PropTypes.number.isRequired,
+    tour: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      price: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired,
+      time: PropTypes.string.isRequired,
+    }).isRequired,
   }).isRequired,
+  // onUpdate: PropTypes.func.isRequired,
 };

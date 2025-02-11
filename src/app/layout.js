@@ -4,13 +4,16 @@ import Providers from '@/components/Providers';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@/styles/globals.css';
+import GoogleMapsWrapper from '@/components/GoogleMapsWrapperComponent';
 
 const inter = Inter({ subsets: ['latin'] });
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Providers>{children}</Providers>
+        <GoogleMapsWrapper>
+          <Providers>{children}</Providers>
+        </GoogleMapsWrapper>
       </body>
     </html>
   );

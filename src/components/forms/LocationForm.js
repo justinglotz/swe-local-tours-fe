@@ -6,55 +6,41 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/utils/context/authContext';
 import PropTypes from 'prop-types';
 import { createLocation, updateLocation } from '@/api/locationData';
-import Autocomplete from 'react-google-autocomplete';
 import geocodeAddress from '@/utils/geocodeAddress';
-
-const gmaps = true;
+import { Autocomplete } from '@react-google-maps/api';
 
 const initialState = {
   id: '',
   name: '',
-  // description: '',
   address: '',
 };
 
 export default function LocationForm({ obj = initialState }) {
   const [formInput, setFormInput] = useState(obj);
+  const [autocomplete, setAutocomplete] = useState(null);
   const { user } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
     if (obj.id) {
-      // if obj.id exists, set the form input to the obj
       setFormInput(obj);
     }
   }, [obj]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (obj.id) {
-      // const payload = { ...formInput };
-      updateLocation(formInput).then(() => router.push(`/locations`));
-      console.log(formInput);
-    } else {
-      const coords = await geocodeAddress(formInput.address);
-      console.log(coords);
-      const payload = { ...formInput, uid: user.uid, coordinates: coords };
-      console.log(payload);
-      await createLocation(payload);
+    try {
+      if (obj.id) {
+        await updateLocation(formInput);
+      } else {
+        const coords = await geocodeAddress(formInput.address);
+        const payload = { ...formInput, uid: user.uid, coordinates: coords };
+        await createLocation(payload);
+      }
       router.push('/locations');
-      // const payload = { ...formInput, uid: user.uid, coordinates: coords };
-      // createLocation(payload);
-      // .then((response) => {
-      //   const { id } = response;
-      //   const patchPayload = { id };
-      //   updateLocation(patchPayload).then(() => {
-      //     router.push('/locations');
-      //   });
-      // });
+    } catch (error) {
+      console.error('Error submitting form:', error);
     }
-
-    router.push('/locations');
   };
 
   const handleChange = (e) => {
@@ -65,36 +51,40 @@ export default function LocationForm({ obj = initialState }) {
     }));
   };
 
+  const onLoad = (autoCompleteInstance) => {
+    setAutocomplete(autoCompleteInstance);
+  };
+
+  const onPlaceChanged = () => {
+    if (autocomplete !== null) {
+      const place = autocomplete.getPlace();
+      if (place.formatted_address) {
+        setFormInput((prevState) => ({
+          ...prevState,
+          address: place.formatted_address,
+        }));
+      }
+    }
+  };
+
   return (
     <div className="flex flex-row justify-center">
       <Form className="w-75 mt-3" onSubmit={handleSubmit}>
-        {/* LOCATION NAME INPUT */}
         <Form.Group className="mb-3" controlId="formBasicText">
           <Form.Label>Location Name</Form.Label>
           <Form.Control name="name" type="text" placeholder="Enter location name" value={formInput.name} onChange={handleChange} />
         </Form.Group>
 
-        <Form.Label>Location Address</Form.Label>
-        {gmaps ? (
-          <>
-            {/* LOCATION ADDRESS INPUT */}
+        <Form.Group className="mb-3" controlId="formBasicAddress">
+          <Form.Label>Location Address</Form.Label>
+          <div className="relative">
+            <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
+              <Form.Control type="text" placeholder="Enter address" value={formInput.address} onChange={(e) => handleChange({ target: { name: 'address', value: e.target.value } })} />
+            </Autocomplete>
+            {!autocomplete && <div className="absolute top-0 right-2 text-sm text-gray-500 mt-2">Loading places...</div>}
+          </div>
+        </Form.Group>
 
-            <Autocomplete
-              apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
-              onPlaceSelected={(place) =>
-                setFormInput((prevState) => ({
-                  ...prevState,
-                  address: place.formatted_address,
-                }))
-              }
-              options={{ types: ['address'] }}
-              className="form-control"
-              placeholder="Enter address"
-            />
-          </>
-        ) : (
-          <Form.Control name="address" type="text" placeholder="Enter address" value={formInput.address} onChange={handleChange} />
-        )}
         <div className="text-center">
           <Button variant="primary" type="submit" className="w-25 mt-2 mb-4">
             Submit
