@@ -14,7 +14,7 @@ import { deleteItinerary, updateItinerary } from '@/api/itineraryData';
 import { Badge } from 'react-bootstrap';
 import { gsap } from 'gsap';
 
-export default function ItineraryTourCard({ itineraryObj }) {
+export default function ItineraryTourCard({ itineraryObj, onUpdate }) {
   // removed onUpdate to prevent infinite loop issue
   const formattedDate = itineraryObj.tour.date ? dayjs(itineraryObj.tour.date).format('ddd, MMMM D, YYYY') : 'No date selected';
   const formattedTime = itineraryObj.tour.time ? dayjs(`2000-01-01 ${itineraryObj.tour.time}`).format('h:mm A') : 'No time selected';
@@ -28,8 +28,7 @@ export default function ItineraryTourCard({ itineraryObj }) {
 
   const deleteThisItinerary = () => {
     if (window.confirm(`Delete ${itineraryObj.name}?`)) {
-      // deleteItinerary(itineraryObj.id).then(() => onUpdate());
-      deleteItinerary(itineraryObj.id);
+      deleteItinerary(itineraryObj.id).then(() => onUpdate());
     }
   };
 
@@ -43,7 +42,7 @@ export default function ItineraryTourCard({ itineraryObj }) {
         tour: itineraryObj.tour.id,
         completed,
       }).then(() => {
-        // onUpdate();
+        onUpdate();
       });
     }, 500);
   };
@@ -101,5 +100,5 @@ ItineraryTourCard.propTypes = {
       time: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
-  // onUpdate: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };

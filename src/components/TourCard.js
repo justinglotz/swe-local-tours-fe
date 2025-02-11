@@ -80,11 +80,13 @@ export default function TourCard({ tourObj, onUpdate }) {
       <Card className="text-center border-none rounded-xl" style={{ backgroundColor: '#4e4c76' }}>
         <Card.Header className="font-semibold">{tourObj.name}</Card.Header>
         <Card.Body>
-          <Card.Text className="text-left hover:text-blue-500 transition-colors duration-300">
-            <Link href={`/location/${tourObj.location}`} passHref>
-              <FontAwesomeIcon icon={faLocationDot} /> {tourObj.locationName}
-            </Link>
-          </Card.Text>
+          {tourObj.location && (
+            <Card.Text className="text-left hover:text-blue-500 transition-colors duration-300">
+              <Link href={`/location/${tourObj.location}`} passHref>
+                <FontAwesomeIcon icon={faLocationDot} /> {tourObj.locationName}
+              </Link>
+            </Card.Text>
+          )}
           <div className="flex flex-row">
             <Card.Text className="text-left mx-2">{formattedDate}</Card.Text>
             <Card.Text className="text-left">{formattedTime}</Card.Text>
