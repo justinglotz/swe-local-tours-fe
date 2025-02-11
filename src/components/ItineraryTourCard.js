@@ -32,19 +32,16 @@ export default function ItineraryTourCard({ itineraryObj, onUpdate }) {
   };
 
   const handleSaveCheckbox = () => {
-    const saveBadge = document.querySelector('.save-badge');
-    const originalText = saveBadge.textContent;
-    saveBadge.textContent = 'Saved!';
-    gsap.fromTo('.save-badge', { scale: 1 }, { scale: 1.2, duration: 0.2, yoyo: true, repeat: 1 });
+    gsap.fromTo(`.save-badge-${itineraryObj.id}`, { scale: 1 }, { scale: 1.2, duration: 0.2, yoyo: true, repeat: 1 });
     setTimeout(() => {
+      console.log(itineraryObj);
       updateItinerary({
-        ...itineraryObj,
+        id: itineraryObj.id,
+        user_id: itineraryObj.user_id,
+        tour: itineraryObj.tour.id,
         completed,
       }).then(() => {
         onUpdate();
-        setTimeout(() => {
-          saveBadge.textContent = originalText;
-        }, 500);
       });
     }, 500);
   };
@@ -64,7 +61,7 @@ export default function ItineraryTourCard({ itineraryObj, onUpdate }) {
               <h2>Completed:</h2>
               <Checkbox className="w-100" checked={completed} onChange={handleCheckboxChange} />
               {completed !== isCompleted && (
-                <Badge bg="success" className="mx-auto d-block save-badge" onClick={handleSaveCheckbox} style={{ cursor: 'pointer' }}>
+                <Badge bg="success" className={`mx-auto d-block save-badge-${itineraryObj.id}`} onClick={handleSaveCheckbox} style={{ cursor: 'pointer' }}>
                   Save
                 </Badge>
               )}
@@ -90,13 +87,17 @@ export default function ItineraryTourCard({ itineraryObj, onUpdate }) {
 
 ItineraryTourCard.propTypes = {
   itineraryObj: PropTypes.shape({
-    name: PropTypes.string,
-    id: PropTypes.number,
     tour_name: PropTypes.string,
     tour_date: PropTypes.string,
     tour_time: PropTypes.string,
     completed: PropTypes.string,
     tour_price: PropTypes.number,
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string,
+    user_id: PropTypes.string,
+    tour: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }),
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
