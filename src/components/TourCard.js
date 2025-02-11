@@ -95,13 +95,13 @@ export default function TourCard({ tourObj, onUpdate }) {
         </Card.Body>
         <Card.Footer className="text-muted">
           <div className="flex flex-row gap-4">
-            <Button className="w-1/2" variant="contained">
+            <Button className="w-1/2 bg-white" variant="contained">
               <Link href={`/tour/${tourObj.id}`} passHref>
                 View Tour Details
               </Link>
             </Button>
 
-            <Button className="w-1/2" variant="contained" onClick={addToItinerary}>
+            <Button className="w-1/2 bg-white" variant="contained" onClick={addToItinerary}>
               Add To Itinerary
             </Button>
           </div>

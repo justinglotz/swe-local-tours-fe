@@ -41,6 +41,7 @@ export default function TourDetailsPage({ params }) {
   }, [id]);
 
   const addToItinerary = () => {
+    console.log(tour);
     createItinerary(tour);
   };
 
