@@ -77,7 +77,7 @@ export default function TourCard({ tourObj, onUpdate }) {
 
   return (
     <div className="w-80 m-3">
-      <Card className="text-center border-none rounded-xl">
+      <Card className="text-center border-none rounded-xl" style={{ backgroundColor: '#4e4c76' }}>
         <Card.Header className="font-semibold">{tourObj.name}</Card.Header>
         <Card.Body>
           <Card.Text className="text-left hover:text-blue-500 transition-colors duration-300">
@@ -95,13 +95,13 @@ export default function TourCard({ tourObj, onUpdate }) {
         </Card.Body>
         <Card.Footer className="text-muted">
           <div className="flex flex-row gap-4">
-            <Button className="w-1/2">
+            <Button className="w-1/2" variant="contained">
               <Link href={`/tour/${tourObj.id}`} passHref>
                 View Tour Details
               </Link>
             </Button>
 
-            <Button className="w-1/2" onClick={addToItinerary}>
+            <Button className="w-1/2" variant="contained" onClick={addToItinerary}>
               Add To Itinerary
             </Button>
           </div>
