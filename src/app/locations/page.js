@@ -10,6 +10,7 @@ import { Button } from 'react-bootstrap';
 import { getLocations } from '@/api/locationData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 export default function LocationsPage() {
   // Set a state for locations
@@ -32,21 +33,23 @@ export default function LocationsPage() {
   }, []);
 
   return (
-    <div className="text-center my-4">
-      <div className="text-center mt-3">
-        <Link href="/location/new" passHref>
-          <Button className="w-25">
-            <FontAwesomeIcon icon={faPlus} /> New Location
-          </Button>
-        </Link>
-      </div>
+    <ProtectedRoute>
+      <div className="text-center my-4">
+        <div className="text-center mt-3">
+          <Link href="/location/new" passHref>
+            <Button className="w-25">
+              <FontAwesomeIcon icon={faPlus} /> New Location
+            </Button>
+          </Link>
+        </div>
 
-      <div className="d-flex flex-wrap">
-        {/* map over locations here using LocationCard component */}
-        {locations.map((location) => (
-          <LocationCard key={location.id} locationObj={location} onUpdate={getAllTheLocations} />
-        ))}
+        <div className="d-flex flex-wrap">
+          {/* map over locations here using LocationCard component */}
+          {locations.map((location) => (
+            <LocationCard key={location.id} locationObj={location} onUpdate={getAllTheLocations} />
+          ))}
+        </div>
       </div>
-    </div>
+    </ProtectedRoute>
   );
 }
