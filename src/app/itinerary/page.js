@@ -86,7 +86,7 @@ export default function ItineraryPage() {
                   itinerary.map((item) => {
                     if (item.location && Array.isArray(item.location.coordinates)) {
                       const [lat, lng] = item.location.coordinates;
-                      return <Marker key={item.id} position={{ lat, lng }} title={item.location.name} />;
+                      return <Marker key={item.id} position={{ lat, lng }} title={`${item.location.name}, ${item.tour.name}`} />;
                     }
                     return null;
                   })}
