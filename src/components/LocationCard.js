@@ -3,7 +3,7 @@
 import React from 'react';
 import { Card, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare, faTrashCan, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare, faTrashCan, faCircleInfo, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 // import deleteLocationTours from '@/api/mergedData';
@@ -19,13 +19,16 @@ export default function LocationCard({ locationObj, onUpdate }) {
     }
   };
   return (
-    <div>
-      <Card style={{ width: '18rem' }}>
-        <Card.Header>
+    <div className="w-80 m-3">
+      <Card className="text-center border-none rounded-xl bg-white shadow-lg">
+        <Card.Header className="font-semibold">
           <Card.Title>{locationObj.name}</Card.Title>
         </Card.Header>
         <Card.Body>
-          <Card.Text>{locationObj.address}</Card.Text>
+          <Card.Text className="text-left hover:text-blue-500 transition-colors duration-300">
+            {' '}
+            <FontAwesomeIcon icon={faLocationDot} /> {locationObj.address}
+          </Card.Text>
           <Card.Footer>
             <div className="d-flex justify-content-between align-items-center">
               <OverlayTrigger overlay={<Tooltip>Details</Tooltip>}>
