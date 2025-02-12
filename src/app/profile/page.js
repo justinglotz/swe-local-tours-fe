@@ -10,12 +10,15 @@ import { getSingleUser } from '@/api/profileData';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import { Modal, Button } from 'react-bootstrap';
 import { useRouter } from 'next/navigation';
+import { getCompletedItineraries } from '@/api/itineraryData';
+import ItineraryTourCard from '@/components/ItineraryTourCard';
 
 export default function ProfilePage() {
   const { user } = useAuth();
   const [userData, setUserData] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
+  const [completedItineraries, setCompletedItineraries] = useState([]);
 
   const getTheSingleUser = () => {
     getSingleUser(user.uid).then((data) => {
@@ -28,8 +31,15 @@ export default function ProfilePage() {
     });
   };
 
+  const fetchCompletedItineraries = () => {
+    getCompletedItineraries().then((data) => {
+      setCompletedItineraries(data);
+    });
+  };
+
   useEffect(() => {
     getTheSingleUser();
+    fetchCompletedItineraries();
   }, []);
 
   const handleRedirect = () => {
@@ -69,6 +79,9 @@ export default function ProfilePage() {
       <div style={{ padding: '20px', marginTop: '30px', maxWidth: '600px', margin: 'auto', textAlign: 'center' }}>
         <h3 style={{ color: '#fff', borderBottom: '2px solid #007bff', display: 'inline-block', paddingBottom: '8px', fontSize: '20px', fontWeight: '600' }}>Completed Tours</h3>
         <p style={{ color: '#ddd', fontSize: '16px', fontStyle: 'italic', marginTop: '5px' }}>(Coming soon)</p>
+        {completedItineraries.map((item) => (
+          <ItineraryTourCard key={item.id} itineraryObj={item} onUpdate={getCompletedItineraries} />
+        ))}
       </div>
     </ProtectedRoute>
   );
