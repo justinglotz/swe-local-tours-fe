@@ -8,9 +8,10 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '@/utils/context/authContext';
 import { getSingleUser } from '@/api/profileData';
 import ProtectedRoute from '@/components/ProtectedRoute';
-import { Modal, Button, Carousel, Image } from 'react-bootstrap';
+import { Modal, Button, Carousel } from 'react-bootstrap';
 import { useRouter } from 'next/navigation';
 import { getCompletedItineraries } from '@/api/itineraryData';
+import CompletedItineraryTourCard from '@/components/CompletedItineraryTourCard';
 
 export default function ProfilePage() {
   const { user } = useAuth();
@@ -32,6 +33,7 @@ export default function ProfilePage() {
 
   const fetchCompletedItineraries = () => {
     getCompletedItineraries().then((data) => {
+      console.log('Fetched Completed Itineraries:', JSON.stringify(data, null, 2));
       setCompletedItineraries(data);
     });
   };
@@ -62,7 +64,7 @@ export default function ProfilePage() {
         </Modal>
       ) : (
         userData && (
-          <div style={{ maxWidth: '600px', margin: 'auto', padding: '30px', borderRadius: '15px', boxShadow: '0 6px 12px rgba(0, 0, 0, 0.1)', backgroundColor: '#f9fafb', textAlign: 'center' }}>
+          <div style={{ maxWidth: '600px', margin: 'auto', padding: '30px', borderRadius: '15px', boxShadow: '0 6px 12px rgba(0, 0, 0, 0.1)', backgroundColor: '#f9fafb', textAlign: 'center', marginTop: '100px' }}>
             <div>
               <img src={user.photoURL} alt="Profile" style={{ width: '120px', height: '120px', borderRadius: '50%', border: '4px solid #007bff', padding: '5px', backgroundColor: '#fff', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }} />
               <h2 style={{ marginTop: '15px', color: '#333', fontSize: '24px', fontWeight: '600' }}>
@@ -76,35 +78,14 @@ export default function ProfilePage() {
       )}
 
       <div style={{ padding: '20px', marginTop: '30px', maxWidth: '600px', margin: 'auto', textAlign: 'center' }}>
-        <h3 style={{ color: '#fff', borderBottom: '2px solid #007bff', display: 'inline-block', paddingBottom: '8px', fontSize: '20px', fontWeight: '600' }}>Completed Tours</h3>
-        <p style={{ color: '#ddd', fontSize: '16px', fontStyle: 'italic', marginTop: '5px' }}>(Coming soon)</p>
+        <h3 style={{ color: '#fff', display: 'inline-block', paddingBottom: '8px', fontSize: '20px', fontWeight: '600', textDecoration: 'underline', marginTop: '50px' }}>Completed Tours</h3>
         <div>
           <Carousel>
-            {console.log(completedItineraries)};
-            <Carousel.Item interval={5000}>
-              <Image text="First slide" />
-              <h2>1</h2>
-              <Carousel.Caption>
-                <h3>First slide label</h3>
-                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-              </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item interval={5000}>
-              <h2>2</h2>
-              <Image text="Second slide" />
-              <Carousel.Caption>
-                <h3>Second slide label</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-              <Image text="Third slide" />
-              <h2>3</h2>
-              <Carousel.Caption>
-                <h3>Third slide label</h3>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-              </Carousel.Caption>
-            </Carousel.Item>
+            {completedItineraries.map((completedObj) => (
+              <Carousel.Item key={completedObj.id} interval={5000}>
+                <CompletedItineraryTourCard completedObj={completedObj} />
+              </Carousel.Item>
+            ))}
           </Carousel>
         </div>
       </div>
