@@ -82,13 +82,14 @@ export default function ItineraryPage() {
           {gmaps ? (
             <div className="h-[500px] w-3/4 mx-auto m-4 border border-white rounded-lg overflow-hidden">
               <Map defaultZoom={11} defaultCenter={{ lat: 36.16, lng: -86.77 }}>
-                {itinerary.map((item) => {
-                  if (item.location.coordinates) {
-                    const [lat, lng] = item.location.coordinates;
-                    return <Marker key={item.id} position={{ lat, lng }} title={item.location.name} />;
-                  }
-                  return null;
-                })}
+                {Array.isArray(itinerary) &&
+                  itinerary.map((item) => {
+                    if (item.location && Array.isArray(item.location.coordinates)) {
+                      const [lat, lng] = item.location.coordinates;
+                      return <Marker key={item.id} position={{ lat, lng }} title={item.location.name} />;
+                    }
+                    return null;
+                  })}
               </Map>
             </div>
           ) : null}
