@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import { Card, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Card, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Button } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import { faLocationDot, faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
@@ -77,7 +78,7 @@ export default function TourCard({ tourObj, onUpdate }) {
 
   return (
     <div className="w-80 m-3">
-      <Card className="text-center border-none rounded-xl" style={{ backgroundColor: '#4e4c76' }}>
+      <Card className="text-center border-none rounded-xl bg-white shadow-lg">
         <Card.Header className="font-semibold">{tourObj.name}</Card.Header>
         <Card.Body>
           {tourObj.location && (
@@ -97,13 +98,13 @@ export default function TourCard({ tourObj, onUpdate }) {
         </Card.Body>
         <Card.Footer className="text-muted">
           <div className="flex flex-row gap-4">
-            <Button className="w-1/2 bg-white" variant="contained">
+            <Button className="w-1/2" style={{ backgroundColor: '#1a374d', color: '#FFFFFF' }} variant="contained">
               <Link href={`/tour/${tourObj.id}`} passHref>
                 View Tour Details
               </Link>
             </Button>
 
-            <Button className="w-1/2 bg-white" variant="contained" onClick={addToItinerary}>
+            <Button className="w-1/2" onClick={addToItinerary} style={{ backgroundColor: '#1a374d', color: '#FFFFFF' }} variant="contained">
               Add To Itinerary
             </Button>
           </div>
