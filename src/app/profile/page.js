@@ -8,10 +8,9 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '@/utils/context/authContext';
 import { getSingleUser } from '@/api/profileData';
 import ProtectedRoute from '@/components/ProtectedRoute';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, Carousel, Image } from 'react-bootstrap';
 import { useRouter } from 'next/navigation';
 import { getCompletedItineraries } from '@/api/itineraryData';
-import ItineraryTourCard from '@/components/ItineraryTourCard';
 
 export default function ProfilePage() {
   const { user } = useAuth();
@@ -79,9 +78,35 @@ export default function ProfilePage() {
       <div style={{ padding: '20px', marginTop: '30px', maxWidth: '600px', margin: 'auto', textAlign: 'center' }}>
         <h3 style={{ color: '#fff', borderBottom: '2px solid #007bff', display: 'inline-block', paddingBottom: '8px', fontSize: '20px', fontWeight: '600' }}>Completed Tours</h3>
         <p style={{ color: '#ddd', fontSize: '16px', fontStyle: 'italic', marginTop: '5px' }}>(Coming soon)</p>
-        {completedItineraries.map((item) => (
-          <ItineraryTourCard key={item.id} itineraryObj={item} onUpdate={getCompletedItineraries} />
-        ))}
+        <div>
+          <Carousel>
+            {console.log(completedItineraries)};
+            <Carousel.Item interval={5000}>
+              <Image text="First slide" />
+              <h2>1</h2>
+              <Carousel.Caption>
+                <h3>First slide label</h3>
+                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item interval={5000}>
+              <h2>2</h2>
+              <Image text="Second slide" />
+              <Carousel.Caption>
+                <h3>Second slide label</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+              <Image text="Third slide" />
+              <h2>3</h2>
+              <Carousel.Caption>
+                <h3>Third slide label</h3>
+                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+          </Carousel>
+        </div>
       </div>
     </ProtectedRoute>
   );
