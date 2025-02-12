@@ -38,7 +38,7 @@ export default function LocationsPage() {
         <div className="text-center mt-3">
           <Link href="/location/new" passHref>
             <Button className="w-25" sx={{ borderRadius: '20px' }} style={{ backgroundColor: '#1a374d', color: '#FFFFFF' }} variant="contained">
-              <FontAwesomeIcon icon={faPlus} /> New Location
+              <FontAwesomeIcon icon={faPlus} /> &nbsp;New Location
             </Button>
           </Link>
         </div>
