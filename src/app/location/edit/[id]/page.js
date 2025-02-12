@@ -15,11 +15,7 @@ export default function EditLocation({ params }) {
     console.log('editItem:', editItem);
   }, [id]);
 
-  return (
-    <>
-      <LocationForm obj={editItem} />;
-    </>
-  );
+  return <LocationForm obj={editItem} />;
 }
 
 EditLocation.propTypes = {
