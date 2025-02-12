@@ -37,7 +37,7 @@ export default function ToursPage() {
     <ProtectedRoute>
       <div className="text-center mt-3">
         <Link href="/tour/new" passHref>
-          <Button className="w-25" variant="contained">
+          <Button className="w-25" sx={{ borderRadius: '20px' }} style={{ backgroundColor: '#1a374d', color: '#FFFFFF' }} variant="contained">
             <FontAwesomeIcon icon={faPlus} />
             &nbsp;New Tour
           </Button>

@@ -27,7 +27,7 @@ export default function ItineraryTourCard({ itineraryObj, onUpdate }) {
   };
 
   const deleteThisItinerary = () => {
-    if (window.confirm(`Delete ${itineraryObj.name}?`)) {
+    if (window.confirm(`Delete ${itineraryObj.tour.name} from Itinerary?`)) {
       deleteItinerary(itineraryObj.id).then(() => onUpdate());
     }
   };
