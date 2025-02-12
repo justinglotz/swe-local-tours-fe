@@ -81,10 +81,11 @@ export default function ItineraryPage() {
           ))}
           {gmaps ? (
             <div className="h-[500px] w-3/4 mx-auto m-4 border border-white rounded-lg overflow-hidden">
-              <Map defaultZoom={12} defaultCenter={{ lat: 36.16, lng: -86.77 }}>
+              <Map defaultZoom={11} defaultCenter={{ lat: 36.16, lng: -86.77 }}>
                 {itinerary.map((item) => {
-                  if (item.location_coordinates) {
-                    return <Marker key={item.id} position={item.location_coordinates} title={item.location_name} />;
+                  if (item.location.coordinates) {
+                    const [lat, lng] = item.location.coordinates;
+                    return <Marker key={item.id} position={{ lat, lng }} title={item.location.name} />;
                   }
                   return null;
                 })}
