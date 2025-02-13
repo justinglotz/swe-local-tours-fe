@@ -20,7 +20,7 @@ Coming soon!
 ## Relevant Links
 - [Wireframes](https://www.figma.com/design/9nYJYdxB3vPJdmOfPkuGhn/E27-29-SWE-Local-Tours?node-id=0-1&t=SCZkBzWEtxzEv9VC-1)
 - [Project Board](https://github.com/orgs/E27-29-SWE-LocalTours/projects/1)
-
+- [ERD](https://dbdiagram.io/d/SWE-LOCAL-TOURS-ERD-6738c9c3e9daa85acaad49df)
 
 ## Project Screenshots 
 <img width="1148" alt="Your Alt" src="your-linnjhkgk.png">
