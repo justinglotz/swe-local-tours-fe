@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 import { deleteItinerary, updateItinerary } from '@/api/itineraryData';
 import { Badge } from 'react-bootstrap';
 import { gsap } from 'gsap';
+import { useAuth } from '@/utils/context/authContext';
 
 export default function ItineraryTourCard({ itineraryObj, onUpdate }) {
   // removed onUpdate to prevent infinite loop issue
@@ -20,6 +21,7 @@ export default function ItineraryTourCard({ itineraryObj, onUpdate }) {
   const formattedTime = itineraryObj.tour.time ? dayjs(`2000-01-01 ${itineraryObj.tour.time}`).format('h:mm A') : 'No time selected';
   const isCompleted = itineraryObj.completed === true || itineraryObj.completed === 'true';
   const [completed, setCompleted] = React.useState(isCompleted);
+  const { user } = useAuth();
 
   const handleCheckboxChange = () => {
     setCompleted(!completed);
@@ -41,6 +43,7 @@ export default function ItineraryTourCard({ itineraryObj, onUpdate }) {
         user_id: itineraryObj.user_id,
         tour: itineraryObj.tour.id,
         completed,
+        uid: user.uid,
       }).then(() => {
         onUpdate();
       });

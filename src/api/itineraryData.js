@@ -18,7 +18,21 @@ const getItineraries = () =>
 // GET ITINERARIES BY UID
 const getItinerariesByUid = (uid) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}?user_id=${uid}`, {
+    fetch(`${endpoint}?uid=${uid}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => resolve(Object.values(data)))
+      .catch(reject);
+  });
+
+// GET COMPLETED ITINERARIES BY UID
+const getCompletedItinerariesByUid = (uid) =>
+  new Promise((resolve, reject) => {
+    fetch(`${endpoint}?uid=${uid}&completed=true`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -100,4 +114,4 @@ const getCompletedItineraries = () =>
       .catch(reject);
   });
 
-export { getItineraries, getItinerariesByUid, getSingleItinerary, createItinerary, updateItinerary, deleteItinerary, getCompletedItineraries };
+export { getItineraries, getItinerariesByUid, getSingleItinerary, createItinerary, updateItinerary, deleteItinerary, getCompletedItineraries, getCompletedItinerariesByUid };

@@ -10,7 +10,7 @@ import { getSingleUser } from '@/api/profileData';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import { Modal, Button, Carousel } from 'react-bootstrap';
 import { useRouter } from 'next/navigation';
-import { getCompletedItineraries } from '@/api/itineraryData';
+import { getCompletedItinerariesByUid } from '@/api/itineraryData';
 import CompletedItineraryTourCard from '@/components/CompletedItineraryTourCard';
 
 export default function ProfilePage() {
@@ -32,7 +32,7 @@ export default function ProfilePage() {
   };
 
   const fetchCompletedItineraries = () => {
-    getCompletedItineraries().then((data) => {
+    getCompletedItinerariesByUid(user.uid).then((data) => {
       console.log('Fetched Completed Itineraries:', JSON.stringify(data, null, 2));
       setCompletedItineraries(data);
     });
