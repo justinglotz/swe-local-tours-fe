@@ -67,6 +67,7 @@ export default function TourCard({ tourObj, onUpdate }) {
       user_id: userData.id,
       tour: tourObj.id,
       completed: false,
+      uid: user.uid,
     };
     createItinerary(payload).then(() => {
       setSuccessMessage('Tour added to itinerary!');

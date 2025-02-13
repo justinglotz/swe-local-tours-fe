@@ -9,7 +9,7 @@ import { Map, Marker } from '@vis.gl/react-google-maps';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import { useAuth } from '@/utils/context/authContext';
 import { getSingleUser } from '@/api/profileData';
-import { getItineraries } from '@/api/itineraryData';
+import { getItinerariesByUid } from '@/api/itineraryData';
 import { Modal, Button } from 'react-bootstrap';
 import { useRouter } from 'next/navigation';
 
@@ -46,7 +46,7 @@ export default function ItineraryPage() {
   };
 
   const getTheItineraries = () => {
-    getItineraries().then((data) => {
+    getItinerariesByUid(user.uid).then((data) => {
       setItinerary(data);
     });
   };
