@@ -25,27 +25,25 @@ export default function LocationCard({ locationObj, onUpdate }) {
           <Card.Title>{locationObj.name}</Card.Title>
         </Card.Header>
         <Card.Body>
-          <Card.Text className="text-left hover:text-blue-500 transition-colors duration-300">
+          <Card.Text className="text-left transition-colors duration-300">
             {' '}
             <FontAwesomeIcon icon={faLocationDot} /> {locationObj.address}
           </Card.Text>
           <Card.Footer>
             <div className="d-flex justify-content-between align-items-center">
-              <OverlayTrigger overlay={<Tooltip>Details</Tooltip>}>
+              <OverlayTrigger placement="bottom" overlay={<Tooltip>Details</Tooltip>}>
                 <Link href={`/location/${locationObj.id}`} passHref>
                   <FontAwesomeIcon className="m-2 fa-2x" icon={faCircleInfo} />
                 </Link>
               </OverlayTrigger>
-              <div>
-                <OverlayTrigger overlay={<Tooltip>Edit</Tooltip>}>
-                  <Link href={`/location/edit/${locationObj.id}`} passHref>
-                    <FontAwesomeIcon className="m-2 fa-2x" icon={faPenToSquare} />
-                  </Link>
-                </OverlayTrigger>
-              </div>
+              <OverlayTrigger placement="bottom" overlay={<Tooltip>Edit</Tooltip>}>
+                <Link href={`/location/edit/${locationObj.id}`} passHref>
+                  <FontAwesomeIcon className="m-2 fa-2x" icon={faPenToSquare} />
+                </Link>
+              </OverlayTrigger>
 
               <div>
-                <OverlayTrigger overlay={<Tooltip>Delete</Tooltip>}>
+                <OverlayTrigger placement="bottom" overlay={<Tooltip>Delete</Tooltip>}>
                   <button type="button" aria-label="Delete Location" onClick={deleteThisLocation}>
                     <FontAwesomeIcon className="m-2 fa-2x" icon={faTrashCan} />
                   </button>

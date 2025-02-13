@@ -8,7 +8,7 @@ import { signOut } from '../utils/auth';
 
 export default function NavBar() {
   return (
-    <Navbar className="bg-cyan-background" collapseOnSelect expand="lg" variant="dark">
+    <Navbar className="bg-var(--background-color)" collapseOnSelect expand="lg" variant="dark">
       <Container>
         <Image alt="" src="/images/Nav-Logo.jpg" width="30" height="30" className="d-inline-block align-top rounded-xl" />
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
