@@ -12,6 +12,7 @@ import { getSingleUser } from '@/api/profileData';
 import { getItinerariesByUid } from '@/api/itineraryData';
 import { Modal, Button } from 'react-bootstrap';
 import { useRouter } from 'next/navigation';
+import ItineraryCalendar from '@/components/ItineraryCalendar';
 
 // gmaps variable to turn on and off Google Maps features
 const gmaps = true;
@@ -93,6 +94,9 @@ export default function ItineraryPage() {
               </Map>
             </div>
           ) : null}
+          <div className="w-3/4 mx-auto m-4 h-[800px] overflow-hidden">
+            <ItineraryCalendar itinerary={itinerary} />
+          </div>
         </div>
       )}
     </ProtectedRoute>
