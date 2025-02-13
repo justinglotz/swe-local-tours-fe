@@ -93,18 +93,17 @@ export default function TourCard({ tourObj, onUpdate }) {
             <Card.Text className="text-left">{formattedTime}</Card.Text>
           </div>
           <Card.Text>${tourObj.price}</Card.Text>
-          {/* message when added to itinerary via short-circuit conditional rendering (if successMessage is truthy it is rendered, otherwise it is not) */}
           {successMessage && <p className="text-green-500 mt-2">{successMessage}</p>}
         </Card.Body>
         <Card.Footer className="text-muted">
           <div className="flex flex-row gap-4">
-            <Button className="w-1/2" style={{ backgroundColor: '#1a374d', color: '#FFFFFF' }} variant="contained">
+            <Button className="w-1/2" style={{ backgroundColor: 'var(--secondary-color)', color: '#FFFFFF' }} variant="contained">
               <Link href={`/tour/${tourObj.id}`} passHref>
                 View Tour Details
               </Link>
             </Button>
 
-            <Button className="w-1/2" onClick={addToItinerary} style={{ backgroundColor: '#1a374d', color: '#FFFFFF' }} variant="contained">
+            <Button className="w-1/2" onClick={addToItinerary} style={{ backgroundColor: 'var(--secondary-color)', color: '#FFFFFF' }} variant="contained">
               Add To Itinerary
             </Button>
           </div>

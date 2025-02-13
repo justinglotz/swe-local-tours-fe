@@ -6,8 +6,15 @@
   
 }
 
+:root {
+  --background-color: #55a2c1;
+  --primary-color: #19b4f4;
+  --secondary-color: #1a374d;
+  --text-color: white;
+}
+
 body {
-  background: #6898ab;
+  background: var(--background-color);
   color: white;
 }
 
