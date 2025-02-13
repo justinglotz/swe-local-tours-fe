@@ -64,7 +64,7 @@ export default function ProfilePage() {
         </Modal>
       ) : (
         userData && (
-          <div style={{ maxWidth: '600px', margin: 'auto', padding: '30px', borderRadius: '15px', boxShadow: '0 6px 12px rgba(0, 0, 0, 0.1)', backgroundColor: '#f9fafb', textAlign: 'center', marginTop: '100px' }}>
+          <div className="shadow-lg" style={{ maxWidth: '600px', margin: 'auto', padding: '30px', borderRadius: '15px', boxShadow: '0 6px 12px rgba(0, 0, 0, 0.1)', backgroundColor: '#f9fafb', textAlign: 'center', marginTop: '100px' }}>
             <div>
               <img src={user.photoURL} alt="Profile" style={{ width: '120px', height: '120px', borderRadius: '50%', border: '4px solid #007bff', color: '#000', padding: '5px', backgroundColor: '#fff', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }} />
               <h2 style={{ marginTop: '15px', color: '#333', fontSize: '24px', fontWeight: '600' }}>

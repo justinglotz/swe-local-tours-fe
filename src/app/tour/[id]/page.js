@@ -11,12 +11,25 @@ import { Card } from 'react-bootstrap';
 import Link from 'next/link';
 import { Map, Marker } from '@vis.gl/react-google-maps';
 import { createItinerary } from '@/api/itineraryData';
+import { useAuth } from '@/utils/context/authContext';
+import { getSingleUser } from '@/api/profileData';
+import { Button } from '@mui/material';
 
 const gmaps = true;
 
 export default function TourDetailsPage({ params }) {
   const [tour, setTour] = useState({});
   const { id } = params;
+  const [userData, setUserData] = useState({});
+  const [successMessage, setSuccessMessage] = useState('');
+  const { user } = useAuth();
+
+  const getTheSingleUser = () => {
+    getSingleUser(user.uid).then((data) => {
+      console.log('Fetched User Data:', data);
+      setUserData(data[0]);
+    });
+  };
 
   useEffect(() => {
     getSingleTour(id).then((data) => {
@@ -40,9 +53,23 @@ export default function TourDetailsPage({ params }) {
     });
   }, [id]);
 
+  useEffect(() => {
+    getTheSingleUser();
+  }, []);
+
   const addToItinerary = () => {
-    console.log(tour);
-    createItinerary(tour);
+    const payload = {
+      user_id: userData.id,
+      tour: tour.id,
+      completed: false,
+      uid: user.uid,
+    };
+    createItinerary(payload).then(() => {
+      setSuccessMessage('Tour added to itinerary!');
+      setTimeout(() => {
+        setSuccessMessage('');
+      }, 3000); // 3000 milliseconds before the message disappears
+    });
   };
 
   const tourDateObj = dayjs(tour.date).format('ddd, MMM D YYYY');
@@ -55,14 +82,18 @@ export default function TourDetailsPage({ params }) {
         <Row className="h-full">
           <Col className="col-4 h-full">
             <div className="h-full">
-              <img src={tour.image} alt={tour.name} className="w-full h-full object-cover rounded-xl" />
+              <img src={tour.image} alt={tour.name} className="w-full h-full object-cover rounded-xl shadow-md" />
             </div>
           </Col>
           <Col className="col-4" />
-          <Col className="col-4 d-flex flex-col justify-end pb-4">
-            <button type="button" className="btn btn-primary" onClick={addToItinerary}>
-              Add to Itinerary
-            </button>
+          <Col className="col-4 d-flex flex-col justify-end">
+            <div className="w-1/2">{successMessage && <p className="text-white mt-2 text-center">{successMessage}</p>}</div>
+
+            <div>
+              <Button className="w-1/2 inline" style={{ backgroundColor: 'var(--secondary-color)', color: 'var(--text-color)', borderRadius: '8px 8px 0 0' }} onClick={addToItinerary}>
+                Add to Itinerary
+              </Button>
+            </div>
           </Col>
         </Row>
       </div>
@@ -80,9 +111,19 @@ export default function TourDetailsPage({ params }) {
             </div>
             <div className="mt-auto pb-4">
               <Link href="/tours" passHref>
-                <button className="btn btn-info hover:w-full" type="button">
+                <Button
+                  sx={{
+                    width: '128px',
+                    transition: 'width 0.2s ease-in-out',
+                    '&:hover': {
+                      width: '100%',
+                    },
+                  }}
+                  style={{ backgroundColor: 'var(--secondary-color)', color: 'var(--text-color)' }}
+                  type="button"
+                >
                   Back to Tours
-                </button>
+                </Button>
               </Link>
             </div>
           </Col>
