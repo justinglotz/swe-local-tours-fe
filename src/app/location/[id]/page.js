@@ -7,12 +7,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
-import { getSingleLocation } from '@/api/locationData';
+import { deleteLocation, getSingleLocation } from '@/api/locationData';
+import { useRouter } from 'next/navigation';
 
 export default function ViewLocationDetails({ params }) {
   const { id } = params;
+  const router = useRouter();
 
   const [locationDetails, setLocationDetails] = useState({});
+
+  const deleteThisLocation = () => {
+    if (window.confirm(`Delete ${locationDetails.name}?`)) {
+      deleteLocation(locationDetails.id).then(() => router.push('/locations'));
+    }
+  };
 
   useEffect(() => {
     getSingleLocation(id).then((data) => {
@@ -45,25 +53,28 @@ export default function ViewLocationDetails({ params }) {
 
         <div>
           <OverlayTrigger overlay={<Tooltip>Delete</Tooltip>}>
-            {/* TODO: add onClick={deleteLocation} to the button below */}
-            <FontAwesomeIcon className="m-2 fa-2x" icon={faTrashCan} style={{ color: 'black', fill: 'black' }} />
+            <button type="button" aria-label="Delete location">
+              <FontAwesomeIcon className="m-2 fa-2x" icon={faTrashCan} style={{ color: 'black', fill: 'black' }} onClick={deleteThisLocation} />
+            </button>
           </OverlayTrigger>
         </div>
       </div>
 
       <hr style={{ color: 'black' }} />
       {/* Tours Section */}
-      <div className="tours-section">
-        <h3>Available Tours at {locationDetails.name}:</h3>
-      </div>
+      {tours.length > 0 ? (
+        <div className="tours-section">
+          <h3>Available Tours at {locationDetails.name}:</h3>
 
-      {/* TODO: add key and tourObj in tour card component below */}
-
-      <div className="d-flex flex-wrap tours-container">
-        {tours.map((tour) => (
-          <TourCard key={tour.id} tourObj={tour} />
-        ))}
-      </div>
+          <div className="d-flex flex-wrap tours-container">
+            {tours.map((tour) => (
+              <TourCard key={tour.id} tourObj={tour} />
+            ))}
+          </div>
+        </div>
+      ) : (
+        <h2 className="text-center text-black mt-4">No tours currently available at this location.</h2>
+      )}
     </div>
   );
 }
