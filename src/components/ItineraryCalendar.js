@@ -61,7 +61,6 @@ function ItineraryCalendar({ itinerary }) {
         {!isWeekView && !isDayView && (
           <>
             <div className="small">{eventInfo.event.extendedProps.location}</div>
-            <div className="small text-muted">${eventInfo.event.extendedProps.price}</div>
             {eventInfo.event.extendedProps.completed && <div className="small text-success">✓ Completed</div>}
           </>
         )}
@@ -77,17 +76,24 @@ function ItineraryCalendar({ itinerary }) {
       <Card.Body className="h-100 p-2">
         <style>
           {`
-            .fc-event-title, .fc-event-main-frame {
-              white-space: normal !important;
-              overflow: visible !important;
-              display: block !important;
+            .fc-timegrid-event {
+              min-height: 2em !important;
             }
-            .fc-event-main {
-              display: block !important;
-              overflow: visible !important;
+            .fc-timegrid-event .fc-event-main {
+              padding: 1px 2px !important;
+              font-size: 0.75rem !important;
             }
-            .fc-daygrid-event, .fc-timegrid-event {
-              height: auto !important;
+            .fc-event-title {
+              font-size: 0.75rem !important;
+            }
+            .event-content {
+              font-size: 0.75rem !important;
+            }
+            .fc-daygrid-event {
+              font-size: 0.75rem !important;
+            }
+            .small {
+              font-size: 0.7rem !important;
             }
           `}
         </style>
