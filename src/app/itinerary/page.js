@@ -81,7 +81,7 @@ export default function ItineraryPage() {
             <ItineraryTourCard key={item.id} itineraryObj={item} onUpdate={getTheItineraries} />
           ))}
           {gmaps ? (
-            <div className="h-[500px] w-3/4 mx-auto m-4 border border-white rounded-lg overflow-hidden">
+            <div className="h-[500px] w-3/4 mx-auto m-4 border border-white rounded-lg overflow-hidden shadow-lg">
               <Map defaultZoom={11} defaultCenter={{ lat: 36.16, lng: -86.77 }}>
                 {Array.isArray(itinerary) &&
                   itinerary.map((item) => {

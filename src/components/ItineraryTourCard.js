@@ -53,7 +53,7 @@ export default function ItineraryTourCard({ itineraryObj, onUpdate }) {
   return (
     <div className="d-flex justify-content-center">
       {console.log(itineraryObj)}
-      <Card className="w-75 mx-auto m-4">
+      <Card className="w-75 mx-auto m-4 shadow-lg">
         <Card.Body>
           <div className="flex flex-row">
             <Card.Title className="flex-grow-1">{itineraryObj.tour.name}</Card.Title>
