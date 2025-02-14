@@ -28,7 +28,7 @@ Coming soon!
 
 ## Contributors
 - [Alyssa Cleland](https://github.com/alyssacleland)
-- [Andre Phosarath](https://github.com/justinglotz)
-- [Julien Cain](https://github.com/justinglotz)
-- [Justin Glotzbach](https://github.com/AVP4000)
-- [Nelson Ngaleumo Glotzbach](https://github.com/NelsonOlivierNgaleumo)
+- [Andre Phosarath](https://github.com/AVP4000)
+- [Julien Cain](https://github.com/juliencain)
+- [Justin Glotzbach](https://github.com/justinglotz)
+- [Nelson Ngaleumo](https://github.com/NelsonOlivierNgaleumo)
