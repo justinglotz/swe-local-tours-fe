@@ -1,6 +1,21 @@
-{
+[{
   "first_name": "Justin",
   "last_name": "Glotzbach",
   "bio": "CEO Entrepeneur, Born in 1964, Jeffrey, Jeffrey Bezos",
   "uid": "YvkaWGw2dfNxbhugw7eJih6jltH2"
+},
+
+{
+  "first_name": "Bumblefuzz",
+  "last_name": "Jiggledoodle",
+  "bio": "I'm Bumblefuzz Jiggledoodle, an inventor of invisible ink pens and professional nap enthusiast. My days are spent organizing my sock collection by color and texture while trying to teach my pet goldfish how to juggle. I enjoy long, confusing conversations with vending machines and am currently working on a groundbreaking new dance move that involves minimal movement and maximum mystery. When I'm not attempting to communicate with squirrels, I'm perfecting my recipe for spaghetti-flavored ice cream.",
+  "uid": "Esvr3CPP6UZrhpX64qwmmr7S8eZ2"
+},
+
+{
+  "first_name": "Thistle",
+  "last_name": "McHooligan",
+  "bio": "I'm Thistle McHooligan, a self-proclaimed 'professional cloud watcher' and part-time yodeling champion. I spend most of my days pondering the mysteries of the universe while balancing on one foot. I have a weird obsession with collecting expired coupons and can recite Shakespeare in Morse code. When I'm not hiking in an oversized inflatable duck costume, I'm perfecting my recipe for 'gluten-free, vegan moon pies.'",
+  "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
 }
+]
