@@ -10,12 +10,15 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { deleteLocation, getSingleLocation } from '@/api/locationData';
 import { useRouter } from 'next/navigation';
 import { Button } from '@mui/material';
+import { Map, Marker } from '@vis.gl/react-google-maps';
 
+const gmaps = true;
 export default function ViewLocationDetails({ params }) {
   const { id } = params;
   const router = useRouter();
 
   const [locationDetails, setLocationDetails] = useState({});
+  const [coordinates, setCoordinates] = useState(null);
 
   const deleteThisLocation = () => {
     if (window.confirm(`Delete ${locationDetails.name}?`)) {
@@ -26,6 +29,9 @@ export default function ViewLocationDetails({ params }) {
   useEffect(() => {
     getSingleLocation(id).then((data) => {
       setLocationDetails(data);
+      if (gmaps) {
+        setCoordinates(locationDetails.coordinates ? { lat: locationDetails.coordinates[0], lng: locationDetails.coordinates[1] } : { lat: -33.860664, lng: 151.208138 }); // fallback coordinates if geocoding fails
+      }
     });
   }, [id]);
 
@@ -40,6 +46,18 @@ export default function ViewLocationDetails({ params }) {
           <p className="location-address">
             <FontAwesomeIcon icon={faLocationDot} /> {locationDetails.address}
           </p>
+        </div>
+
+        {/* render the map */}
+        <div className="h-3/4 rounded-lg overflow-hidden" style={{ height: '400px', width: '100%', marginTop: '20px' }}>
+          {coordinates && ( // Only render map when coordinates exist
+            <Map
+              defaultZoom={15} // Increased zoom level for better visibility
+              defaultCenter={coordinates}
+            >
+              <Marker position={coordinates} title={locationDetails.name} />
+            </Map>
+          )}
         </div>
 
         <div className="d-flex justify-content-center align-items-center">
@@ -79,7 +97,7 @@ export default function ViewLocationDetails({ params }) {
         )}
       </div>
 
-      <div className="mt-auto pb-4" style={{ paddingLeft: '1100px' }}>
+      <div className="mt-auto pb-4" style={{ paddingLeft: '150px' }}>
         <Link href="/locations" passHref>
           <Button
             // sx={{
