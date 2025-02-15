@@ -13,11 +13,9 @@ export default function LocationCard({ locationObj, onUpdate }) {
   const deleteThisLocation = () => {
     if (window.confirm(`Delete ${locationObj.name}?`)) {
       deleteLocation(locationObj.id).then(() => onUpdate());
-      // console.log('locationId:', locationObj.id);
-
-      //   deleteLocationTours(locationObj.id).then(() => onUpdate());
     }
   };
+
   return (
     <div className="w-80 m-3">
       <Card className="text-center border-none rounded-xl bg-white shadow-lg">

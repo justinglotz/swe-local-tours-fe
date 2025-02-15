@@ -29,7 +29,6 @@ export default function TourDetailsPage({ params }) {
 
   const getTheSingleUser = () => {
     getSingleUser(user.uid).then((data) => {
-      console.log('Fetched User Data:', data);
       setUserData(data[0]);
     });
   };

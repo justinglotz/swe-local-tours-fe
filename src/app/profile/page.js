@@ -22,7 +22,6 @@ export default function ProfilePage() {
 
   const getTheSingleUser = () => {
     getSingleUser(user.uid).then((data) => {
-      console.log('Fetched User Data:', data);
       if (data[0] && data[0].first_name && data[0].last_name && data[0].bio) {
         setUserData(data[0]);
       } else {
@@ -33,7 +32,6 @@ export default function ProfilePage() {
 
   const fetchCompletedItineraries = () => {
     getCompletedItinerariesByUid(user.uid).then((data) => {
-      console.log('Fetched Completed Itineraries:', JSON.stringify(data, null, 2));
       setCompletedItineraries(data);
     });
   };

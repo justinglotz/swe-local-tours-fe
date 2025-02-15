@@ -13,7 +13,6 @@ export default function ProfileForm() {
   });
   const router = useRouter();
   const { user } = useAuth();
-  console.log('uid:', user.uid);
 
   const handleChange = (e) => {
     setFormInput((prevState) => ({
@@ -25,7 +24,6 @@ export default function ProfileForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const payload = { ...formInput, uid: user.uid };
-    console.log('payload:', payload);
     // create user object in the database
     createUser(payload).then(() => {
       // route to tours page

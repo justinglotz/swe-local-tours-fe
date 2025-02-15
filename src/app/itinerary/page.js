@@ -32,7 +32,6 @@ export default function ItineraryPage() {
     if (!user?.uid) return; // Prevent running effect if user is not yet loaded
 
     getSingleUser(user.uid).then((data) => {
-      console.log('Fetched User Data:', data);
       const isComplete = data[0]?.first_name && data[0]?.last_name && data[0]?.bio;
       setUserData(data[0] || null);
       if (!isComplete) setShowModal(true);
@@ -55,8 +54,6 @@ export default function ItineraryPage() {
   useEffect(() => {
     getTheItineraries();
   }, []);
-
-  console.log('itinerary: ', itinerary);
 
   return (
     <ProtectedRoute>

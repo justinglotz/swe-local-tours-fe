@@ -5,8 +5,6 @@ const viewLocationDetails = (LocationId) =>
   new Promise((resolve, reject) => {
     Promise.all([getSingleLocation(LocationId), getLocationTours(LocationId)])
       .then(([locationObject, locationToursArray]) => {
-        console.log('locationObject:', locationObject);
-        console.log('locationToursArray:', locationToursArray);
         resolve({ ...locationObject, tours: locationToursArray });
       })
       .catch((error) => reject(error));

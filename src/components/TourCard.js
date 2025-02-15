@@ -14,7 +14,6 @@ import { useAuth } from '@/utils/context/authContext';
 import { getSingleUser } from '@/api/profileData';
 
 export default function TourCard({ tourObj, onUpdate }) {
-  console.log(tourObj);
   const formattedDate = tourObj.date ? dayjs(tourObj.date).format('MMMM D, YYYY') : 'No date selected';
   const formattedTime = tourObj.time ? dayjs(`2000-01-01 ${tourObj.time}`).format('h:mm A') : 'No time selected';
 
@@ -32,7 +31,6 @@ export default function TourCard({ tourObj, onUpdate }) {
 
   const getTheSingleUser = () => {
     getSingleUser(user.uid).then((data) => {
-      console.log('Fetched User Data:', data);
       setUserData(data[0]);
     });
   };

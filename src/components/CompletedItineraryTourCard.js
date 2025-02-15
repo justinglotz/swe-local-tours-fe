@@ -11,8 +11,6 @@ export default function CompletedItineraryTourCard({ completedObj }) {
   const formattedDate = completedObj.tour.date ? dayjs(completedObj.tour.date).format('ddd, MMM D, YYYY') : 'No date selected';
   const formattedTime = completedObj.tour.time ? dayjs(`2000-01-01 ${completedObj.tour.time}`).format('h:mm A') : 'No time selected';
 
-  console.log('date:, ', completedObj.tour.date);
-
   return (
     <div className="d-flex justify-content-center">
       <Card className="m-3 p-3" style={{ width: '250px', height: '250px', display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
