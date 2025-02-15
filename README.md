@@ -23,8 +23,45 @@ Coming soon!
 - [ERD](https://dbdiagram.io/d/SWE-LOCAL-TOURS-ERD-6738c9c3e9daa85acaad49df)
 
 ## Project Screenshots 
-<img width="1148" alt="Your Alt" src="your-linnjhkgk.png">
-Coming soon!
+<img width="1510" alt="Screenshot 2025-02-14 at 11 35 51 PM" src="https://github.com/user-attachments/assets/68815cb2-4c7d-494c-a228-a3b447f6d342" />
+Login Screen
+
+<img width="1510" alt="Screenshot 2025-02-14 at 11 36 04 PM" src="https://github.com/user-attachments/assets/540b3238-5733-4d86-94b3-c3db092474c7" />
+Tours Page
+
+<img width="1510" alt="Screenshot 2025-02-14 at 11 36 56 PM" src="https://github.com/user-attachments/assets/5fac4316-c5ac-4af9-a85f-139c1d917198" />
+New Tour Form
+
+<img width="1511" alt="Screenshot 2025-02-14 at 11 37 21 PM" src="https://github.com/user-attachments/assets/c290b85c-4f96-4fdc-9e7c-e2691ccbd87a" />
+Locations Page
+
+<img width="1510" alt="Screenshot 2025-02-14 at 11 38 02 PM" src="https://github.com/user-attachments/assets/76c29aef-bd07-4bf9-af5c-4446738d2cf1" />
+Location Details page with map
+
+<img width="1512" alt="Screenshot 2025-02-14 at 11 38 10 PM" src="https://github.com/user-attachments/assets/9a29ee12-8711-428f-ae70-0ce4bccd6f8f" />
+Location Details page with tours at that location
+
+<img width="1512" alt="Screenshot 2025-02-14 at 11 38 24 PM" src="https://github.com/user-attachments/assets/32a09904-8503-42e1-b8fa-849bf140677e" />
+Itinerary Page (map)
+
+<img width="1511" alt="Screenshot 2025-02-14 at 11 38 34 PM" src="https://github.com/user-attachments/assets/16c0f754-21b0-4f63-926e-bd2b42d9b434" />
+Itinerary Page (calendar)
+
+<img width="1511" alt="Screenshot 2025-02-14 at 11 38 54 PM" src="https://github.com/user-attachments/assets/6781d1de-7145-493e-8bcd-51ff7bb77c6e" />
+Tour Details Page
+
+<img width="1512" alt="Screenshot 2025-02-14 at 11 39 29 PM" src="https://github.com/user-attachments/assets/0c7eb97a-527e-4c8f-9e12-b05496e186a4" />
+Profile Page
+
+
+
+
+
+
+
+
+
+
 
 ## Contributors
 - [Alyssa Cleland](https://github.com/alyssacleland)
