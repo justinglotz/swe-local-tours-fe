@@ -1,102 +1,132 @@
 [
-  {
-      "id": 1,
-      "name": "Centennial Park",
-      "address": "2500 West End Avenue, Nashville, TN 37203, USA",
-      "coordinates": {
-          "latitude": 36.149937,
-          "longitude": -86.812866
-      },
-      "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
-  },
-  {
-      "id": 2,
-      "name": "Bicentennial Capitol Mall State Park",
-      "address": "600 James Robertson Pkwy, Nashville, TN 37243, USA",
-      "coordinates": {
-          "latitude": 36.1681,
-          "longitude": -86.7844
-      },
-      "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
-  },
-  {
-      "id": 3,
-      "name": "Radnor Lake State Park",
-      "address": "1160 Otter Creek Road, Nashville, TN 37220, USA",
-      "coordinates": {
-          "latitude": 36.0631,
-          "longitude": -86.8097
-      },
-      "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
-  },
-  {
-      "id": 4,
-      "name": "Edwin Warner Park",
-      "address": "50 Vaughn Road, Nashville, TN 37221, USA",
-      "coordinates": {
-          "latitude": 36.0664,
-          "longitude": -86.9012
-      },
-      "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
-  },
-  {
-      "id": 5,
-      "name": "Percy Warner Park",
-      "address": "7311 Highway 100, Nashville, TN 37221, USA",
-      "coordinates": {
-          "latitude": 36.0787,
-          "longitude": -86.9015
-      },
-      "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
-  },
-  {
-      "id": 6,
-      "name": "Shelby Park",
-      "address": "1900 Shelby Ave, Nashville, TN 37206, USA",
-      "coordinates": {
-          "latitude": 36.1683,
-          "longitude": -86.7256
-      },
-      "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
-  },
-  {
-      "id": 7,
-      "name": "Fannie Mae Dees Park",
-      "address": "2400 Blakemore Ave, Nashville, TN 37212, USA",
-      "coordinates": {
-          "latitude": 36.1414,
-          "longitude": -86.8086
-      },
-      "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
-  },
-  {
-      "id": 8,
-      "name": "Cumberland Park",
-      "address": "592 S 1st St, Nashville, TN 37213, USA",
-      "coordinates": {
-          "latitude": 36.1622,
-          "longitude": -86.7713
-      },
-      "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
-  },
-  {
-      "id": 9,
-      "name": "Sevier Park",
-      "address": "3000 Granny White Pike, Nashville, TN 37204, USA",
-      "coordinates": {
-          "latitude": 36.1253,
-          "longitude": -86.7905
-      },
-      "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
-  },
-  {
-      "id": 10,
-      "name": "Two Rivers Park",
-      "address": "3150 McGavock Pike, Nashville, TN 37214, USA",
-      "coordinates": {
-          "latitude": 36.1802,
-          "longitude": -86.7026
-      },
-      "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
-  }
+    {
+        "id": 7,
+        "name": "Centennial Park",
+        "address": "2500 West End Ave, Nashville, TN 37232, USA",
+        "coordinates": [
+            36.1496079,
+            -86.8126195
+        ],
+        "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
+    },
+    {
+        "id": 8,
+        "name": "Bicentennial Capitol Mall State Park",
+        "address": "600 James Robertson Pkwy, Nashville, TN 37243, USA",
+        "coordinates": [
+            36.1679013,
+            -86.7869004
+        ],
+        "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
+    },
+    {
+        "id": 9,
+        "name": "Radnor Lake State Park",
+        "address": "1160 Otter Creek Rd, Oak Hill, TN 37220, USA",
+        "coordinates": [
+            36.0630891,
+            -86.8096497
+        ],
+        "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
+    },
+    {
+        "id": 10,
+        "name": "Grand Ole Opry",
+        "address": "600 Opry Mills Dr, Nashville, TN 37214, USA",
+        "coordinates": [
+            36.2066575,
+            -86.6926723
+        ],
+        "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
+    },
+    {
+        "id": 11,
+        "name": "Ryman Auditorium",
+        "address": "116 5th Ave N, Nashville, TN 37219, USA",
+        "coordinates": [
+            36.1611859,
+            -86.77856539999999
+        ],
+        "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
+    },
+    {
+        "id": 12,
+        "name": "Edwin Warner Park",
+        "address": "50 Vaughn Rd, Nashville, TN 37221, USA",
+        "coordinates": [
+            36.0500101,
+            -86.9041463
+        ],
+        "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
+    },
+    {
+        "id": 13,
+        "name": "Percy Warner Park",
+        "address": "7311 TN-100, Nashville, TN 37221, USA",
+        "coordinates": [
+            36.0608131,
+            -86.906018
+        ],
+        "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
+    },
+    {
+        "id": 14,
+        "name": "Shelby Park",
+        "address": "1900 Shelby Ave, Nashville, TN 37206, USA",
+        "coordinates": [
+            36.16966499999999,
+            -86.73729759999999
+        ],
+        "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
+    },
+    {
+        "id": 15,
+        "name": "Fannie Mae Dees Park",
+        "address": "2400 Blakemore Ave, Nashville, TN 37232, USA",
+        "coordinates": [
+            36.1385521,
+            -86.8059866
+        ],
+        "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
+    },
+    {
+        "id": 16,
+        "name": "Cumberland Park",
+        "address": "592 S 1st St, Nashville, TN 37213, USA",
+        "coordinates": [
+            36.1623784,
+            -86.77023109999999
+        ],
+        "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
+    },
+    {
+        "id": 17,
+        "name": "Two Rivers Park",
+        "address": "3150 McGavock Pk, Nashville, TN 37214, USA",
+        "coordinates": [
+            36.1857889,
+            -86.678066
+        ],
+        "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
+    },
+    {
+        "id": 18,
+        "name": "The Parthenon",
+        "address": "2500 West End Ave, Nashville, TN 37203, USA",
+        "coordinates": [
+            36.1466143,
+            -86.8116256
+        ],
+        "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
+    },
+    {
+        "id": 19,
+        "name": "Country Music Hall of Fame and Museum",
+        "address": "222 Rep. John Lewis Way S, Nashville, TN 37203, USA",
+        "coordinates": [
+            36.1582227,
+            -86.7764364
+        ],
+        "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
+    }
 ]
