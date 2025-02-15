@@ -43,7 +43,6 @@ export default function ViewLocationDetails({ params }) {
 
   const tours = locationDetails.tours || []; // if locationDetails.tours is undefined, set it to an empty array
 
-  console.log('location details:', locationDetails);
   return (
     <>
       <div className="location-details-container">

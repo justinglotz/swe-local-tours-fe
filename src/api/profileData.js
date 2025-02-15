@@ -12,7 +12,6 @@ const createUser = (payload) =>
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log('Server response:', data); // Log response data
         resolve(data);
       })
       .catch((error) => {

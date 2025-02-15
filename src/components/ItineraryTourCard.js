@@ -37,7 +37,6 @@ export default function ItineraryTourCard({ itineraryObj, onUpdate }) {
   const handleSaveCheckbox = () => {
     gsap.fromTo(`.save-badge-${itineraryObj.id}`, { scale: 1 }, { scale: 1.2, duration: 0.2, yoyo: true, repeat: 1 });
     setTimeout(() => {
-      console.log(itineraryObj);
       updateItinerary({
         id: itineraryObj.id,
         user_id: itineraryObj.user_id,
@@ -52,7 +51,6 @@ export default function ItineraryTourCard({ itineraryObj, onUpdate }) {
 
   return (
     <div className="d-flex justify-content-center">
-      {console.log(itineraryObj)}
       <Card className="w-75 mx-auto m-4 shadow-lg">
         <Card.Body>
           <div className="flex flex-row">

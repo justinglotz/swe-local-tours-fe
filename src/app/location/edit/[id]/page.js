@@ -7,12 +7,10 @@ import PropTypes from 'prop-types';
 
 export default function EditLocation({ params }) {
   const { id } = params;
-  console.log('id:', id);
   const [editItem, setEditItem] = useState({});
 
   useEffect(() => {
     getSingleLocation(id).then(setEditItem);
-    console.log('editItem:', editItem);
   }, [id]);
 
   return <LocationForm obj={editItem} />;

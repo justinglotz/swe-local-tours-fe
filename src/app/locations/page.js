@@ -28,7 +28,6 @@ export default function LocationsPage() {
 
   // useEffect to fetch locations when the page loads
   useEffect(() => {
-    console.log('Fetching locations for user:', user?.uid); // Check if user ID is available and used
     getAllTheLocations();
   }, []);
 
