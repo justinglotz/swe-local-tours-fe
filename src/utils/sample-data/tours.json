@@ -80,7 +80,7 @@
   {
     "id": 7,
     "user_id": 5,
-    "image": "",
+    "image": "https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2014/9/30/1412077851628/Invisible-art-Lana-Newstr-013.jpg?width=620&dpr=1&s=none&crop=none",
     "price": "10.00",
     "location": 13,
     "name": "Invisible Art Tour",
@@ -152,7 +152,7 @@
     "description": "Take a moonlit walk through the Glowing Forest, where each tree lights up to the rhythm of the forest's heartbeat.",
     "date": "2025-02-23",
     "time": "19:00:00",
-    "duration": "01:00:00",
+    "duration": "60",
     "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
   },
   {
@@ -223,7 +223,7 @@
   {
     "id": 18,
     "user_id": 5,
-    "image": "",
+    "image": "https://illiliberation.wordpress.com/wp-content/uploads/2013/09/cloudy-with-a-chance-of-meatballs.jpg",
     "price": "65.00",
     "location": 8,
     "name": "Spaghetti Tornado Experience",
