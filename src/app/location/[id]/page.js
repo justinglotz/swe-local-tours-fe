@@ -97,7 +97,7 @@ export default function ViewLocationDetails({ params }) {
         )}
       </div>
 
-      <div className="mt-auto pb-4" style={{ paddingLeft: '150px' }}>
+      <div className="mt-auto pb-4" style={{ paddingLeft: '1100px' }}>
         <Link href="/locations" passHref>
           <Button
             // sx={{
