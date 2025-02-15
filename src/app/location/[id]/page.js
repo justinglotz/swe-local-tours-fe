@@ -29,11 +29,17 @@ export default function ViewLocationDetails({ params }) {
   useEffect(() => {
     getSingleLocation(id).then((data) => {
       setLocationDetails(data);
-      if (gmaps) {
-        setCoordinates(locationDetails.coordinates ? { lat: locationDetails.coordinates[0], lng: locationDetails.coordinates[1] } : { lat: -33.860664, lng: 151.208138 }); // fallback coordinates if geocoding fails
-      }
     });
   }, [id]);
+
+  useEffect(() => {
+    if (gmaps && locationDetails.coordinates) {
+      setCoordinates({
+        lat: locationDetails.coordinates[0],
+        lng: locationDetails.coordinates[1],
+      });
+    }
+  }, [locationDetails]);
 
   const tours = locationDetails.tours || []; // if locationDetails.tours is undefined, set it to an empty array
 
