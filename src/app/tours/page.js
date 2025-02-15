@@ -43,7 +43,21 @@ export default function ToursPage() {
           </Button>
         </Link>
       </div>
-      <div className="flex flex-row justify-center flex-wrap">
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          gap: '16px',
+          maxHeight: '750px',
+          maxWidth: '1500px',
+          overflowY: 'auto', // Enable vertical scroll
+          marginTop: '50px',
+          padding: '10px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        }}
+      >
         {tours.map((tour) => (
           <TourCard tourObj={tour} onUpdate={getAllTheTours} />
         ))}
