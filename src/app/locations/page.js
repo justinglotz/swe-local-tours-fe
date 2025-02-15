@@ -43,7 +43,23 @@ export default function LocationsPage() {
           </Link>
         </div>
 
-        <div className="flex flex-row justify-center flex-wrap">
+        {/* Scrollable Container for location cards */}
+
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            gap: '16px',
+            maxHeight: '750px',
+            maxWidth: '1500px',
+            overflowY: 'auto', // Enable vertical scroll
+            marginTop: '50px',
+            padding: '10px',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+          }}
+        >
           {/* map over locations here using LocationCard component */}
           {locations.map((location) => (
             <LocationCard key={location.id} locationObj={location} onUpdate={getAllTheLocations} />

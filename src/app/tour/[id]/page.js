@@ -1,3 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable react-hooks/exhaustive-deps */
+
 'use client';
 
 import React, { useEffect, useState } from 'react';
@@ -106,6 +109,7 @@ export default function TourDetailsPage({ params }) {
               <div>
                 <h1 className="text-center text-2xl">{tour.name}</h1>
               </div>
+              <p className="text-center">{tour.description}</p>
               <p className="text-center">Date: {tourDateObj}</p>
               <p className="text-center">Time: {tourTimeObj}</p>
             </div>
