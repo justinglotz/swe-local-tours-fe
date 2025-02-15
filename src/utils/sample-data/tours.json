@@ -9,7 +9,7 @@
     "description": "Join the legendary Penguin Parade and witness these tuxedo-clad creatures showcase their moonwalk skills.",
     "date": "2025-02-12",
     "time": "18:00:00",
-    "duration": "00:30:00",
+    "duration": "30",
     "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
   },
   {
@@ -22,7 +22,7 @@
     "description": "Embark on a search for the mythical blue donut. This tour includes one brief, but intense, search through enchanted bakeries.",
     "date": "2025-02-13",
     "time": "10:00:00",
-    "duration": "00:45:00",
+    "duration": "45",
     "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
   },
   {
@@ -35,7 +35,7 @@
     "description": "Dive into the mysterious world of sock puppets, and learn the ancient art of sock puppet diplomacy.",
     "date": "2025-02-14",
     "time": "14:30:00",
-    "duration": "00:30:00",
+    "duration": "30",
     "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
   },
   {
@@ -48,7 +48,7 @@
     "description": "Hop aboard the Airship of Dreams for a 30-minute flight over clouds made entirely of marshmallows.",
     "date": "2025-02-15",
     "time": "16:00:00",
-    "duration": "00:30:00",
+    "duration": "30",
     "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
   },
   {
@@ -61,7 +61,7 @@
     "description": "Take part in a time-travel experiment where you'll attempt to teach a caveman how to ride a unicycle.",
     "date": "2025-02-16",
     "time": "11:00:00",
-    "duration": "00:45:00",
+    "duration": "45",
     "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
   },
   {
@@ -74,7 +74,7 @@
     "description": "Join us for an expedition to find the lost city of Popcornopolis, where the streets are paved with buttery snacks.",
     "date": "2025-02-17",
     "time": "09:30:00",
-    "duration": "01:00:00",
+    "duration": "60",
     "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
   },
   {
@@ -87,7 +87,7 @@
     "description": "Take a 25-minute tour through the secretive world of invisible art, where you’ll see absolutely nothing… but it’s definitely art.",
     "date": "2025-02-18",
     "time": "12:45:00",
-    "duration": "00:15:00",
+    "duration": "15",
     "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
   },
   {
@@ -100,7 +100,7 @@
     "description": "Embark on a magical journey to witness the annual Jellybean Rebellion, where jellybeans fight for their right to be delicious.",
     "date": "2025-02-19",
     "time": "15:00:00",
-    "duration": "00:30:00",
+    "duration": "30",
     "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
   },
   {
@@ -113,7 +113,7 @@
     "description": "Join us for a speed tour through the Underground Library of Whispering Books, where every page has a secret to tell.",
     "date": "2025-02-20",
     "time": "17:30:00",
-    "duration": "00:15:00",
+    "duration": "15",
     "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
   },
   {
@@ -126,7 +126,7 @@
     "description": "Explore the wonders of the Galactic Doughnut Factory, where we make cosmic pastries for intergalactic travelers.",
     "date": "2025-02-21",
     "time": "08:00:00",
-    "duration": "00:45:00",
+    "duration": "45",
     "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
   },
   {
@@ -139,7 +139,7 @@
     "description": "Delve deep into the Cave of Echoes, a magical location where every sound you make is returned in the form of song.",
     "date": "2025-02-22",
     "time": "13:30:00",
-    "duration": "00:30:00",
+    "duration": "30",
     "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
   },
   {
@@ -165,7 +165,7 @@
     "description": "Embark on a guided walk through a wormhole, where time and space bend, and you never know what you might encounter next.",
     "date": "2025-02-24",
     "time": "11:00:00",
-    "duration": "00:45:00",
+    "duration": "30",
     "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
   },
   {
@@ -178,7 +178,7 @@
     "description": "Climb the legendary Chocolate Volcano, where lava flows with the richest melted chocolate ever known to mankind.",
     "date": "2025-02-25",
     "time": "16:00:00",
-    "duration": "00:30:00",
+    "duration": "30",
     "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
   },
   {
@@ -191,7 +191,7 @@
     "description": "Join this thrilling adventure of skydiving with a parachute made of the finest aged cheese. Will you land smoothly?",
     "date": "2025-02-26",
     "time": "14:00:00",
-    "duration": "00:45:00",
+    "duration": "45",
     "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
   },
   {
@@ -204,7 +204,7 @@
     "description": "Experience a concert like no other in the underwater concert hall, where fish play instruments and the audience is surrounded by aquatic wonders.",
     "date": "2025-02-27",
     "time": "18:00:00",
-    "duration": "01:00:00",
+    "duration": "60",
     "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
   },
   {
@@ -217,7 +217,7 @@
     "description": "Travel through time and enjoy a picnic in a different era. Lunch is provided from the future!",
     "date": "2025-02-28",
     "time": "13:00:00",
-    "duration": "00:45:00",
+    "duration": "45",
     "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
   },
   {
@@ -230,7 +230,7 @@
     "description": "Catch a ride in the Spaghetti Tornado and experience a whirlwind of pasta spinning in the air.",
     "date": "2025-03-01",
     "time": "16:30:00",
-    "duration": "00:45:00",
+    "duration": "45",
     "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
   },
   {
@@ -243,7 +243,7 @@
     "description": "Go on a magical safari where you’ll encounter mythical creatures and enjoy a brew from the witch’s cauldron.",
     "date": "2025-03-02",
     "time": "14:30:00",
-    "duration": "00:30:00",
+    "duration": "30",
     "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
   },
   {
@@ -256,7 +256,7 @@
     "description": "Join a quest for the hidden leprechaun’s gold, with enchanted clues and a wild chase through the forest.",
     "date": "2025-03-03",
     "time": "13:30:00",
-    "duration": "00:45:00",
+    "duration": "45",
     "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
   },
   {
@@ -269,7 +269,7 @@
     "description": "Hop aboard the Haunted Train for a ride through eerie landscapes and mysterious whispers.",
     "date": "2025-03-04",
     "time": "18:30:00",
-    "duration": "00:45:00",
+    "duration": "45",
     "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
   },
   {
@@ -282,7 +282,7 @@
     "description": "Meet and greet extraterrestrial beings during this thrilling and otherworldly tour.",
     "date": "2025-03-05",
     "time": "20:00:00",
-    "duration": "00:30:00",
+    "duration": "30",
     "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
   },
   {
@@ -295,7 +295,7 @@
     "description": "Search for the hidden dragon eggs in this mysterious, magical forest where fire-breathing creatures roam.",
     "date": "2025-03-06",
     "time": "10:00:00",
-    "duration": "00:45:00",
+    "duration": "45",
     "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
   },
   {
@@ -308,7 +308,7 @@
     "description": "Take a tour of the enchanted Mermaid Lagoon, where underwater kingdoms and magical sea creatures await.",
     "date": "2025-03-07",
     "time": "11:30:00",
-    "duration": "00:30:00",
+    "duration": "30",
     "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
   },
   {
@@ -321,7 +321,7 @@
     "description": "Take a journey through time and space on the Space-Time Cruise, where every stop offers a new galaxy to explore.",
     "date": "2025-03-08",
     "time": "12:00:00",
-    "duration": "01:00:00",
+    "duration": "60",
     "uid": "SH4SWAjPr5Uzp4Cao5NGJwcuGMM2"
   }
 ]
