@@ -26,8 +26,8 @@ Our app is designed for travelers who love exploring new destinations and want a
 - Navigate to the deployed site: https://swe-local-tours-fe.vercel.app
 
 
-## Video Walkthrough of APP NAME 
-Coming soon!
+## Video Walkthrough of Local Tours
+https://www.loom.com/share/9cf5062cc64448db969b1b0c2c108c47
 
 
 ## Relevant Links
