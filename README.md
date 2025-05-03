@@ -23,13 +23,7 @@ Our app is designed for travelers who love exploring new destinations and want a
   5. python manage.py runserver
 - This will start the backend dev server, which will run on localhost:8000
  
-- Clone this repo
-- cd into the folder where you cloned this repo
-- Run the following commands:
-  1. npm install (install dependencies)
-  2. npm run prepare
-  3. npm run dev
-- This will start the front end dev server, which will run on localhost:3000
+- Navigate to the deployed site: https://swe-local-tours-fe.vercel.app
 
 
 ## Video Walkthrough of APP NAME 
