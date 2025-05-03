@@ -16,9 +16,11 @@ Our app is designed for travelers who love exploring new destinations and want a
 ## Getting Started
 - Clone backend repo @ https://github.com/E27-29-SWE-LocalTours/swe-localtours-be
 - From your terminal, cd into the folder where you cloned the backend repo, then run the following commands:
-  1. python manage.py makemigrations
-  2. python manage.py migrate
-  3. python manage.py runserver
+  1. pipenv install (create virtual environment and install dependencies)
+  2. pipenv shell (activate virtual environment)
+  3. python manage.py makemigrations
+  4. python manage.py migrate
+  5. python manage.py runserver
 - This will start the backend dev server, which will run on localhost:8000
  
 - Clone this repo
