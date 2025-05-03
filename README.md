@@ -26,8 +26,9 @@ Our app is designed for travelers who love exploring new destinations and want a
 - Clone this repo
 - cd into the folder where you cloned this repo
 - Run the following commands:
-  1. npm run prepare
-  2. npm run dev
+  1. npm install (install dependencies)
+  2. npm run prepare
+  3. npm run dev
 - This will start the front end dev server, which will run on localhost:3000
 
 
