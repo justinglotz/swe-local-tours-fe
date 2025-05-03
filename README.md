@@ -78,8 +78,11 @@ Profile Page
 
 
 ## Contributors
+Front end:
+- [Justin Glotzbach](https://github.com/justinglotz)
 - [Alyssa Cleland](https://github.com/alyssacleland)
+
+Back end:
 - [Andre Phosarath](https://github.com/AVP4000)
 - [Julien Cain](https://github.com/juliencain)
-- [Justin Glotzbach](https://github.com/justinglotz)
 - [Nelson Ngaleumo](https://github.com/NelsonOlivierNgaleumo)
