@@ -1,4 +1,4 @@
-const endpoint = 'http://localhost:8000/users';
+const endpoint = 'https://swe-localtours-be.onrender.com/users';
 
 // CREATE USER
 const createUser = (payload) =>

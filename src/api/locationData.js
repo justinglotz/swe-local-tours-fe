@@ -1,6 +1,6 @@
 // const { clientCredentials } = require('@/utils/client');
 
-const endpoint = 'http://localhost:8000/locations';
+const endpoint = 'https://swe-localtours-be.onrender.com/locations';
 
 // GET ALL LOCATIONS BY UID
 const getLocations = (uid) =>

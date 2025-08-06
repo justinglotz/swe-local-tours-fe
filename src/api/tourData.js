@@ -1,7 +1,7 @@
 // API CALLS FOR TOURS
 
 // const endpoint = clientCredentials.databaseURL;
-const endpoint = 'http://localhost:8000/tours';
+const endpoint = 'https://swe-localtours-be.onrender.com/tours';
 
 // GET ALL TOURS FOR A SPECIFIC USER
 const getTours = (uid) =>
