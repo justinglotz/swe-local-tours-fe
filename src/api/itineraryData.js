@@ -1,5 +1,5 @@
 // API CALLS FOR ITINERARY ITEMS
-const endpoint = 'http://localhost:8000/itineraries';
+const endpoint = 'https://swe-localtours-be.onrender.com/itineraries';
 
 // GET ALL ITINERARIES
 const getItineraries = () =>
